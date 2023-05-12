@@ -6,6 +6,8 @@ services:
       dockerfile: ./docker/app/Dockerfile
     volumes:
       - ./src/:/app
+    ports:
+      - "5173:5173"
   web:
     build:
       context: .

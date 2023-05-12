@@ -2,30 +2,21 @@
 
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\novels;
-use App\Models\novel_info;
-use App\Models\user;
-use Database\Factories\NovelsFactory;
-use NovelInfo;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            NovelSeeder::class,
-            Novel_IdSeeder::class,
-        ]);
+        // \App\Models\User::factory(10)->create();
 
-        // User::factory(100)->create();
-        // novel_info::factory(100)->create();
-        // Novels::factory(100)->create();
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }

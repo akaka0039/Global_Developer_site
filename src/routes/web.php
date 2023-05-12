@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-
-
-use App\Http\Controllers\UserController;
-
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,32 +17,43 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// index
-Route::get('/', [
-    UserController::class,
-    'index'
-])->name('user.index');
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
-// 小説の詳細
-Route::get('/show/{id}', [
-    UserController::class,
-    'show'
-])->name('user.show');
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
-// 小説を読む
-Route::get('/read/{novel_id}/{page}', [
-    UserController::class,
-    'read'
-])->name('user.read');
+Route::get('/', function () {
+    return Inertia::render('Home');
+});
 
-// 小説を検索する
-Route::get('/search/{user_request}', [
-    UserController::class,
-    'search'
-])->name('user.search');
+Route::get('/login', function () {
+    return Inertia::render('login');
+});
 
 
+Route::get('/index', [HomeController::class, 'index'])->name('Index');
 
-Auth::routes();
+// Route::get('/app', function () {
+//     return view('home.jsx');
+// })->where('any','.*');
 
-require __DIR__ . '/auth.php';
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+require __DIR__.'/auth.php';
