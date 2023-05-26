@@ -38,6 +38,10 @@ Route::get('/login', function () {
     return Inertia::render('login');
 });
 
+Route::get('/top', function () {
+    return Inertia::render('Top/Top');
+});
+
 
 Route::get('/index', [HomeController::class, 'index'])->name('Index');
 
