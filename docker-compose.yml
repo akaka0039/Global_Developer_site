@@ -6,7 +6,6 @@ services:
       dockerfile: ./docker/app/Dockerfile
     volumes:
       - ./src/:/app
-      - vendor-store:/vendor
     ports:
       - "5173:5173"
   web:
@@ -36,4 +35,3 @@ services:
 
 volumes:
   mysql-volume:
-  vendor-store:
