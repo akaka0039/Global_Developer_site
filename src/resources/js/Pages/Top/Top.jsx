@@ -1,10 +1,11 @@
 import React from "react";
 import Card from "./Card";
+import Top1 from "./Top1";
 
 function Top() {
     const backgroundImageUrl = "/images/top_background.jpg";
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen flex-col">
             <div
                 className="h-screen flex-grow bg-cover bg-center"
                 style={{
@@ -25,6 +26,7 @@ function Top() {
                 </div>
                 <Card />
             </div>
+            <Top1 />
         </div>
     );
 }
