@@ -1,6 +1,10 @@
 import React from "react";
 
 const MainCard = ({ imageUrl, title, description }) => {
+    const defaultImage = "/images/top_background.jpg";
+    const cardStyle = {
+        backgroundImage: `url(${imageUrl || defaultImage})`,
+    };
     return (
         <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             <img className="w-full h-auto" src={imageUrl} alt={title} />

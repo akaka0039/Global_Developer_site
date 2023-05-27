@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,9 +36,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/main', function () {
-    return Inertia::render('Main/Index');
-});
+Route::get('/main', [EventsController::class, 'index'])
+    ->name('main');
 
 Route::get('/login', function () {
     return Inertia::render('login');

@@ -4,7 +4,8 @@ import Card from "./Card";
 
 import Header from "../../Components/Header";
 
-function Index() {
+function Index({ events }) {
+    console.log(events);
     const backgroundImageUrl = "/images/top_background.jpg";
     return (
         <div className="flex h-screen flex-col">
@@ -32,51 +33,14 @@ function Index() {
             </p>
 
             <div className="flex flex-wrap justify-center items-center mt-8">
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <Card
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
+                {events.map((event) => (
+                    <Card
+                        key={event.event_id}
+                        imageUrl={event.imagePath}
+                        title={event.title}
+                        description={event.description}
+                    />
+                ))}
             </div>
         </div>
     );
