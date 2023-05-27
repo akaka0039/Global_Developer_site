@@ -34,6 +34,11 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
+
+Route::get('/main', function () {
+    return Inertia::render('Main/Index');
+});
+
 Route::get('/login', function () {
     return Inertia::render('login');
 });
