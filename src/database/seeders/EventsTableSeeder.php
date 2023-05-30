@@ -14,7 +14,7 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-        // ダミーデータを挿入する処理
+       
         for ($i = 1; $i <= 10; $i++) {
             DB::table('events')->insert([
                 'user_id' => $i,
@@ -27,6 +27,6 @@ class EventsTableSeeder extends Seeder
             ]);
         }
 
-        // 他のダミーデータの挿入処理を追加することもできます
+        
     }
 }

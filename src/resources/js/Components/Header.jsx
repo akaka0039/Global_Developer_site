@@ -9,22 +9,27 @@ const Header = () => {
                     <ul className="flex space-x-4">
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                Home
+                                Member
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/article" className="hover:text-gray-400">
+                                Article
                             </a>
                         </li>
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                About
+                                Project
                             </a>
                         </li>
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                Services
+                                Sign up
                             </a>
                         </li>
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                Contact
+                                Sign in
                             </a>
                         </li>
                     </ul>

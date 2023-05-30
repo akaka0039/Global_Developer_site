@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,13 +36,13 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
-
+ 
 Route::get('/main', [EventsController::class, 'index'])
     ->name('main');
 
-Route::get('/login', function () {
-    return Inertia::render('login');
-});
+    Route::get('/article', [ArticleController::class, 'index'])
+    ->name('article');
+
 
 Route::get('/top', function () {
     return Inertia::render('Top/Top');
@@ -50,9 +51,10 @@ Route::get('/top', function () {
 
 Route::get('/index', [HomeController::class, 'index'])->name('Index');
 
-// Route::get('/app', function () {
-//     return view('home.jsx');
-// })->where('any','.*');
+
+
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

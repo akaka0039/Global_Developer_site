@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-use App\Models\Events; 
 
-class EventsController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = DB::table('events')->get();
-        return Inertia::render('Main/Index', compact('events'));
+        $articles = DB::table('articles')->get();
+        return Inertia::render('Article/Index', compact('articles'));
     }
 
     /**
@@ -38,7 +38,7 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
         //
     }
@@ -46,7 +46,7 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
         //
     }
@@ -54,7 +54,7 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
         //
     }
@@ -62,7 +62,7 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
         //
     }
