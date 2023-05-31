@@ -41,6 +41,12 @@ Route::get('/top', function () {
 Route::get('/main', [EventsController::class, 'index'])
     ->name('main');
 
+Route::get('/event', function () {
+    return Inertia::render('Main/Event/EventDetail');
+});
+
+    
+
 Route::get('/article', [ArticleController::class, 'index'])
     ->name('article');
 
