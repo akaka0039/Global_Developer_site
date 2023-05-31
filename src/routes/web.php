@@ -44,7 +44,10 @@ Route::get('/main', [EventsController::class, 'index'])
 Route::get('/article', [ArticleController::class, 'index'])
     ->name('article');
 
-
+    Route::get('/project', function () {
+        return Inertia::render('Project/Index');
+    });
+    
 Route::get('/member', function () {
     return Inertia::render('Member/Index');
 });
