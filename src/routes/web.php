@@ -41,11 +41,15 @@ Route::get('/top', function () {
 Route::get('/main', [EventsController::class, 'index'])
     ->name('main');
 
-Route::get('/event', function () {
+Route::get('/eventDetail', function () {
     return Inertia::render('Main/Event/EventDetail');
 });
 
-    
+Route::get('/eventForm', function () {
+    return Inertia::render('Main/Event/EventForm');
+});
+
+
 
 Route::get('/article', [ArticleController::class, 'index'])
     ->name('article');
@@ -59,15 +63,7 @@ Route::get('/member', function () {
 });
  
 
-
-
-
-
 Route::get('/index', [HomeController::class, 'index'])->name('Index');
-
-
-
-
 
 
 Route::get('/dashboard', function () {

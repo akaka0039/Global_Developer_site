@@ -5,6 +5,7 @@ const EventDetail = () => {
     const [event, setEvent] = useState({
         id: 1,
         userId: 123,
+        title: "Event",
         address: "123 Main St, City",
         imagePath: "/images/event1.jpg",
         description:
@@ -38,75 +39,41 @@ const EventDetail = () => {
                     alt="Event"
                     className="w-full rounded-lg mb-4"
                 />
-                {isEditing ? (
-                    <div>
-                        <input
-                            type="text"
-                            name="address"
-                            value={event.address}
-                            onChange={handleInputChange}
-                            className="w-full rounded-lg mb-2 p-2"
-                        />
-                        <textarea
-                            name="description"
-                            value={event.description}
-                            onChange={handleInputChange}
-                            className="w-full rounded-lg mb-2 p-2"
-                        ></textarea>
-                        <input
-                            type="text"
-                            name="limitMember"
-                            value={event.limitMember}
-                            onChange={handleInputChange}
-                            className="w-full rounded-lg mb-2 p-2"
-                        />
-                        <div className="flex justify-end">
-                            <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                onClick={handleSave}
-                            >
-                                Save
-                            </button>
-                            <button
-                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                                onClick={() => setIsEditing(false)}
-                            >
-                                Back
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        <h2 className="text-lg font-bold mb-2">
-                            Event ID: {event.id}
-                        </h2>
-                        <p className="text-gray-500 mb-2">
-                            Address: {event.address}
-                        </p>
-                        <p className="text-gray-500 mb-2">
-                            Description: {event.description}
-                        </p>
-                        <p className="text-gray-500 mb-2">
-                            Limit Members: {event.limitMember}
-                        </p>
-                        <p className="text-gray-500 mb-2">
-                            Created At:{" "}
-                            {new Date(event.createdAt).toLocaleString()}
-                        </p>
-                        <p className="text-gray-500 mb-2">
-                            Updated At:{" "}
-                            {new Date(event.updatedAt).toLocaleString()}
-                        </p>
-                        <div className="flex justify-end">
+
+                <div>
+                    <p className="text-gray-500 mb-2">Title: {event.title}</p>
+                    <p className="text-gray-500 mb-2">
+                        Address: {event.address}
+                    </p>
+                    <p className="text-gray-500 mb-2">
+                        Description: {event.description}
+                    </p>
+                    <p className="text-gray-500 mb-2">
+                        Limit Members: {event.limitMember}
+                    </p>
+                    <p className="text-gray-500 mb-2">
+                        Created At: {new Date(event.createdAt).toLocaleString()}
+                    </p>
+                    <p className="text-gray-500 mb-2">
+                        Updated At: {new Date(event.updatedAt).toLocaleString()}
+                    </p>
+                    <div className="flex justify-end">
+                        <a href="/main">
                             <button
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                 onClick={() => setIsEditing(true)}
                             >
-                                Edit
+                                Back
                             </button>
-                        </div>
+                        </a>
+                        <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            onClick={() => setIsEditing(true)}
+                        >
+                            Attend
+                        </button>
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );
