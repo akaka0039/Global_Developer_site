@@ -8,28 +8,33 @@ const Header = () => {
                 <nav>
                     <ul className="flex space-x-4">
                         <li>
-                            <a href="#" className="hover:text-gray-400">
+                            <a href="/main" className="hover:text-gray-400">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/member" className="hover:text-gray-400">
                                 Member
                             </a>
                         </li>
                         <li>
-                            <a href="/article" className="hover:text-gray-400">
+                            <a href="/project" className="hover:text-gray-400">
+                                Project
+                            </a>
+                        </li>
+                        <li>
+                            <a href="article" className="hover:text-gray-400">
                                 Article
                             </a>
                         </li>
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                Project
+                                Services
                             </a>
                         </li>
                         <li>
                             <a href="#" className="hover:text-gray-400">
-                                Sign up
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:text-gray-400">
-                                Sign in
+                                Contact
                             </a>
                         </li>
                     </ul>

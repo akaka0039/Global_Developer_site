@@ -28,25 +28,39 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-});
-
- 
-Route::get('/main', [EventsController::class, 'index'])
-    ->name('main');
-
-    Route::get('/article', [ArticleController::class, 'index'])
-    ->name('article');
 
 
 Route::get('/top', function () {
     return Inertia::render('Top/Top');
 });
+
+Route::get('/main', [EventsController::class, 'index'])
+    ->name('main');
+
+Route::get('/event', function () {
+    return Inertia::render('Main/Event/EventDetail');
+});
+
+    
+
+Route::get('/article', [ArticleController::class, 'index'])
+    ->name('article');
+
+    Route::get('/project', function () {
+        return Inertia::render('Project/Index');
+    });
+    
+Route::get('/member', function () {
+    return Inertia::render('Member/Index');
+});
+ 
+
+
+
 
 
 Route::get('/index', [HomeController::class, 'index'])->name('Index');
