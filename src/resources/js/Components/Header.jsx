@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <header className="bg-gray-800 text-white p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <h1 className="text-lg font-bold">My Website</h1>
+                <h1 className="text-lg font-bold">Website</h1>
                 <nav>
                     <ul className="flex space-x-4">
                         <li>
@@ -12,21 +12,21 @@ const Header = () => {
                                 Home
                             </a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a href="/member" className="hover:text-gray-400">
                                 Member
                             </a>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <a href="/project" className="hover:text-gray-400">
                                 Project
                             </a>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <a href="article" className="hover:text-gray-400">
                                 Article
                             </a>
-                        </li>
+                        </li> */}
                         <li>
                             <a href="#" className="hover:text-gray-400">
                                 Services
