@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('event_name')->after('user_id');
+            $table->string('name')->after('user_id');
             $table->integer('participant_limit_number')->default(0)->after('address');
             $table->boolean('is_online')->default(false)->after('description');
             $table->string('address')->nullable()->change();
