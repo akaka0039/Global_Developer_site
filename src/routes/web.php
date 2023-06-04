@@ -34,8 +34,8 @@ use Inertia\Inertia;
 
 
 
-Route::get('/top', function () {
-    return Inertia::render('Top/Top');
+Route::get('/', function () {
+    return Inertia::render('Top/Index');
 });
 
 Route::get('/main', [EventsController::class, 'index'])
