@@ -45,6 +45,10 @@ Route::get('/eventDetail', function () {
     return Inertia::render('Event/EventDetail');
 });
 
+Route::get('/eventEdit', function () {
+    return Inertia::render('Event/EventEdit');
+});
+
 Route::get('/eventForm', function () {
     return Inertia::render('Event/EventForm');
 });
