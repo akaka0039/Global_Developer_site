@@ -42,11 +42,11 @@ Route::get('/main', [EventsController::class, 'index'])
     ->name('main');
 
 Route::get('/eventDetail', function () {
-    return Inertia::render('Main/Event/EventDetail');
+    return Inertia::render('Event/EventDetail');
 });
 
 Route::get('/eventForm', function () {
-    return Inertia::render('Main/Event/EventForm');
+    return Inertia::render('Event/EventForm');
 });
 
 
