@@ -37,6 +37,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Top/Index');
 });
+Route::resource('events', EventController::class);
 
 Route::get('/main', [EventsController::class, 'index'])
     ->name('main');
@@ -61,11 +62,11 @@ Route::get('/article', [ArticleController::class, 'index'])
     Route::get('/project', function () {
         return Inertia::render('Project/Index');
     });
-    
+
 Route::get('/member', function () {
     return Inertia::render('Member/Index');
 });
- 
+
 
 Route::get('/index', [HomeController::class, 'index'])->name('Index');
 
