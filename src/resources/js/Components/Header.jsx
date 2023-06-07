@@ -12,22 +12,6 @@ const Header = () => {
                                 Home
                             </a>
                         </li>
-                        {/* <li>
-                            <a href="/member" className="hover:text-gray-400">
-                                Member
-                            </a>
-                        </li> */}
-                        {/* <li>
-                            <a href="/project" className="hover:text-gray-400">
-                                Project
-                            </a>
-                        </li> */}
-                        {/* <li>
-                            <a href="article" className="hover:text-gray-400">
-                                Article
-                            </a>
-                        </li> */}
-
                         <li>
                             <a href="/login" className="hover:text-gray-400">
                                 Login
