@@ -5,7 +5,6 @@ import Card from "./Card";
 import Header from "../../Components/Header";
 
 function Index({ events }) {
-    console.log(events);
     const backgroundImageUrl = "/images/top_background.jpg";
     return (
         <div className="flex h-screen flex-col">
