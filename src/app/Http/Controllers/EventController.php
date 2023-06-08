@@ -43,8 +43,6 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        // dd($event);
-        // $event = Event::find($id);
         return Inertia::render('Event/EventDetail', compact('event'));
     }
 
