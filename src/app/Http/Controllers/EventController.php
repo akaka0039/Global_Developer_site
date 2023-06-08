@@ -29,6 +29,7 @@ class EventController extends Controller
     }
 
     /**
+     * @param StoreEventRequest $request
      * Store a newly created resource in storage.
      */
     public function store(StoreEventRequest $request)
@@ -49,7 +50,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(StoreEventRequest $event)
     {
         return Inertia::render('Event/EventEdit', [
             'event' => [
