@@ -8,7 +8,7 @@ const Header = () => {
                 <nav>
                     <ul className="flex space-x-4">
                         <li>
-                            <a href="/main" className="hover:text-gray-400">
+                            <a href="/events" className="hover:text-gray-400">
                                 Home
                             </a>
                         </li>

@@ -19,57 +19,13 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
-
-
-
+// Top page
 Route::get('/', function () {
     return Inertia::render('Top/Index');
 });
+
+// Events
 Route::resource('events', EventController::class);
-
-Route::get('/main', [EventsController::class, 'index'])
-    ->name('main');
-
-Route::get('/eventDetail', function () {
-    return Inertia::render('Event/EventDetail');
-});
-
-Route::get('/eventEdit', function () {
-    return Inertia::render('Event/EventEdit');
-});
-
-Route::get('/eventForm', function () {
-    return Inertia::render('Event/EventForm');
-});
-
-
-
-Route::get('/article', [ArticleController::class, 'index'])
-    ->name('article');
-
-    Route::get('/project', function () {
-        return Inertia::render('Project/Index');
-    });
-
-Route::get('/member', function () {
-    return Inertia::render('Member/Index');
-});
-
-
-Route::get('/index', [HomeController::class, 'index'])->name('Index');
-
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -80,6 +36,34 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+/*
+    Reference
+*/
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
+
+/*
+    2023/6/9
+    we are planing to make those services
+*/
+// Route::get('/article', [ArticleController::class, 'index'])
+//     ->name('article');
+// Route::get('/project', function () {
+//         return Inertia::render('Project/Index');
+//     });
+// Route::get('/member', function () {
+//     return Inertia::render('Member/Index');
+// });
 
 
 require __DIR__.'/auth.php';
