@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('address');
             $table->string('imagePath');
             $table->text('description');
-            $table->string('limitMember');
             $table->timestamps();
         });
     }
