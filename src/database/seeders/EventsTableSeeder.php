@@ -14,19 +14,17 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-       
         for ($i = 1; $i <= 10; $i++) {
             DB::table('events')->insert([
                 'user_id' => $i,
                 'address' => 'Example Address',
-                'imagePath' => '/images/top_background.jpg',
+                'image' => '/images/top_background.jpg',
                 'description' => 'Example description ' . $i,
+                'name' => 'event_name' . $i,
                 'limitMember' => '10',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
-
-        
     }
 }
