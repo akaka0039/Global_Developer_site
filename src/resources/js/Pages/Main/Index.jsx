@@ -32,28 +32,8 @@ function Index({ events }) {
             </p>
 
             <div className="flex flex-wrap justify-center items-center mt-8">
-                <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-2">
-                    <a href="/eventDetail">
-                        <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden">
-                            <div className="w-full h-40 bg-cover bg-no-repeat bg-center"></div>
-                            <div className="p-4">
-                                <h2 className="text-xl font-bold mb-2">
-                                    Event
-                                </h2>
-                                <p className="text-gray-700">
-                                    testesttestesttestesttestesttestesttestest
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
                 {events.map((event) => (
-                    <Card
-                        key={event.event_id}
-                        imageUrl={event.imagePath}
-                        title={event.title}
-                        description={event.description}
-                    />
+                    <Card key={event.event_id} event={event} />
                 ))}
             </div>
         </div>
