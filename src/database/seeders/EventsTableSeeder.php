@@ -21,7 +21,7 @@ class EventsTableSeeder extends Seeder
                 'image' => '/images/top_background.jpg',
                 'description' => 'Example description ' . $i,
                 'name' => 'event_name' . $i,
-                'limitMember' => '10',
+                'participant_limit_number' => $i,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
