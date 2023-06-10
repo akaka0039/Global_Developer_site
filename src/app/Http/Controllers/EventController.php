@@ -50,7 +50,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StoreEventRequest $event)
+    public function edit(Request $event)
     {
         return Inertia::render('Event/EventEdit', [
             'event' => [
@@ -69,7 +69,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(StoreEventRequest $request, Event $event)
     {
         $event->update($request->validated());
 
