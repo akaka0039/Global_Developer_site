@@ -73,7 +73,7 @@ const EventDetail = () => {
                         </div>
                         <div className="bg-gray-100 px-4 py-4 sm:px-6 flex justify-end">
                             <div className="pl-2">
-                                <a href="/main">
+                                <a href="/events">
                                     <button className="bg-gray-400 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
                                         Back
                                     </button>
