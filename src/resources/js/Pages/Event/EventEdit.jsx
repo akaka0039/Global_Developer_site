@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Header from "@/Components/Header";
 
-const EditEventPage = ({ eventId }) => {
+const EditEventPage = ({ event }) => {
+    console.log(event);
     // Mock event data
     const [formData, setFormData] = useState({
         id: 1,

@@ -39,9 +39,10 @@ const EventForm = () => {
         e.preventDefault();
         if (e.nativeEvent.submitter.id !== "back-button") {
             // フォームの送信処理を実行する
-            console.log("Submitted!");
-            console.log("Limit:", limit);
-            console.log("Image:", image);
+            router.post(`/events`);
+            // console.log("Submitted!");
+            // console.log("Limit:", limit);
+            // console.log("Image:", image);
         }
     };
     return (
