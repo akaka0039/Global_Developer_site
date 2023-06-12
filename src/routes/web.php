@@ -24,6 +24,10 @@ Route::get('/', function () {
     return Inertia::render('Top/Index');
 });
 
+Route::get('/profile/1', function () {
+    return Inertia::render('Profile/ProfileDetail');
+});
+
 // Events
 Route::resource('events', EventController::class);
 

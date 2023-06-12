@@ -3,7 +3,7 @@ import Top_1 from "./Top_1";
 import Top_2 from "./Top_2";
 import Top_3 from "./Top_3";
 import Header from "@/Components/Header";
-import Footer from "@/Components/footer";
+import Footer from "@/Components/Footer";
 
 function Index() {
     return (

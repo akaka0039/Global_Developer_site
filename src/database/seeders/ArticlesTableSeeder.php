@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use App\Models\Article; // モデル名を単数形の"Article"に修正
+use App\Models\Article; 
 
 class ArticlesTableSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class ArticlesTableSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 10; $i++) {
-            Article::create([ // モデル名を修正
+            Article::create([ 
                 'user_id' => $i,
                 'title' => 'Sample Article ' . $i,
                 'content' => 'This is the content of sample article ' . $i,

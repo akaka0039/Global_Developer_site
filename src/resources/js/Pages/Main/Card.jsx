@@ -13,7 +13,7 @@ const Card = ({ event }) => {
 
     return (
         <div
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-2 "
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-2"
             onClick={handleClick}
         >
             <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:bg-blue-100">
