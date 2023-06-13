@@ -155,7 +155,7 @@ const ProfileDetails = ({ auth, user }) => {
                                 <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
                                     Organizing Events
                                 </h3>
-                                <div className="flex flex-wrap h-full">
+                                <div className="flex flex-wrap">
                                     {user.organizingEvents.map((event) => (
                                         <div
                                             key={event.event_id}
