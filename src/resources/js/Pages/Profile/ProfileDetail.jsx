@@ -1,228 +1,195 @@
-import React, { useState } from "react";
-import Header from "@/Components/Header";
+import React from "react";
+import GeneralLayout from "../../Layouts/GeneralLayout";
 
-const ProfileDetail = ({ event }) => {
-    console.log(event);
-    // Mock event data
-    const [formData, setFormData] = useState({
-        id: 1,
-        userId: 123,
-        title: "Event",
-        address: "123 Main St, City",
-        imagePath: "/images/top_background.jpg",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur mi et tincidunt consectetur. Quisque vehicula felis a quam feugiat posuere. Aliquam nec ex mauris. Proin ut sapien varius, finibus risus non, tempor ipsum.",
-        limitMember: "9",
-        createdAt: "2023-05-31T12:34:56",
-        updatedAt: "2023-05-31T12:34:56",
-    });
-
-    // drag & drop
-    const handleDrop = (event) => {
-        event.preventDefault();
-        const file = event.dataTransfer.files[0];
-        // const imagePath = URL.createObjectURL(file);
-        setFormData({ ...formData, imagePath });
+const ProfileDetails = ({ auth, user }) => {
+    auth = "";
+    user = {
+        name: "John Doefa",
+        introduction: "Hello, I'm John Doe.",
+        image: "/images/top_background.jpg",
+        habitation: "Tokyo, Japan",
+        nationality: "Japanese",
+        position: "Software Engineer",
+        url: "https://github.com",
+        attendance_count: 10,
+        participatingEvents: [
+            {
+                event_id: 1,
+                title: "Participating Event 1",
+                description: "This is a participating event description.",
+                image: "/images/top_background.jpg",
+            },
+            {
+                event_id: 2,
+                title: "Participating Event 2",
+                description: "This is another participating event description.",
+                image: "/images/participating_event2.jpg",
+            },
+        ],
+        organizingEvents: [
+            {
+                event_id: 3,
+                title: "Organizing Event 1",
+                description: "This is an organizing event description.",
+                image: "/images/organizing_event1.jpg",
+            },
+            {
+                event_id: 4,
+                title: "Organizing Event 2",
+                description: "This is another organizing event description.",
+                image: "/images/organizing_event2.jpg",
+            },
+        ],
     };
 
-    const handleDragOver = (event) => {
-        event.preventDefault();
-        // Add drag over styles if needed
-    };
-
-    const handleDragLeave = (event) => {
-        event.preventDefault();
-        // Remove drag over styles if needed
+    const handleClick = (eventId) => {
+        // イベントの詳細ページへの遷移などの処理を追加する
+        console.log("Clicked on event with ID:", eventId);
     };
 
     return (
-        <div>
-            <Header />
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-9">
-                <h1 className="text-5xl font-bold text-gray-900">Event Edit</h1>
-                <form className="mt-8 space-y-6">
-                    <div className="shadow sm:rounded-md sm:overflow-hidden">
-                        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button
-                                type="button"
-                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                            >
-                                Delete
-                            </button>
+        <GeneralLayout auth={auth}>
+            <div className="container mx-auto px-4">
+                <div className="flex flex-col items-left mt-8 sm:flex-row">
+                    <div className="w-full max-w-xl mb-8 sm:mb-0">
+                        <div className="bg-white shadow-md rounded-lg p-6">
+                            <div className="text-center">
+                                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 truncate">
+                                    {user.name}
+                                </h2>
+                                <img
+                                    src={user.image}
+                                    alt="Profile"
+                                    className="w-48 h-48 sm:w-64 sm:h-64 mx-auto rounded-full mb-4"
+                                />
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Introduction
+                                </h3>
+                                <p className="text-sm sm:text-base">
+                                    {user.introduction}
+                                </p>
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Habitation
+                                </h3>
+                                <p className="text-sm sm:text-base">
+                                    {user.habitation}
+                                </p>
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Nationality
+                                </h3>
+                                <p className="text-sm sm:text-base">
+                                    {user.nationality}
+                                </p>
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Position
+                                </h3>
+                                <p className="text-sm sm:text-base">
+                                    {user.position}
+                                </p>
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    URL
+                                </h3>
+                                <a
+                                    href={user.url}
+                                    className="text-blue-500 hover:underline text-sm sm:text-base"
+                                >
+                                    {user.url}
+                                </a>
+                            </div>
+                            <div className="mb-7">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Attendance Count
+                                </h3>
+                                <p className="text-sm sm:text-base">
+                                    {user.attendance_count}
+                                </p>
+                            </div>
                         </div>
-                        <div className="px-4 py-5 bg-white sm:p-6">
-                            <div className="grid grid-cols-6 gap-6">
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="title"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Title
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        id="title"
-                                        autoComplete="off"
-                                        value={formData.title}
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="address"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Location
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        id="address"
-                                        autoComplete="off"
-                                        value={formData.address}
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    />
-                                </div>
-
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="startDate"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Start date
-                                    </label>
-                                    <input
-                                        type="datetime-local"
-                                        name="startDate"
-                                        id="startDate"
-                                        value={formData.createdAt}
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="startDate"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        End date
-                                    </label>
-                                    <input
-                                        type="datetime-local"
-                                        name="startDate"
-                                        id="startDate"
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="image"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Image
-                                    </label>
-                                    {formData.imagePath && (
-                                        <img
-                                            src={formData.imagePath}
-                                            alt="Event"
-                                            className="mt-2 h-72 object-contain"
-                                        />
-                                    )}
-                                    <div
-                                        className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
-                                        onDrop={handleDrop}
-                                        onDragOver={handleDragOver}
-                                        onDragLeave={handleDragLeave}
-                                    >
-                                        <div className="space-y-1 text-center">
-                                            <svg
-                                                className="mx-auto h-12 w-12 text-gray-400"
-                                                stroke="currentColor"
-                                                fill="none"
-                                                viewBox="0 0 48 48"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M20 9l-7 7m0 0l7 7m-7-7v18"
-                                                />
-                                            </svg>
-                                            <div className="flex text-sm text-gray-600">
-                                                <label
-                                                    htmlFor="image"
-                                                    className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-                                                >
-                                                    <span>Select Image</span>
-                                                    <input
-                                                        id="image"
-                                                        name="image"
-                                                        type="file"
-                                                        className="sr-only"
-                                                    />
-                                                </label>
-                                                <p className="pl-1">
-                                                    or drag & drop
-                                                </p>
+                    </div>
+                    <div className="w-full max-w-xl flex-grow">
+                        <div className="bg-white shadow-md rounded-lg p-6 h-full flex flex-col">
+                            <div className="mb-7 flex-grow">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Participating Events
+                                </h3>
+                                <div className="flex flex-wrap">
+                                    {user.participatingEvents.map((event) => (
+                                        <div
+                                            key={event.event_id}
+                                            className="w-full sm:w-1/2 md:w-1/3 lg:w-2/4 xl:w-2/4 p-2 flex"
+                                            onClick={() =>
+                                                handleClick(event.event_id)
+                                            }
+                                        >
+                                            <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:bg-blue-100 w-full">
+                                                <div
+                                                    className="w-full h-40 bg-cover bg-no-repeat bg-center"
+                                                    style={{
+                                                        backgroundImage: `url(${event.image})`,
+                                                    }}
+                                                ></div>
+                                                <div className="p-3">
+                                                    <h2 className="text-xl font-bold mb-2 truncate">
+                                                        {event.title}
+                                                    </h2>
+                                                    <p className="text-gray-700 translate">
+                                                        {event.description}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <p className="text-xs text-gray-500">
-                                                PNG、JPG、GIF Max size: 5MB
-                                            </p>
                                         </div>
-                                    </div>
+                                    ))}
                                 </div>
-
-                                <div className="col-span-6">
-                                    <label
-                                        htmlFor="description"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Description
-                                    </label>
-                                    <textarea
-                                        name="description"
-                                        id="description"
-                                        rows="3"
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    ></textarea>
-                                </div>
-
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="limitMember"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        Limit of Attendance
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="limitMember"
-                                        id="limitMember"
-                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                    />
+                            </div>
+                            <div className="mb-4 flex-grow">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
+                                    Organizing Events
+                                </h3>
+                                <div className="flex flex-wrap">
+                                    {user.organizingEvents.map((event) => (
+                                        <div
+                                            key={event.event_id}
+                                            className="w-full sm:w-1/2 md:w-1/3 lg:w-2/4 xl:w-2/4 p-2 flex"
+                                            onClick={() =>
+                                                handleClick(event.event_id)
+                                            }
+                                        >
+                                            <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:bg-blue-100 w-full">
+                                                <div
+                                                    className="w-full h-40 bg-cover bg-no-repeat bg-center"
+                                                    style={{
+                                                        backgroundImage: `url(${event.image})`,
+                                                    }}
+                                                ></div>
+                                                <div className="p-2">
+                                                    <h2 className="text-xl font-bold mb-2">
+                                                        {event.title}
+                                                    </h2>
+                                                    <p className="text-gray-700">
+                                                        {event.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
-                        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button
-                                type="button"
-                                className="inline-flex justify-center py-2 mr-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-grey-500"
-                            >
-                                Back
-                            </button>
-                            <button
-                                type="submit"
-                                className="inline-flex justify-center py-2 px-4  border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >
-                                Update
-                            </button>
-                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </GeneralLayout>
     );
 };
 
-export default ProfileDetail;
+export default ProfileDetails;
