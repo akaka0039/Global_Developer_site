@@ -7,7 +7,7 @@ import Footer from "@/Components/footer";
 
 function Index({ auth, events }) {
     // mock data 2023/06/12
-    auth = "1";
+    auth = "";
     return (
         // <GeneralLayout auth={auth}>
         <div className="flex h-screen flex-col">
