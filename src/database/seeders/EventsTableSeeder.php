@@ -17,10 +17,12 @@ class EventsTableSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('events')->insert([
                 'user_id' => $i,
-                'address' => 'Example Address',
+                'name' => 'event_name' . $i,
+                'start_date' => '2024-06-12 19:28:01',
+                'end_date' => '2024-06-13 19:28:01',
+                'address' => 'Example Address' . $i,
                 'image' => '/images/top_background.jpg',
                 'description' => 'Example description ' . $i,
-                'name' => 'event_name' . $i,
                 'participant_limit_number' => $i,
                 'created_at' => now(),
                 'updated_at' => now(),

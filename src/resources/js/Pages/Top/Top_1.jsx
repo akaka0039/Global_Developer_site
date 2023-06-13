@@ -39,7 +39,7 @@ function Index() {
             </div>
             <div className="pt-12 pb-16">
                 <a
-                    href="/main"
+                    href="/events"
                     className="text-white ml-8 mt-4 sm:mt-6 bg-blue-600 rounded-lg py-4 px-7 hover:bg-blue-500 transition duration-300"
                 >
                     Check Event

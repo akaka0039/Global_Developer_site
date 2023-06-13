@@ -34,7 +34,7 @@ function Index({ articles }) {
             <div className="flex flex-wrap justify-center items-center mt-8">
                 {articles.map((article) => (
                     <Card
-                        key={article.a_id}
+                        key={article._id}
                         imageUrl={article.imagePath}
                         title={article.title}
                         description={article.description}

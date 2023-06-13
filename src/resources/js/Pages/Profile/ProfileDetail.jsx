@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "@/Components/Header";
 
-const EditEventPage = ({ event }) => {
+const ProfileDetail = ({ event }) => {
     console.log(event);
     // Mock event data
     const [formData, setFormData] = useState({
@@ -225,4 +225,4 @@ const EditEventPage = ({ event }) => {
     );
 };
 
-export default EditEventPage;
+export default ProfileDetail;
