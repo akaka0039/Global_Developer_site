@@ -36,8 +36,7 @@ class EventController extends Controller
     {
         Event::create($request->validated());
 
-        return to_route('events.index');
-    }
+        return redirect('/events')->with('message', 'Your event has been successfully created!');    }
 
     /**
      * Display the specified resource.
