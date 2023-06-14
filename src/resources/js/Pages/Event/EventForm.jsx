@@ -3,7 +3,7 @@ import TimeForm from "./TimeForm";
 import Header from "@/Components/Header";
 import { router } from "@inertiajs/react";
 
-const EventForm = (props) => {
+const EventForm = (errors, auth) => {
     const [limit, setLimit] = React.useState("");
     const [image, setImage] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
@@ -12,7 +12,6 @@ const EventForm = (props) => {
     const [address, setAddress] = React.useState("");
     const [startTime, setStartTime] = React.useState("");
     const [endTime, setEndTime] = React.useState("");
-    const { errors, auth } = props
     const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleImageChange = (e) => {
@@ -57,7 +56,7 @@ const EventForm = (props) => {
                 description: description,
                 start_date: startTime,
                 end_date: endTime,
-                user_id: auth.user.user_id,
+                user_id: auth?.user?.user_id,
             }
             router.post(`/events`, data);
         }
