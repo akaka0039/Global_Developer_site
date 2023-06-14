@@ -9,7 +9,7 @@ export default function Header({ auth }) {
                 <h1 className="text-lg font-bold">Website</h1>
                 <nav>
                     <ul className="flex space-x-4">
-                        {auth.user ? (
+                        {auth?.user ? (
                             <>
                                 <li>
                                     <a
