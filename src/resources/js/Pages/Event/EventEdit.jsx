@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "@/Components/Header";
+import GeneralLayout from "@/Layouts/GeneralLayout";
 
-const EditEventPage = ({ event }) => {
+const EditEventPage = ({ auth, event }) => {
     console.log(event);
     // Mock event data
     const [formData, setFormData] = useState({
@@ -36,8 +36,7 @@ const EditEventPage = ({ event }) => {
     };
 
     return (
-        <div>
-            <Header />
+        <GeneralLayout auth={auth}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-9">
                 <h1 className="text-5xl font-bold text-gray-900">Event Edit</h1>
                 <form className="mt-8 space-y-6">
@@ -221,7 +220,7 @@ const EditEventPage = ({ event }) => {
                     </div>
                 </form>
             </div>
-        </div>
+        </GeneralLayout>
     );
 };
 

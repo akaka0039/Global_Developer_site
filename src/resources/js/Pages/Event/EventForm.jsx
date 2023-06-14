@@ -1,9 +1,9 @@
 import React from "react";
 import TimeForm from "./TimeForm";
-import Header from "@/Components/Header";
 import { router } from "@inertiajs/react";
+import GeneralLayout from "@/Layouts/GeneralLayout";
 
-const EventForm = ({errors, auth}) => {
+const EventForm = ({ errors, auth }) => {
     const [limit, setLimit] = React.useState("");
     const [image, setImage] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
@@ -56,16 +56,14 @@ const EventForm = ({errors, auth}) => {
                 description: description,
                 start_date: startTime,
                 end_date: endTime,
+                // Before deploying, should fix this
                 user_id: auth?.user?.user_id,
-            }
+            };
             router.post(`/events`, data);
         }
     };
     return (
-        <div>
-            <div className="pb-10">
-                <Header />
-            </div>
+        <GeneralLayout auth={auth}>
             <div className="flex justify-center items-center">
                 <div className="w-9/12 pt-46">
                     <form onSubmit={handleSubmit}>
@@ -82,9 +80,13 @@ const EventForm = ({errors, auth}) => {
                                 placeholder="Enter event name"
                                 id="name"
                                 value={name}
-                                onChange={e => setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                             />
-                            {errors.name && <div className={errorMessageStyle}>{errors.name}</div> }
+                            {errors.name && (
+                                <div className={errorMessageStyle}>
+                                    {errors.name}
+                                </div>
+                            )}
                         </div>
                         <div
                             className={`bg-white shadow-md rounded px-8 py-6 mb-4 ${
@@ -155,9 +157,13 @@ const EventForm = ({errors, auth}) => {
                                 placeholder="Enter your message"
                                 id="description"
                                 value={description}
-                                onChange={e => setDescription(e.target.value)}
+                                onChange={(e) => setDescription(e.target.value)}
                             ></textarea>
-                            {errors.description && <div className={errorMessageStyle}>{errors.description}</div> }
+                            {errors.description && (
+                                <div className={errorMessageStyle}>
+                                    {errors.description}
+                                </div>
+                            )}
                         </div>
                         <div>
                             <label
@@ -175,7 +181,11 @@ const EventForm = ({errors, auth}) => {
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
                             />
-                            {errors.address && <div className={errorMessageStyle}>{errors.address}</div> }
+                            {errors.address && (
+                                <div className={errorMessageStyle}>
+                                    {errors.address}
+                                </div>
+                            )}
                         </div>
 
                         <div className="mt-4">
@@ -205,9 +215,13 @@ const EventForm = ({errors, auth}) => {
                                 placeholder="Enter limit"
                                 id="limit"
                                 value={limit}
-                                onChange={e => setLimit(e.target.value)}
+                                onChange={(e) => setLimit(e.target.value)}
                             />
-                            {errors.participant_limit_number && <div className={errorMessageStyle}>{errors.participant_limit_number}</div> }
+                            {errors.participant_limit_number && (
+                                <div className={errorMessageStyle}>
+                                    {errors.participant_limit_number}
+                                </div>
+                            )}
                         </div>
                         <div className="flex justify-end">
                             <button
@@ -230,7 +244,7 @@ const EventForm = ({errors, auth}) => {
                     </form>
                 </div>
             </div>
-        </div>
+        </GeneralLayout>
     );
 };
 

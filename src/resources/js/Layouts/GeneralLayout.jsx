@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "@/Components/Header";
-import Footer from "@/Components/footer";
+import Footer from "@/Components/Footer";
 
 export default function GeneralLayout({ auth, children }) {
     return (
@@ -9,7 +9,7 @@ export default function GeneralLayout({ auth, children }) {
                 <Header auth={auth} />
             </div>
             <div className="flex-1 pb-8">{children}</div>
-            <div>
+            <div className="flex-1 pt-4">
                 <Footer />
             </div>
         </div>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Header from "../../Components/Header";
 import { router } from "@inertiajs/react";
+import GeneralLayout from "@/Layouts/GeneralLayout";
 
-const EventDetail = ({ event }) => {
+const EventDetail = ({ auth, event }) => {
     // for debug
-    console.log(event);
+    // console.log(auth);
 
     function handleClick() {
         // console.log(event.event_id);
@@ -12,9 +12,7 @@ const EventDetail = ({ event }) => {
     }
 
     return (
-        <div>
-            <Header />
-
+        <GeneralLayout auth={auth}>
             <div className="flex flex-col justify-center items-center h-full pt-8">
                 <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-end pb-3">
@@ -91,7 +89,7 @@ const EventDetail = ({ event }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </GeneralLayout>
     );
 };
 
