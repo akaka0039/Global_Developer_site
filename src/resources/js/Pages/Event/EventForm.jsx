@@ -3,7 +3,7 @@ import TimeForm from "./TimeForm";
 import Header from "@/Components/Header";
 import { router } from "@inertiajs/react";
 
-const EventForm = (errors, auth) => {
+const EventForm = ({errors, auth}) => {
     const [limit, setLimit] = React.useState("");
     const [image, setImage] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
