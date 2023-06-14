@@ -22,14 +22,15 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'required', 'max:255'],
-            'limitMember' => ['string', 'required'],
-            'address' => ['string', 'max:255'],
-            'participant_limit_number' => ['integer', 'required'],
-            'image' => ['url', 'required'],
-            'description' => ['string', 'required'],
-            'is_online' => ['bool', 'required'],
-            'user_id' => ['integer']
+            'user_id' => ['required', 'integer'],
+            'name' => ['required', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'participant_limit_number' => [ 'required', 'integer'],
+            'description' => [ 'required', 'string'],
+            'start_date' => 'required|date_format:H:i|',
+            'end_date' => 'required|date_format:H:i|after:start_date',
+            // 'image' => ['url', 'required'],
+            // 'is_online' => ['bool', 'required'],
         ];
     }
 }

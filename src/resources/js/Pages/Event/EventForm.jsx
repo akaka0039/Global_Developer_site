@@ -3,14 +3,16 @@ import TimeForm from "./TimeForm";
 import Header from "@/Components/Header";
 import { router } from "@inertiajs/react";
 
-const EventForm = () => {
+const EventForm = ({errors, auth}) => {
     const [limit, setLimit] = React.useState("");
     const [image, setImage] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
-
-    const handleLimitChange = (e) => {
-        setLimit(e.target.value);
-    };
+    const [name, setName] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const [address, setAddress] = React.useState("");
+    const [startTime, setStartTime] = React.useState("");
+    const [endTime, setEndTime] = React.useState("");
+    const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -35,14 +37,28 @@ const EventForm = () => {
         setIsDragging(false);
     };
 
+    const handleStartTimeChange = (newValue) => {
+        setStartTime(newValue);
+    };
+
+    const handleEndTimeChange = (newValue) => {
+        setEndTime(newValue);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (e.nativeEvent.submitter.id !== "back-button") {
-            // フォームの送信処理を実行する
-            router.post(`/events`);
-            // console.log("Submitted!");
-            // console.log("Limit:", limit);
-            // console.log("Image:", image);
+            const data = {
+                name: name,
+                address: address,
+                participant_limit_number: limit,
+                image: image,
+                description: description,
+                start_date: startTime,
+                end_date: endTime,
+                user_id: auth?.user?.user_id,
+            }
+            router.post(`/events`, data);
         }
     };
     return (
@@ -64,7 +80,11 @@ const EventForm = () => {
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
                                 placeholder="Enter event name"
+                                id="name"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
                             />
+                            {errors.name && <div className={errorMessageStyle}>{errors.name}</div> }
                         </div>
                         <div
                             className={`bg-white shadow-md rounded px-8 py-6 mb-4 ${
@@ -120,16 +140,24 @@ const EventForm = () => {
                                 type="date"
                             />
                         </div>
-                        <TimeForm />
+                        <TimeForm
+                            handleStartTimeChange={handleStartTimeChange}
+                            handleEndTimeChange={handleEndTimeChange}
+                            errors={errors}
+                        />
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Content
+                                Description
                             </label>
                             <textarea
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 rows={4}
                                 placeholder="Enter your message"
+                                id="description"
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
                             ></textarea>
+                            {errors.description && <div className={errorMessageStyle}>{errors.description}</div> }
                         </div>
                         <div>
                             <label
@@ -144,9 +172,10 @@ const EventForm = () => {
                                 name="location"
                                 className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 placeholder="Enter the location"
-                                // value={location}
-                                // onChange={(e) => setLocation(e.target.value)}
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                             />
+                            {errors.address && <div className={errorMessageStyle}>{errors.address}</div> }
                         </div>
 
                         <div className="mt-4">
@@ -174,7 +203,11 @@ const EventForm = () => {
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="number"
                                 placeholder="Enter limit"
+                                id="limit"
+                                value={limit}
+                                onChange={e => setLimit(e.target.value)}
                             />
+                            {errors.participant_limit_number && <div className={errorMessageStyle}>{errors.participant_limit_number}</div> }
                         </div>
                         <div className="flex justify-end">
                             <button
