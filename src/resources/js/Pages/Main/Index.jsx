@@ -1,9 +1,8 @@
 import React from "react";
 import MainCard from "./MainCard";
 import Card from "./Card";
-import GeneralLayout from "@/Layouts/GeneralLayout";
 import Header from "@/Components/Header";
-import Footer from "@/Components/footer";
+import Footer from "@/Components/Footer";
 
 function Index({ auth, events, flash }) {
     // mock data 2023/06/12
@@ -15,7 +14,6 @@ function Index({ auth, events, flash }) {
     };
 
     return (
-        // <GeneralLayout auth={auth}>
         <div className="flex h-screen flex-col">
             <Header auth={auth} />
             <div>
@@ -38,18 +36,25 @@ function Index({ auth, events, flash }) {
                 />
                 <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12">
                     <div className="text-center">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black-100">
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black-100 pt-10">
                             Global Developer
                         </h1>
                         <p className="text-balck-100 mt-4 sm:mt-6">
                             ~ based on your participation ~
                         </p>
+                        <div className="px-4 py-8 text-center items-center sm:px-6">
+                            <a href="/events/create">
+                                <button
+                                    type="submit"
+                                    className="inline-flex justify-center py-6 px-10  border border-transparent shadow-sm text-xl font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                >
+                                    Create
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p className="text-right text-black-100 mt-2 pt-8 pr-5">
-                ＞＞＞ Check All Events
-            </p>
 
             <div className="flex flex-wrap justify-center items-center pt-4 pb-5">
                 {events.map((event) => (
@@ -60,7 +65,6 @@ function Index({ auth, events, flash }) {
                 <Footer />
             </div>
         </div>
-        // </GeneralLayout>
     );
 }
 
