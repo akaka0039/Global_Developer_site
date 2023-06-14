@@ -21,16 +21,25 @@ class StoreEventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'user_id' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:255'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'participant_limit_number' => [ 'required', 'integer'],
             'description' => [ 'required', 'string'],
-            'start_date' => 'required|date_format:H:i|',
-            'end_date' => 'required|date_format:H:i|after:start_date',
+            'start_date' => ['required', 'date_format:Y-m-d H:i'],
+            'end_date' => ['required', 'date_format:Y-m-d H:i', 'after:start_date'],
             // 'image' => ['url', 'required'],
-            // 'is_online' => ['bool', 'required'],
+            'is_online' => ['bool', 'required'],
         ];
+
+        if ($this->input('is_online')) {
+            // true_online
+            $rules['address'] = ['required', 'url'];
+        } else {
+             // true_inPerson
+            $rules['address'] = ['required', 'string', 'max:255'];
+        }
+        return $rules;
     }
 }

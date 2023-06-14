@@ -31,6 +31,10 @@ class EventController extends Controller
     /**
      * @param StoreEventRequest $request
      * Store a newly created resource in storage.
+     * 
+     * columns
+     * is_online '0' - in person
+     * is_online '1' - online
      */
     public function store(StoreEventRequest $request)
     {

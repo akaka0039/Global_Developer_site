@@ -1,7 +1,8 @@
-import React from "react";
-import TimeForm from "./TimeForm";
+import React, { useState } from "react";
+import TimeForm from "./EventFormComponents/TimeForm";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
+import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
 const EventForm = ({ errors, auth }) => {
     const [limit, setLimit] = React.useState("");
@@ -13,6 +14,7 @@ const EventForm = ({ errors, auth }) => {
     const [startTime, setStartTime] = React.useState("");
     const [endTime, setEndTime] = React.useState("");
     const errorMessageStyle = "text-red-500 italic text-lg";
+    const [is_online, setIs_online] = useState(false);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -25,10 +27,6 @@ const EventForm = ({ errors, auth }) => {
 
         const file = e.dataTransfer.files[0];
         setImage(file);
-    };
-
-    const handleUploadClick = () => {
-        document.getElementById("image-upload").click();
     };
 
     const handleDragOver = (e) => {
@@ -59,16 +57,21 @@ const EventForm = ({ errors, auth }) => {
             description: description,
             start_date: startTime,
             end_date: endTime,
+            is_online: is_online,
             // Before deploying, should fix this
             user_id: auth?.user?.user_id,
         };
         router.post(`/events`, data);
     };
+
+    const addressHandleSwitchChange = (isActive) => {
+        setIs_online(isActive);
+    };
     return (
         <GeneralLayout auth={auth}>
             <div className="flex justify-center items-center">
                 <div className="w-9/12 pt-46">
-                    <h1 className="text-2xl font-bold mb-4">Event Details</h1>
+                    <h1 className="text-2xl font-bold mb-4">Event Form</h1>
                     <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Event Name
@@ -131,20 +134,12 @@ const EventForm = ({ errors, auth }) => {
                         />
                     </div>
 
-                    <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            Event Date
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            type="date"
-                        />
-                    </div>
                     <TimeForm
                         handleStartTimeChange={handleStartTimeChange}
                         handleEndTimeChange={handleEndTimeChange}
                         errors={errors}
                     />
+
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Description
@@ -163,46 +158,61 @@ const EventForm = ({ errors, auth }) => {
                             </div>
                         )}
                     </div>
-                    <div>
-                        <label
-                            htmlFor="location"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Location
-                        </label>
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter the location"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                        {errors.address && (
-                            <div className={errorMessageStyle}>
-                                {errors.address}
+                    <Switch onChange={addressHandleSwitchChange}>
+                        {!is_online && (
+                            <div>
+                                <div className="mt-4 w-full">
+                                    <label
+                                        htmlFor="onlineUrl"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        Address
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="Address"
+                                        name="Address"
+                                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Enter the Address"
+                                        value={address}
+                                        onChange={(e) =>
+                                            setAddress(e.target.value)
+                                        }
+                                    />
+                                    {errors.address && (
+                                        <div className={errorMessageStyle}>
+                                            {errors.address}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         )}
-                    </div>
+                        {is_online && (
+                            <div className="mt-4 w-full">
+                                <label
+                                    htmlFor="onlineUrl"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Online
+                                </label>
+                                <input
+                                    type="url"
+                                    id="Address"
+                                    name="Address"
+                                    className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                    placeholder="Enter the online URL"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                                {errors.address && (
+                                    <div className={errorMessageStyle}>
+                                        {errors.address}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </Switch>
 
-                    <div className="mt-4">
-                        <label
-                            htmlFor="onlineUrl"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Online URL
-                        </label>
-                        <input
-                            type="text"
-                            id="onlineUrl"
-                            name="onlineUrl"
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter the online URL"
-                            // value={onlineUrl}
-                            // onChange={(e) => setOnlineUrl(e.target.value)}
-                        />
-                    </div>
                     <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Attendance Limit
@@ -213,7 +223,14 @@ const EventForm = ({ errors, auth }) => {
                             placeholder="Enter limit"
                             id="limit"
                             value={limit}
-                            onChange={(e) => setLimit(e.target.value)}
+                            onChange={(e) => {
+                                const inputValue = e.target.value;
+                                const numericValue = inputValue.replace(
+                                    /\D/g,
+                                    ""
+                                ); // 数字以外の文字を削除
+                                setLimit(numericValue);
+                            }}
                         />
                         {errors.participant_limit_number && (
                             <div className={errorMessageStyle}>
@@ -221,6 +238,7 @@ const EventForm = ({ errors, auth }) => {
                             </div>
                         )}
                     </div>
+
                     <div className="flex justify-end">
                         <button
                             id="back-button"
