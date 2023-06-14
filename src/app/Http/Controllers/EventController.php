@@ -50,18 +50,20 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $event)
+    public function edit(Event $event)
     {
         return Inertia::render('Event/EventEdit', [
             'event' => [
                 'name' => $event->name,
-                'limitMember' => $event->limitMember,
                 'address' => $event->address,
                 'participant_limit_number' => $event->participant_limit_number,
                 'image' => $event->image,
+                'start_date' => $event->start_date,
+                'end_date' => $event->end_date,
                 'description' => $event->description,
                 'is_online' => $event->is_online,
-                'user_id' => $event->user_id
+                'user_id' => $event->user_id,
+                'event_id' => $event->event_id
             ]
         ]);
     }
