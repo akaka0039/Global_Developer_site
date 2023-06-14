@@ -5,10 +5,10 @@ import Top_3 from "./Top_3";
 import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 
-function Index() {
+function Index({ auth }) {
     return (
         <div className="flex flex-col h-screen">
-            <Header />
+            <Header auth={auth} />
             <Top_1 />
             <Top_2 />
             <Top_3 />
