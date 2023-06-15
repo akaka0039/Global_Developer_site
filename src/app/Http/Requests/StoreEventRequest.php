@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreEventRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -29,7 +30,6 @@ class StoreEventRequest extends FormRequest
             'description' => [ 'required', 'string'],
             'start_date' => ['required', 'date_format:Y-m-d H:i'],
             'end_date' => ['required', 'date_format:Y-m-d H:i', 'after:start_date'],
-            // 'image' => ['url', 'required'],
             'is_online' => ['bool', 'required'],
         ];
 

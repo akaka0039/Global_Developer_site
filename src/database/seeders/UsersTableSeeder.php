@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => 'User' . $i,
                 'introduction' => 'Introduction' . $i,
-                'image' => 'image1.jpg',
+                'image' => 'top_background.jpg',
                 'habitation' => 'Habitation' . $i,
                 'nationality' => 'Nationality' . $i,
                 'position' => 'Position' . $i,

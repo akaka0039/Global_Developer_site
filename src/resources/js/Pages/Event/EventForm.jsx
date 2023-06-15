@@ -58,8 +58,7 @@ const EventForm = ({ errors, auth }) => {
             start_date: startTime,
             end_date: endTime,
             is_online: is_online,
-            // Before deploying, should fix this
-            user_id: auth?.user?.user_id,
+            user_id: auth.user.user_id,
         };
         router.post(`/events`, data);
     };

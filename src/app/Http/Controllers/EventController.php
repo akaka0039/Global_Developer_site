@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreEventRequest;
@@ -25,7 +26,11 @@ class EventController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Event/EventForm');
+        if (Auth::check()) {
+            return Inertia::render('Event/EventForm');
+        } else {
+            return redirect()->route('login'); 
+        }
     }
 
     /**
@@ -38,7 +43,28 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        Event::create($request->validated());
+        $event = new Event();
+
+        // if image is there
+        if ($request->hasFile('image')) {
+            $original = $request->file('image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            $request->file('image')->move('storage/images', $name);
+            $event->image = $name;
+        } else {
+            // default
+            $event->image = 'storage/images/top_background.jpg'; 
+        }
+
+        $event->user_id = $request->input('user_id');
+        $event->name = $request->input('name');
+        $event->start_date = $request->input('start_date');
+        $event->end_date = $request->input('end_date');
+        $event->address = $request->input('address');
+        $event->participant_limit_number = $request->input('participant_limit_number');
+        $event->description = $request->input('description');
+        $event->is_online = $request->input('is_online');
+        $event->save();
 
         return redirect('/events')->with('message', 'Your event has been successfully created!');    }
 
