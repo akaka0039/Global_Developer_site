@@ -53,7 +53,7 @@ class EventController extends Controller
             $event->image = $name;
         } else {
             // default
-            $event->image = 'storage/images/top_background.jpg'; 
+            $event->image = 'top_background.jpg'; 
         }
 
         $event->user_id = $request->input('user_id');
@@ -66,7 +66,8 @@ class EventController extends Controller
         $event->is_online = $request->input('is_online');
         $event->save();
 
-        return redirect('/events')->with('message', 'Your event has been successfully created!');    }
+        return redirect('/events')->with('message', 'Your event has been successfully created!');    
+    }
 
     /**
      * Display the specified resource.
