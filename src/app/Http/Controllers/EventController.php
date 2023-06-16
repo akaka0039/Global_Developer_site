@@ -43,7 +43,9 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return Inertia::render('Event/EventDetail', compact('event'));
+        $is_attend = $event->isAttendedBy();
+        $participants = $event->participants()->get();
+        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
     }
 
     /**

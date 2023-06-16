@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -51,5 +52,13 @@ class User extends Authenticatable
     public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'event_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function participant_events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'participants' , 'event_id', 'user_id')->withTimestamps();;
     }
 }
