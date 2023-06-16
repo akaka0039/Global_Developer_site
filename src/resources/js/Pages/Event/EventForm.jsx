@@ -14,7 +14,7 @@ const EventForm = ({ errors, auth }) => {
     const [startTime, setStartTime] = React.useState("");
     const [endTime, setEndTime] = React.useState("");
     const errorMessageStyle = "text-red-500 italic text-lg";
-    const [is_online, setIs_online] = useState(false);
+    const [isOnline, setIsOnline] = useState(false);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -57,14 +57,14 @@ const EventForm = ({ errors, auth }) => {
             description: description,
             start_date: startTime,
             end_date: endTime,
-            is_online: is_online,
+            is_online: isOnline,
             user_id: auth.user.user_id,
         };
         router.post(`/events`, data);
     };
 
     const addressHandleSwitchChange = (isActive) => {
-        setIs_online(isActive);
+        setIsOnline(isActive);
     };
     return (
         <GeneralLayout auth={auth}>
@@ -158,7 +158,7 @@ const EventForm = ({ errors, auth }) => {
                         )}
                     </div>
                     <Switch onChange={addressHandleSwitchChange}>
-                        {!is_online && (
+                        {!isOnline && (
                             <div>
                                 <div className="mt-4 w-full">
                                     <label
@@ -186,7 +186,7 @@ const EventForm = ({ errors, auth }) => {
                                 </div>
                             </div>
                         )}
-                        {is_online && (
+                        {isOnline && (
                             <div className="mt-4 w-full">
                                 <label
                                     htmlFor="onlineUrl"
