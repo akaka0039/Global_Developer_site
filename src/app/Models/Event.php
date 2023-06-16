@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -19,11 +20,12 @@ class Event extends Model
      */
     protected $fillable = [
         'name',
-        'limitMember',
         'address',
         'participant_limit_number',
         'image',
         'description',
+        'start_date',
+        'end_date',
         'is_online',
         'user_id',
     ];
@@ -34,5 +36,25 @@ class Event extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function participants(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'participants' , 'event_id', 'user_id',)->withTimestamps();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAttendedBy(): bool
+    {
+        if (!auth()->check() && is_null(auth()->user())) {
+            return false;
+        }
+
+        return $this->participants->contains(auth()->user());
     }
 }

@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 
-const EventDetail = ({ auth, event }) => {
+const EventDetail = ({ auth, event, is_attend, participants }) => {
     // for debug
-    // console.log(auth);
+    console.log(event, is_attend, participants);
 
-    function handleClick() {
+    function handleEditClick() {
         // console.log(event.event_id);
         router.get(`/events/${event.event_id}/edit`);
+    }
+
+    function handleAttendClick() {
+        router.post(`/events/${event.event_id}/participants`, {user_id: auth?.user?.user_id});
+    }
+
+    function handleNotAttendClick() {
+        router.delete(`/events/${event.event_id}/participants`, {user_id: auth?.user?.user_id});
     }
 
     return (
@@ -18,7 +26,7 @@ const EventDetail = ({ auth, event }) => {
                     <div className="flex justify-end pb-3">
                         <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded  focus:outline-none focus:shadow-outline"
-                            onClick={handleClick}
+                            onClick={handleEditClick}
                         >
                             Edit
                         </button>
@@ -59,7 +67,7 @@ const EventDetail = ({ auth, event }) => {
                                         Limit of Attendance
                                     </dt>
                                     <dd className="mt-1 text-sm text-gray-900">
-                                        {event.participant_limit_number}/10
+                                        {participants.length}/{event.participant_limit_number}
                                     </dd>
                                 </div>
                                 <div className="sm:col-span-2">
@@ -80,11 +88,21 @@ const EventDetail = ({ auth, event }) => {
                                     </button>
                                 </a>
                             </div>
-                            <div className="pl-2">
-                                <button className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
-                                    attend
-                                </button>
-                            </div>
+
+                            {!is_attend && (
+                                <div className="pl-2">
+                                    <button onClick={handleAttendClick} className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
+                                        attend
+                                    </button>
+                                </div>
+                            )}
+                            {is_attend && (
+                                <div className="pl-2">
+                                    <button onClick={handleNotAttendClick} className="bg-red-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-red-600">
+                                        not attend
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

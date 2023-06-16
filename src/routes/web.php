@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ParticipantController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,9 @@ Route::get('/profile/1', function () {
 
 // Events
 Route::resource('events', EventController::class);
+// Participants
+Route::post('events/{eventId}/participants', [ParticipantController::class, 'addParticipant']);
+Route::delete('events/{eventId}/participants', [ParticipantController::class, 'removeParticipant']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
