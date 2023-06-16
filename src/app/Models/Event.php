@@ -51,7 +51,7 @@ class Event extends Model
      * Check if the event is attended by the user.
      * @return bool
      */
-    public function isAttendedBy(): bool
+    public function isAttended(): bool
     {
         if (!auth()->check() && is_null(auth()->user())) {
             return false;
