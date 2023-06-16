@@ -21,7 +21,7 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         $organizing_events = $user->events()->get();
-        $participating_events = $user->participant_events()->get();
+        $participating_events = $user->participantEvents()->get();
         return Inertia::render(
             'Profile/ProfileDetail',
             compact(
