@@ -33,4 +33,25 @@ class StoreEventRequest extends FormRequest
             'is_online' => ['bool', 'required'],
         ];
     }
+
+    /**
+     * @return void
+     * To save pass of a image into database
+     */
+    protected function passedValidation(): void
+    {
+        if ($this->hasFile('image')) {
+            $original = $this->file('image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            $this->file('image')->move('storage/images', $name);
+            $this->merge([
+                'image' => $name,
+            ]);
+        } else {
+            // default
+            $this->merge([
+                'image' => 'top_background.jpg',
+            ]);
+        }
+    }
 }

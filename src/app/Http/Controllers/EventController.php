@@ -43,28 +43,10 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $event = new Event();
+        $validated = $request->validated();
+        $validated['image'] = $request->get('image') ?? $request->all()['image'];
 
-        // if image is there
-        if ($request->hasFile('image')) {
-            $original = $request->file('image')->getClientOriginalName();
-            $name = date('Ymd_His') . '_' . $original;
-            $request->file('image')->move('storage/images', $name);
-            $event->image = $name;
-        } else {
-            // default
-            $event->image = 'top_background.jpg'; 
-        }
-
-        $event->user_id = $request->input('user_id');
-        $event->name = $request->input('name');
-        $event->start_date = $request->input('start_date');
-        $event->end_date = $request->input('end_date');
-        $event->address = $request->input('address');
-        $event->participant_limit_number = $request->input('participant_limit_number');
-        $event->description = $request->input('description');
-        $event->is_online = $request->input('is_online');
-        $event->save();
+        Event::create($validated);
 
         return redirect('/events')->with('message', 'Your event has been successfully created!');    
     }
