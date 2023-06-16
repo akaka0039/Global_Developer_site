@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,24 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    /**
+     * Display the user's profile form.
+     */
+    public function show(int $id): Response
+    {
+        $user = User::find($id);
+        $organizing_events = $user->events()->get();
+        $participating_events = $user->participant_events()->get();
+        return Inertia::render(
+            'Profile/ProfileDetail',
+            compact(
+                'user',
+                'organizing_events',
+                'participating_events'
+            )
+        );
+    }
+
     /**
      * Display the user's profile form.
      */
