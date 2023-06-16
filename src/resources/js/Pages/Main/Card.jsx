@@ -1,10 +1,10 @@
 import React from "react";
 import { router } from "@inertiajs/react";
-import defaultImage from "../../../../public/images/top_background.jpg";
 
 const Card = ({ event }) => {
     const cardStyle = {
-        backgroundImage: `url(${event.imageUrl || defaultImage})`,
+        backgroundImage: `url(${`/storage/images/${event.image}`})`,
+        backgroundSize: "cover",
     };
 
     function handleClick() {
@@ -23,9 +23,11 @@ const Card = ({ event }) => {
                 ></div>
                 <div className="p-4">
                     <h2 className="text-xl font-bold mb-2" key={event.event_id}>
-                        {event.title}
+                        {event.name}
                     </h2>
-                    <p className="text-gray-700">{event.description}</p>
+                    <p className="text-gray-700 truncate">
+                        {event.description}
+                    </p>
                 </div>
             </div>
         </div>

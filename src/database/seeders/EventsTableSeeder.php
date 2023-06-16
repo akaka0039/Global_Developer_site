@@ -21,7 +21,7 @@ class EventsTableSeeder extends Seeder
                 'start_date' => '2024-06-12 19:28:01',
                 'end_date' => '2024-06-13 19:28:01',
                 'address' => 'Example Address' . $i,
-                'image' => '/images/top_background.jpg',
+                'image' => 'top_background.jpg',
                 'description' => 'Example description ' . $i,
                 'participant_limit_number' => $i,
                 'created_at' => now(),

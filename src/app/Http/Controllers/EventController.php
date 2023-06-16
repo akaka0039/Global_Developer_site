@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreEventRequest;
@@ -25,18 +26,30 @@ class EventController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Event/EventForm');
+        if (Auth::check()) {
+            return Inertia::render('Event/EventForm');
+        } else {
+            return redirect()->route('login'); 
+        }
     }
 
     /**
      * @param StoreEventRequest $request
      * Store a newly created resource in storage.
+     * 
+     * columns
+     * is_online '0' - in person
+     * is_online '1' - online
      */
     public function store(StoreEventRequest $request)
     {
-        Event::create($request->validated());
+        $validated = $request->validated();
+        $validated['image'] = $request->get('image') ?? $request->all()['image'];
 
-        return redirect('/events')->with('message', 'Your event has been successfully created!');    }
+        Event::create($validated);
+
+        return redirect('/events')->with('message', 'Your event has been successfully created!');    
+    }
 
     /**
      * Display the specified resource.

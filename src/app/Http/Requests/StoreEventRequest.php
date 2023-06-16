@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreEventRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -24,13 +25,33 @@ class StoreEventRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:255'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'address' => $this->input('is_online') ? ['required', 'url'] : ['required', 'string', 'max:255'],
             'participant_limit_number' => [ 'required', 'integer'],
             'description' => [ 'required', 'string'],
-            'start_date' => 'required|date_format:H:i|',
-            'end_date' => 'required|date_format:H:i|after:start_date',
-            // 'image' => ['url', 'required'],
-            // 'is_online' => ['bool', 'required'],
+            'start_date' => ['required', 'date_format:Y-m-d H:i'],
+            'end_date' => ['required', 'date_format:Y-m-d H:i', 'after:start_date'],
+            'is_online' => ['bool', 'required'],
         ];
+    }
+
+    /**
+     * @return void
+     * To save pass of a image into database
+     */
+    protected function passedValidation(): void
+    {
+        if ($this->hasFile('image')) {
+            $original = $this->file('image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            $this->file('image')->move('storage/images', $name);
+            $this->merge([
+                'image' => $name,
+            ]);
+        } else {
+            // default
+            $this->merge([
+                'image' => 'top_background.jpg',
+            ]);
+        }
     }
 }
