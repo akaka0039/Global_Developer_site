@@ -1,7 +1,8 @@
 import React from "react";
 import GeneralLayout from "../../Layouts/GeneralLayout";
 
-const ProfileDetails = ({ auth, user }) => {
+const ProfileDetails = ({ auth, user, organizing_events, participating_events }) => {
+    // console.log(user, organizing_events, participating_events);
     auth = "";
     user = {
         name: "John Doefa",
