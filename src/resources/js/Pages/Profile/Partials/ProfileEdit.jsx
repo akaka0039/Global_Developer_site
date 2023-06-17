@@ -68,7 +68,7 @@ export default function ProfileEdit({
     };
 
     return (
-        <GeneralLayout auth={auth}>
+        <>
             <div>
                 {isFlashVisible && flash.message && (
                     <div
@@ -292,16 +292,14 @@ export default function ProfileEdit({
                                             </div>
                                         )}
 
-                                    <div className="mt-2">
-                                        <PrimaryButton onClick={submit}>
-                                            Save
-                                        </PrimaryButton>
-                                        <div className="px-4 py-3  text-right sm:px-6">
-                                            <a href="/user/delete">
-                                                <button className="inline-flex justify-center py-2 px-4  border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                    delete
-                                                </button>
-                                            </a>
+                                    <div className="mt-2 flex flex-col items-end">
+                                        <div className="flex">
+                                            <button
+                                                onClick={submit}
+                                                className="py-3 px-7 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                            >
+                                                Save
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -310,6 +308,6 @@ export default function ProfileEdit({
                     </div>
                 </div>
             </div>
-        </GeneralLayout>
+        </>
     );
 }
