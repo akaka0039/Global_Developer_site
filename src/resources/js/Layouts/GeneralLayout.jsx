@@ -8,8 +8,8 @@ export default function GeneralLayout({ auth, children }) {
             <div className="flex-1">
                 <Header auth={auth} />
             </div>
-            <div className="flex-1 pb-8">{children}</div>
-            <div className="flex-1 pt-4">
+            <div className="flex-grow pb-8">{children}</div>
+            <div>
                 <Footer />
             </div>
         </div>
