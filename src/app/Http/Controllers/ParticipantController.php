@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Illuminate\Http\JsonResponse;
 
 class ParticipantController extends Controller
 {
-    public function addParticipant(Request $request, $eventId)
+    /**
+     * Add participant to event.
+     * @param int $eventId
+     * @return JsonResponse
+     */
+    public function addParticipant(int $eventId) : JsonResponse
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -19,12 +22,19 @@ class ParticipantController extends Controller
         $event = Event::find($eventId);
         $event->participants()->attach(auth()->id());
         $participants = $event->participants()->get();
-        $is_attend = true;
 
-        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
+        return response()->json([
+            'is_attended' => true,
+            'participants' => $participants,
+        ]);
     }
 
-    public function removeParticipant(Request $request, $eventId)
+    /**
+     * Remove participant from event.
+     * @param int $eventId
+     * @return JsonResponse
+     */
+    public function removeParticipant(int $eventId) : JsonResponse
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -33,8 +43,10 @@ class ParticipantController extends Controller
         $event = Event::find($eventId);
         $event->participants()->detach(auth()->id());
         $participants = $event->participants()->get();
-        $is_attend = false;
 
-        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
+        return response()->json([
+            'is_attended' => false,
+            'participants' => $participants,
+        ]);
     }
 }
