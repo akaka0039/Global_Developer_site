@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\HasTags;
 
 class Event extends Model
 {
     use HasFactory;
+    use HasTags;
 
     protected $primaryKey = 'event_id';
 
@@ -32,6 +34,7 @@ class Event extends Model
 
     /**
      * Get the user that owns the event.
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -39,6 +42,7 @@ class Event extends Model
     }
 
     /**
+     * Get the participants for the event.
      * @return BelongsToMany
      */
     public function participants(): BelongsToMany
@@ -47,6 +51,7 @@ class Event extends Model
     }
 
     /**
+     * Check if the event is attended by the current user.
      * @return bool
      */
     public function isAttendedBy(): bool
