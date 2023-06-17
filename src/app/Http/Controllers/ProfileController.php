@@ -61,7 +61,7 @@ class ProfileController extends Controller
             $user->image = $name;
         }
         $user->save();
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')->with('message', 'Your account has been successfully edit!'); ;
     }
 
     /**
