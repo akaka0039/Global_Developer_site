@@ -25,12 +25,17 @@ Route::get('/', function () {
     return Inertia::render('Top/Index');
 });
 
-Route::get('/profile/1', function () {
-    return Inertia::render('Profile/ProfileDetail');
-});
-
 // Events
 Route::resource('events', EventController::class);
+
+// Users
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/{user_id}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 // Participants
 Route::post('events/{eventId}/participants', [ParticipantController::class, 'addParticipant']);
 Route::delete('events/{eventId}/participants', [ParticipantController::class, 'removeParticipant']);
@@ -38,12 +43,6 @@ Route::delete('events/{eventId}/participants', [ParticipantController::class, 'r
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 /*
     Reference

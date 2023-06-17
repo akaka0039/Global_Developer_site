@@ -68,7 +68,7 @@ class EventController extends Controller
      */
     public function show(Event $event): Response
     {
-        $is_attended = $event->isAttendedBy();
+        $is_attended = $event->isAttended();
         $participants = $event->participants()->get();
         $tags = $event->tags()->get();
         return Inertia::render(

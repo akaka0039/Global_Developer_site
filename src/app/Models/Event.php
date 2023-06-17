@@ -38,7 +38,7 @@ class Event extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'event_id');
     }
 
     /**
@@ -47,14 +47,14 @@ class Event extends Model
      */
     public function participants(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'participants' , 'event_id', 'user_id',)->withTimestamps();
+        return $this->belongsToMany(User::class, 'participants', 'event_id', 'user_id',)->withTimestamps();
     }
 
     /**
      * Check if the event is attended by the current user.
      * @return bool
      */
-    public function isAttendedBy(): bool
+    public function isAttended(): bool
     {
         if (!auth()->check() && is_null(auth()->user())) {
             return false;

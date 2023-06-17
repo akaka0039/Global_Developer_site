@@ -51,14 +51,14 @@ class User extends Authenticatable
      */
     public function events(): HasMany
     {
-        return $this->hasMany(Event::class, 'event_id');
+        return $this->hasMany(Event::class, 'user_id');
     }
 
     /**
      * @return BelongsToMany
      */
-    public function participant_events(): BelongsToMany
+    public function participantEvents(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class, 'participants' , 'event_id', 'user_id')->withTimestamps();;
+        return $this->belongsToMany(Event::class, 'participants', 'user_id', 'event_id')->withTimestamps();;
     }
 }
