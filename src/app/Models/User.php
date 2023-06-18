@@ -47,6 +47,7 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the events for the user.
      * @return HasMany
      */
     public function events(): HasMany
@@ -55,6 +56,7 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the participant events for the user.
      * @return BelongsToMany
      */
     public function participantEvents(): BelongsToMany
