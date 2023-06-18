@@ -1,7 +1,5 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import GeneralLayout from "@/Layouts/GeneralLayout";
-import PrimaryButton from "@/Components/PrimaryButton";
 import { Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 
@@ -52,6 +50,7 @@ export default function ProfileEdit({
         setImageUrl(URL.createObjectURL(file));
     };
 
+    console.log(errors);
     const submit = (e) => {
         e.preventDefault();
         const data = {
@@ -211,6 +210,10 @@ export default function ProfileEdit({
                                             }
                                             autoComplete="off"
                                         />
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.introduction}
+                                        />
                                     </div>
 
                                     <div>
@@ -226,6 +229,10 @@ export default function ProfileEdit({
                                                 setHabitation(e.target.value)
                                             }
                                             autoComplete="off"
+                                        />
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.habitation}
                                         />
                                     </div>
 
@@ -243,6 +250,10 @@ export default function ProfileEdit({
                                             }
                                             autoComplete="nationality"
                                         />
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.nationality}
+                                        />
                                     </div>
 
                                     <div>
@@ -258,6 +269,10 @@ export default function ProfileEdit({
                                                 setUrl(e.target.value)
                                             }
                                             autoComplete="off"
+                                        />
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.url}
                                         />
                                     </div>
 

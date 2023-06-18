@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Rules\UniqueEmail;
+
 
 
 class ProfileUpdateRequest extends FormRequest
@@ -17,27 +17,23 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     { 
-        $userId = $this->user()->user_id;
         return [
-            'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', new UniqueEmail($userId)],
-            'image' => ['nullable'],
-            'introduction '=> ['nullable'],
-            'habitation' => ['nullable'],
-            'nationality' => ['nullable'],
-            'url' => ['nullable'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$this->user()->user_id.',user_id'],
+            'introduction' => ['nullable', 'string'],
+            'habitation' => ['nullable', 'string'],
+            'nationality' => ['nullable', 'string'],
+            'url' => ['nullable', 'url']
         ];
     }
 
-    protected function passedValidation(): void
-    {
+    public function processImage(User $user): void
+    { 
         if ($this->hasFile('image')) {
-            $original = $this->file('image')->getClientOriginalName();
+            $image = $this->file('image');
+            $original = $image->getClientOriginalName();
             $name = date('Ymd_His') . '_' . $original;
-            $this->file('image')->move('storage/images', $name);
-            $this->merge([
-                'image' => $name,
-            ]);
-        } 
-    }
+            $user->image = $name;
+        }
+    } 
 }

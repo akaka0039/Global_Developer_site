@@ -54,12 +54,7 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
         
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $original = $image->getClientOriginalName();
-            $name = date('Ymd_His') . '_' . $original;
-            $user->image = $name;
-        }
+        $request->processImage($user);
         $user->save();
         return Redirect::route('profile.edit')->with('message', 'Your account has been successfully edit!'); ;
     }
