@@ -32,6 +32,8 @@ class Event extends Model
         'user_id',
     ];
 
+    // DB relationships
+
     /**
      * Get the user that owns the event.
      * @return BelongsTo
@@ -51,6 +53,17 @@ class Event extends Model
     }
 
     /**
+     * Get the wait_list for the event.
+     * @return BelongsToMany
+     */
+    public function waitList(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'wait_lists', 'event_id', 'user_id',)->withTimestamps();
+    }
+
+    // Scopes
+
+    /**
      * Check if the event is attended by the current user.
      * @return bool
      */
@@ -61,5 +74,18 @@ class Event extends Model
         }
 
         return $this->participants->contains(auth()->user());
+    }
+
+    /**
+     * Check if the event is wait listed by the current user.
+     * @return bool
+     */
+    public function isWaitListed(): bool
+    {
+        if (!auth()->check() && is_null(auth()->user())) {
+            return false;
+        }
+
+        return $this->waitList->contains(auth()->user());
     }
 }

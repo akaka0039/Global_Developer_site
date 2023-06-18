@@ -70,6 +70,7 @@ class EventController extends Controller
     {
         $is_attended = $event->isAttended();
         $participants = $event->participants()->get();
+        $wait_list = $event->waitList()->get();
         $tags = $event->tags()->get();
         return Inertia::render(
             'Event/EventDetail',
@@ -78,6 +79,7 @@ class EventController extends Controller
                     'event',
                     'is_attended',
                     'participants',
+                    'wait_list',
                     'tags'
                 ]
             )

@@ -3,12 +3,14 @@ import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 import axios from "axios";
 
-const EventDetail = ({ auth, event, is_attended, participants, tags }) => {
+const EventDetail = ({ auth, event, is_attended, participants, tags, wait_list }) => {
     // for debug
-    console.log(event, is_attended, participants, tags);
+    console.log(event, is_attended, participants, tags, wait_list);
 
     const [isAttended, SetIsAttended] = useState(is_attended);
     const [participantsState, SetParticipantsState] = useState(participants);
+    const [waitListState, SetWaitListState] = useState(wait_list);
+    const isFullyOccupied = participantsState.length >= event.participant_limit_number;
 
     const handleEditClick = () => {
         // console.log(event.event_id);
@@ -23,6 +25,9 @@ const EventDetail = ({ auth, event, is_attended, participants, tags }) => {
         if (response?.data?.participants) {
             SetParticipantsState(response?.data?.participants);
         }
+        if (response?.data?.wait_list) {
+            SetWaitListState(response?.data?.wait_list);
+        }
     }
 
     const handleNotAttendClick = async () => {
@@ -32,6 +37,9 @@ const EventDetail = ({ auth, event, is_attended, participants, tags }) => {
         }
         if (response?.data?.participants) {
             SetParticipantsState(response?.data?.participants);
+        }
+        if (response?.data?.wait_list) {
+            SetWaitListState(response?.data?.wait_list);
         }
     }
 
@@ -97,6 +105,12 @@ const EventDetail = ({ auth, event, is_attended, participants, tags }) => {
                                     <dd className="mt-1 text-sm text-gray-900">
                                         {participantsState.length}/{event.participant_limit_number}
                                     </dd>
+                                    <dt className="text-sm font-medium text-gray-500">
+                                        Number of people waiting
+                                    </dt>
+                                    <dd className="mt-1 text-sm text-gray-900">
+                                        {waitListState.length}
+                                    </dd>
                                 </div>
                                 <div className="sm:col-span-2">
                                     <dt className="text-sm font-medium text-gray-500">
@@ -117,7 +131,14 @@ const EventDetail = ({ auth, event, is_attended, participants, tags }) => {
                                 </a>
                             </div>
 
-                            {!isAttended && (
+                            {isFullyOccupied && !isAttended && (
+                                <div className="pl-2">
+                                    <button onClick={handleAttendClick} className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600">
+                                        waitlist
+                                    </button>
+                                </div>
+                            )}
+                            {!isFullyOccupied && !isAttended && (
                                 <div className="pl-2">
                                     <button onClick={handleAttendClick} className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
                                         attend
