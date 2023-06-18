@@ -3,66 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ParticipantController extends Controller
 {
-    /**
-     * Add participant to event.
-     * @param int $eventId
-     * @return JsonResponse
-     */
-    public function addParticipant(int $eventId) : JsonResponse
+    public function addParticipant(Request $request, $eventId)
     {
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
         $event = Event::find($eventId);
-        if ($event->participants()->count() >= $event->participant_limit_number) {
-            $event->waitList()->attach(auth()->id());
-        } else {
-            $event->participants()->attach(auth()->id());
-        }
+        $event->participants()->attach(auth()->id());
+        $participants = $event->participants()->get();
+        $is_attend = true;
 
-        return response()->json([
-            'is_attended' => true,
-            'participants' => $event->participants()->get(),
-            'wait_list' => $event->waitList()->get(),
-        ]);
+        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
     }
 
-    /**
-     * Remove participant from event.
-     * @param int $eventId
-     * @return JsonResponse
-     */
-    public function removeParticipant(int $eventId) : JsonResponse
+    public function removeParticipant(Request $request, $eventId)
     {
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
         $event = Event::find($eventId);
-        if ($event->isAttended(auth()->id())) {
-            $event->participants()->detach(auth()->id());
-        }
-        // Check if there is a user on the wait_list
-        $wait_list = $event->waitList();
-        if ($wait_list->first() && !$event->isWaitListed(auth()->id())) {
-            $first_wait_list = $wait_list->first();
-            $event->participants()->attach($first_wait_list->user_id);
-            $event->waitList()->detach($first_wait_list->user_id);
-        } else {
-            $event->waitList()->detach(auth()->id());
-        }
+        $event->participants()->detach(auth()->id());
+        $participants = $event->participants()->get();
+        $is_attend = false;
 
-        return response()->json([
-            'is_attended' => false,
-            'participants' => $event->participants()->get(),
-            'wait_list' => $event->waitList()->get(),
-        ]);
+        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
     }
 }

@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Tags\HasTags;
 
 class Event extends Model
 {
     use HasFactory;
-    use HasTags;
 
     protected $primaryKey = 'event_id';
 
@@ -32,11 +30,8 @@ class Event extends Model
         'user_id',
     ];
 
-    // DB relationships
-
     /**
      * Get the user that owns the event.
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -53,18 +48,7 @@ class Event extends Model
     }
 
     /**
-     * Get the wait_list for the event.
-     * @return BelongsToMany
-     */
-    public function waitList(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'wait_lists', 'event_id', 'user_id',)->withTimestamps();
-    }
-
-    // Scopes
-
-    /**
-     * Check if the event is attended by the current user.
+     * Check if the event is attended by the user.
      * @return bool
      */
     public function isAttended(): bool
@@ -74,18 +58,5 @@ class Event extends Model
         }
 
         return $this->participants->contains(auth()->user());
-    }
-
-    /**
-     * Check if the event is wait listed by the current user.
-     * @return bool
-     */
-    public function isWaitListed(): bool
-    {
-        if (!auth()->check() && is_null(auth()->user())) {
-            return false;
-        }
-
-        return $this->waitList->contains(auth()->user());
     }
 }

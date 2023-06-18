@@ -2,96 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreEventRequest;
 use App\Models\Event;
-use Spatie\Tags\Tag;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class EventController extends Controller
 {
     /**
-     * Display a listing of the events.
-     * @return Response
+     * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
         $events = Event::orderBy('created_at', 'desc')->get();
         return Inertia::render('Main/Index', compact('events'));
     }
 
     /**
-     * Show the form for creating a new event.
-     * @return Response|RedirectResponse
+     * Show the form for creating a new resource.
      */
-    public function create(): Response|RedirectResponse
+    public function create()
     {
         if (Auth::check()) {
-            $tags = Tag::orderBy('created_at', 'desc')->get();
-            return Inertia::render('Event/EventForm', compact('tags'));
+            return Inertia::render('Event/EventForm');
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login'); 
         }
     }
 
     /**
-     * Store a newly created event in storage.
      * @param StoreEventRequest $request
-     * @return RedirectResponse
-     *
+     * Store a newly created resource in storage.
+     * 
      * columns
      * is_online '0' - in person
      * is_online '1' - online
      */
-    public function store(StoreEventRequest $request): RedirectResponse
+    public function store(StoreEventRequest $request)
     {
-        DB::transaction(function () use ($request) {
-            $validated = $request->validated();
-            $validated['image'] = $request->get('image') ?? $request->all()['image'];
-            $event = Event::create($validated);
-            // attach tags
-            if ($validated['tags']) {
-                $event->attachTags($validated["tags"]);
-            }
-        });
+        $validated = $request->validated();
+        $validated['image'] = $request->get('image') ?? $request->all()['image'];
 
-        return redirect('/events')->with('message', 'Your event has been successfully created!');
+        Event::create($validated);
+
+        return redirect('/events')->with('message', 'Your event has been successfully created!');    
     }
 
     /**
-     * Display the specified event.
-     * @param Event $event
-     * @return Response
+     * Display the specified resource.
      */
-    public function show(Event $event): Response
+    public function show(Event $event)
     {
-        $is_attended = $event->isAttended();
+        $is_attend = $event->isAttended();
         $participants = $event->participants()->get();
-        $wait_list = $event->waitList()->get();
-        $tags = $event->tags()->get();
-        return Inertia::render(
-            'Event/EventDetail',
-            compact(
-                [
-                    'event',
-                    'is_attended',
-                    'participants',
-                    'wait_list',
-                    'tags'
-                ]
-            )
-        );
+        return Inertia::render('Event/EventDetail', compact(['event', 'is_attend', 'participants']));
     }
 
     /**
-     * Show the form for editing the specified event.
-     * @param Event $event
-     * @return Response
+     * Show the form for editing the specified resource.
      */
-    public function edit(Event $event): Response
+    public function edit(Event $event)
     {
         return Inertia::render('Event/EventEdit', [
             'event' => [
@@ -110,12 +83,9 @@ class EventController extends Controller
     }
 
     /**
-     * Update the specified event in storage.
-     * @param StoreEventRequest $request
-     * @param Event $event
-     * @return RedirectResponse
+     * Update the specified resource in storage.
      */
-    public function update(StoreEventRequest $request, Event $event): RedirectResponse
+    public function update(StoreEventRequest $request, Event $event)
     {
         $event->update($request->validated());
 
@@ -123,11 +93,9 @@ class EventController extends Controller
     }
 
     /**
-     * Remove the specified event from storage.
-     * @param Event $event
-     * @return RedirectResponse
+     * Remove the specified resource from storage.
      */
-    public function destroy(Event $event): RedirectResponse
+    public function destroy(Event $event)
     {
         $event->delete();
 

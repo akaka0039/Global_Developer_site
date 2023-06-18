@@ -4,7 +4,7 @@ import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
-const EventForm = ({ errors, auth, tags }) => {
+const EventForm = ({ errors, auth }) => {
     const [limit, setLimit] = React.useState("");
     const [image, setImage] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
@@ -15,22 +15,6 @@ const EventForm = ({ errors, auth, tags }) => {
     const [endTime, setEndTime] = React.useState("");
     const errorMessageStyle = "text-red-500 italic text-lg";
     const [isOnline, setIsOnline] = useState(false);
-    const [activeTagButtons, setActiveTagButtons] = useState([])
-    const [submitTags, setSubmitTags] = useState([])
-
-    const handleTagButton = (index, tagName) => {
-        // Copy current tag status
-        const updatedButtons = [...activeTagButtons];
-        const updatedSubmitTags = [...submitTags];
-
-        // Switch Tag Status
-        updatedButtons[index] = !updatedButtons[index];
-        updatedSubmitTags[index] = updatedButtons[index] ? tagName : null;
-
-        // Set updated state
-        setActiveTagButtons(updatedButtons);
-        setSubmitTags(updatedSubmitTags);
-    };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -75,7 +59,6 @@ const EventForm = ({ errors, auth, tags }) => {
             end_date: endTime,
             is_online: isOnline,
             user_id: auth.user.user_id,
-            tags: submitTags.filter(v => v),
         };
         router.post(`/events`, data);
     };
@@ -107,8 +90,9 @@ const EventForm = ({ errors, auth, tags }) => {
                         )}
                     </div>
                     <div
-                        className={`bg-white shadow-md rounded px-8 py-6 mb-4 ${isDragging ? "border-4 border-blue-300" : ""
-                            }`}
+                        className={`bg-white shadow-md rounded px-8 py-6 mb-4 ${
+                            isDragging ? "border-4 border-blue-300" : ""
+                        }`}
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
@@ -173,53 +157,26 @@ const EventForm = ({ errors, auth, tags }) => {
                             </div>
                         )}
                     </div>
-
-                    <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
-                        <Switch onChange={addressHandleSwitchChange}>
-                            {!isOnline && (
-                                <div>
-                                    <div className="mt-4 w-full">
-                                        <label
-                                            htmlFor="onlineUrl"
-                                            className="block text-sm font-bold text-gray-700"
-                                        >
-                                            Address
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="Address"
-                                            name="Address"
-                                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            placeholder="Enter the Address"
-                                            value={address}
-                                            onChange={(e) =>
-                                                setAddress(e.target.value)
-                                            }
-                                        />
-                                        {errors.address && (
-                                            <div className={errorMessageStyle}>
-                                                {errors.address}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-                            {isOnline && (
+                    <Switch onChange={addressHandleSwitchChange}>
+                        {!isOnline && (
+                            <div>
                                 <div className="mt-4 w-full">
                                     <label
                                         htmlFor="onlineUrl"
-                                        className="block text-sm font-bold text-gray-700"
+                                        className="block text-sm font-medium text-gray-700"
                                     >
-                                        Online
+                                        Address
                                     </label>
                                     <input
-                                        type="url"
+                                        type="text"
                                         id="Address"
                                         name="Address"
                                         className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                        placeholder="Enter the online URL"
+                                        placeholder="Enter the Address"
                                         value={address}
-                                        onChange={(e) => setAddress(e.target.value)}
+                                        onChange={(e) =>
+                                            setAddress(e.target.value)
+                                        }
                                     />
                                     {errors.address && (
                                         <div className={errorMessageStyle}>
@@ -227,9 +184,33 @@ const EventForm = ({ errors, auth, tags }) => {
                                         </div>
                                     )}
                                 </div>
-                            )}
-                        </Switch>
-                    </div>
+                            </div>
+                        )}
+                        {isOnline && (
+                            <div className="mt-4 w-full">
+                                <label
+                                    htmlFor="onlineUrl"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Online
+                                </label>
+                                <input
+                                    type="url"
+                                    id="Address"
+                                    name="Address"
+                                    className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                    placeholder="Enter the online URL"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                                {errors.address && (
+                                    <div className={errorMessageStyle}>
+                                        {errors.address}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </Switch>
 
                     <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -255,21 +236,6 @@ const EventForm = ({ errors, auth, tags }) => {
                                 {errors.participant_limit_number}
                             </div>
                         )}
-                    </div>
-
-                    <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            Tags
-                        </label>
-                        {tags && tags.map((tag) => (
-                            <button
-                                key={tag.id}
-                                className={activeTagButtons[tag.id] ? 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4 mb-4' : 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-4 mb-4'}
-                                onClick={() => handleTagButton(tag.id, tag.name.en)}
-                            >
-                                {tag.name.en}
-                            </button>
-                        ))}
                     </div>
 
                     <div className="flex justify-end">
