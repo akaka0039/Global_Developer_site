@@ -27,13 +27,15 @@ class ProfileUpdateRequest extends FormRequest
         ];
     }
 
-    public function processImage(User $user): void
+    public function passedValidation(): void
     { 
         if ($this->hasFile('image')) {
-            $image = $this->file('image');
-            $original = $image->getClientOriginalName();
+            $original = $this->file('image')->getClientOriginalName();
             $name = date('Ymd_His') . '_' . $original;
-            $user->image = $name;
+            $this->file('image')->move('storage/images', $name);
+            $this->merge([
+                'image' => $name,
+            ]);
         }
     } 
 }
