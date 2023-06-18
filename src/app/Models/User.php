@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// for creating in the future
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+// for creating in the future
+// class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -25,6 +28,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'introduction',
+        'habitation',
+        'nationality',
+        'url',
     ];
 
     /**

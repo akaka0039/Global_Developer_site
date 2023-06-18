@@ -4,15 +4,16 @@ import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
-const EventForm = ({ errors, auth, tags }) => {
-    const [limit, setLimit] = React.useState("");
-    const [image, setImage] = React.useState(null);
-    const [isDragging, setIsDragging] = React.useState(false);
-    const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [address, setAddress] = React.useState("");
-    const [startTime, setStartTime] = React.useState("");
-    const [endTime, setEndTime] = React.useState("");
+
+const EventForm = ({ errors, auth }) => {
+    const [limit, setLimit] = useState("");
+    const [image, setImage] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [address, setAddress] = useState("");
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
     const errorMessageStyle = "text-red-500 italic text-lg";
     const [isOnline, setIsOnline] = useState(false);
     const [activeTagButtons, setActiveTagButtons] = useState([])
