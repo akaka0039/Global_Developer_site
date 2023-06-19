@@ -7,13 +7,13 @@ RUN apt-get update && \
     docker-php-ext-install intl pdo_mysql zip bcmath
 
 # install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
 # install npm
-RUN npm install -g npm@8.1.0
+RUN npm install -g npm@9.2.0
 
-# 必要なパッケージのインストール
+# necessary packages
 RUN npm install -g @headlessui/react@1.7.14 && \
     npm install -g @inertiajs/react@1.0.6 && \
     npm install -g @tailwindcss/forms@0.5.3 && \
