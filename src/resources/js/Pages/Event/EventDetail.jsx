@@ -103,26 +103,18 @@ const EventDetail = ({
         <GeneralLayout auth={auth}>
             <div className="flex flex-col justify-center items-center h-full pt-8 pb-6">
                 <div className="max-w-6xl w-full px-4 sm:px-6 lg:px-8">
-                    <div className="bg-gray-100 flex justify-end pb-3">
-                        <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded  focus:outline-none focus:shadow-outline"
-                            onClick={handleEditClick}
-                        >
-                            Edit
-                        </button>
-                    </div>
                     <div className="bg-white overflow-hidden shadow sm:rounded-lg">
                         <div className="h-screen max-h-96 sm:max-h-72 flex items-center">
                             <div
                                 className={`flex bg-center bg-cover bg-no-repeat border object-contain rounded-md border-gray-200`}
                                 style={{
-                                    backgroundImage: `url(/storage/images/${image})`,
+                                    backgroundImage: `url(/storage/images/${event.image})`,
                                     width: "100%",
                                     height: "100%",
                                 }}
                             ></div>
                         </div>
-                        <div className="flex px-6 py-8 sm:px-10">
+                        <div className="flex px-3 py-8 sm:px-10">
                             <div className="flex flex-col">
                                 <h1 className="text-4xl leading-8 font-bold text-gray-900 mb-4">
                                     {event.name}
