@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 import axios from "axios";
@@ -11,13 +11,20 @@ const EventDetail = ({ auth, event, is_attended, participants, tags, wait_list }
     const [participantsState, SetParticipantsState] = useState(participants);
     const [waitListState, SetWaitListState] = useState(wait_list);
     const isFullyOccupied = participantsState.length >= event.participant_limit_number;
+    const attendClickProcessing = useRef(false);
 
     const handleEditClick = () => {
         // console.log(event.event_id);
         router.get(`/events/${event.event_id}/edit`);
     }
 
-    const handleAttendClick = async () => {
+    const handleAttendClick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(attendClickProcessing.current) return;
+        attendClickProcessing.current = true;
+
         const response = await axios.post(`/events/${event.event_id}/participants`, { user_id: auth?.user?.user_id });
         if (response?.data?.is_attended) {
             SetIsAttended(true);
@@ -28,9 +35,17 @@ const EventDetail = ({ auth, event, is_attended, participants, tags, wait_list }
         if (response?.data?.wait_list) {
             SetWaitListState(response?.data?.wait_list);
         }
+
+        attendClickProcessing.current = false;
     }
 
-    const handleNotAttendClick = async () => {
+    const handleNotAttendClick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(attendClickProcessing.current) return;
+        attendClickProcessing.current = true;
+
         const response = await axios.delete(`/events/${event.event_id}/participants`, { user_id: auth?.user?.user_id });
         if (!response?.data?.is_attended) {
             SetIsAttended(false);
@@ -41,6 +56,8 @@ const EventDetail = ({ auth, event, is_attended, participants, tags, wait_list }
         if (response?.data?.wait_list) {
             SetWaitListState(response?.data?.wait_list);
         }
+
+        attendClickProcessing.current = false;
     }
 
     return (
