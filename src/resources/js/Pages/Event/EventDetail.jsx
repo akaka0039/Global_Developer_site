@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
 import MemberPopup from "./EventFormComponents/MemberPopup";
@@ -22,6 +22,7 @@ const EventDetail = ({
         participantsState.length >= event.participant_limit_number;
     const [showAttendance, setShowAttendance] = useState(false);
     const [showWaitList, setShowWaitList] = useState(false);
+    const attendClickProcessing = useRef(false);
 
     const handleEditClick = () => {
         router.get(`/events/${event.event_id}/edit`);
@@ -41,6 +42,8 @@ const EventDetail = ({
         if (response?.data?.wait_list) {
             SetWaitListState(response?.data?.wait_list);
         }
+
+        attendClickProcessing.current = false;
     };
 
     const handleNotAttendClick = async () => {
@@ -57,6 +60,8 @@ const EventDetail = ({
         if (response?.data?.wait_list) {
             SetWaitListState(response?.data?.wait_list);
         }
+
+        attendClickProcessing.current = false;
     };
 
     console.log(waitListState);
@@ -72,7 +77,6 @@ const EventDetail = ({
     const handleWaitListClick = () => {
         setShowWaitList(true);
     };
-
     return (
         <GeneralLayout auth={auth}>
             <div className="flex flex-col justify-center items-center h-full pt-8 pb-6">
