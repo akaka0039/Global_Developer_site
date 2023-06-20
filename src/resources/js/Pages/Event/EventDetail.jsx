@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
+import AttendancePopup from "./EventFormComponents/AttendancePopup";
 import axios from "axios";
 
 const EventDetail = ({
@@ -57,6 +58,16 @@ const EventDetail = ({
         if (response?.data?.wait_list) {
             SetWaitListState(response?.data?.wait_list);
         }
+    };
+
+    const [showAttendance, setShowAttendance] = useState(false);
+
+    const handleAttendanceClick = () => {
+        setShowAttendance(true);
+    };
+
+    const handleModalClose = () => {
+        setShowAttendance(false);
     };
 
     return (
@@ -137,15 +148,32 @@ const EventDetail = ({
                                     </dd>
                                 </div>
 
-                                <div className="sm:col-span-1">
+                                <div className="sm:col-span-1 ">
                                     <dt className="text-sm font-medium text-gray-500">
                                         Limit of Attendance
                                     </dt>
                                     <dd className="mt-1 text-sm text-gray-900">
                                         {participantsState.length}/
                                         {event.participant_limit_number}
+                                        {participants &&
+                                            participants.length > 0 && (
+                                                <button
+                                                    className="text-blue-500 ml-2 hover:underline"
+                                                    onClick={
+                                                        handleAttendanceClick
+                                                    }
+                                                >
+                                                    show attendance
+                                                </button>
+                                            )}
                                     </dd>
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    {showAttendance && (
+                                        <AttendancePopup
+                                            participants={participants}
+                                            handleModalClose={handleModalClose}
+                                        />
+                                    )}
+                                    <dt className="text-sm font-medium text-gray-500 pt-3">
                                         Number of people waiting
                                     </dt>
                                     <dd className="mt-1 text-sm text-gray-900">
