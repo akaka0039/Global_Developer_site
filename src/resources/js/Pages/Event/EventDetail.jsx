@@ -76,6 +76,16 @@ const EventDetail = ({
         attendClickProcessing.current = false;
     };
 
+    const [showAttendance, setShowAttendance] = useState(false);
+
+    const handleAttendanceClick = () => {
+        setShowAttendance(true);
+    };
+
+    const handleModalClose = () => {
+        setShowAttendance(false);
+    };
+
     return (
         <GeneralLayout auth={auth}>
             <div className="flex flex-col justify-center items-center h-full pt-8">
@@ -158,6 +168,17 @@ const EventDetail = ({
                                     <dd className="mt-1 text-sm text-gray-900">
                                         {participantsState.length}/
                                         {event.participant_limit_number}
+                                        {participants &&
+                                            participants.length > 0 && (
+                                                <button
+                                                    className="text-blue-500 ml-2 hover:underline"
+                                                    onClick={
+                                                        handleAttendanceClick
+                                                    }
+                                                >
+                                                    show attendance
+                                                </button>
+                                            )}
                                     </dd>
                                     {showAttendance && (
                                         <MemberPopup
