@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { router } from "@inertiajs/react";
 import GeneralLayout from "@/Layouts/GeneralLayout";
-import AttendancePopup from "./EventFormComponents/AttendancePopup";
+import MemberPopup from "./EventFormComponents/MemberPopup";
 import axios from "axios";
 
 const EventDetail = ({
@@ -15,16 +15,15 @@ const EventDetail = ({
     // for debug
     console.log(event, is_attended, participants, tags, wait_list);
 
-    const image = event.image || "";
-
     const [isAttended, SetIsAttended] = useState(is_attended);
     const [participantsState, SetParticipantsState] = useState(participants);
     const [waitListState, SetWaitListState] = useState(wait_list);
     const isFullyOccupied =
         participantsState.length >= event.participant_limit_number;
+    const [showAttendance, setShowAttendance] = useState(false);
+    const [showWaitList, setShowWaitList] = useState(false);
 
     const handleEditClick = () => {
-        // console.log(event.event_id);
         router.get(`/events/${event.event_id}/edit`);
     };
 
@@ -60,7 +59,7 @@ const EventDetail = ({
         }
     };
 
-    const [showAttendance, setShowAttendance] = useState(false);
+    console.log(waitListState);
 
     const handleAttendanceClick = () => {
         setShowAttendance(true);
@@ -68,41 +67,39 @@ const EventDetail = ({
 
     const handleModalClose = () => {
         setShowAttendance(false);
+        setShowWaitList(false);
+    };
+    const handleWaitListClick = () => {
+        setShowWaitList(true);
     };
 
     return (
         <GeneralLayout auth={auth}>
             <div className="flex flex-col justify-center items-center h-full pt-8 pb-6">
                 <div className="max-w-6xl w-full px-4 sm:px-6 lg:px-8">
-                    <div className="bg-gray-100 flex justify-end pb-3">
-                        <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded  focus:outline-none focus:shadow-outline"
-                            onClick={handleEditClick}
-                        >
-                            Edit
-                        </button>
-                    </div>
                     <div className="bg-white overflow-hidden shadow sm:rounded-lg">
                         <div className="h-screen max-h-96 sm:max-h-72 flex items-center">
                             <div
                                 className={`flex bg-center bg-cover bg-no-repeat border object-contain rounded-md border-gray-200`}
                                 style={{
-                                    backgroundImage: `url(/storage/images/${image})`,
+                                    backgroundImage: `url(/storage/images/${event.image})`,
                                     width: "100%",
                                     height: "100%",
                                 }}
                             ></div>
                         </div>
-                        <div className="flex px-6 py-8 sm:px-10">
-                            <div className="flex flex-col">
-                                <h1 className="text-4xl leading-8 font-bold text-gray-900 mb-4">
-                                    {event.name}
-                                </h1>
+                        <div className="flex px-3 py-8 sm:px-10">
+                            <div className="flex flex-col w-full">
+                                <div className="flex flex-row items-center justify-between mb-4">
+                                    <h1 className="text-4xl leading-8 font-bold text-gray-900">
+                                        {event.name}
+                                    </h1>
+                                </div>
                                 <p className="text-md text-gray-600 mb-2">
-                                    Start：{event.start_date}
+                                    Start: {event.start_date}
                                 </p>
                                 <p className="text-md text-gray-600 mb-2">
-                                    End ： {event.end_date}
+                                    End: {event.end_date}
                                 </p>
                             </div>
                         </div>
@@ -155,8 +152,8 @@ const EventDetail = ({
                                     <dd className="mt-1 text-sm text-gray-900">
                                         {participantsState.length}/
                                         {event.participant_limit_number}
-                                        {participants &&
-                                            participants.length > 0 && (
+                                        {participantsState &&
+                                            participantsState.length > 0 && (
                                                 <button
                                                     className="text-blue-500 ml-2 hover:underline"
                                                     onClick={
@@ -168,9 +165,10 @@ const EventDetail = ({
                                             )}
                                     </dd>
                                     {showAttendance && (
-                                        <AttendancePopup
-                                            participants={participants}
+                                        <MemberPopup
+                                            Members={participantsState}
                                             handleModalClose={handleModalClose}
+                                            title="Attendance List"
                                         />
                                     )}
                                     <dt className="text-sm font-medium text-gray-500 pt-3">
@@ -178,7 +176,25 @@ const EventDetail = ({
                                     </dt>
                                     <dd className="mt-1 text-sm text-gray-900">
                                         {waitListState.length}
+                                        {waitListState &&
+                                            waitListState.length > 0 && (
+                                                <button
+                                                    className="text-blue-500 ml-5 hover:underline"
+                                                    onClick={
+                                                        handleWaitListClick
+                                                    }
+                                                >
+                                                    show waitList
+                                                </button>
+                                            )}
                                     </dd>
+                                    {showWaitList && (
+                                        <MemberPopup
+                                            Members={waitListState}
+                                            handleModalClose={handleModalClose}
+                                            title="Wait List"
+                                        />
+                                    )}
                                 </div>
                                 <div className="sm:col-span-2">
                                     <dt className="text-sm font-medium text-gray-500">
@@ -222,7 +238,7 @@ const EventDetail = ({
                                         onClick={handleAttendClick}
                                         className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
                                     >
-                                        waitlist
+                                        Waitlist
                                     </button>
                                 </div>
                             )}
@@ -232,7 +248,7 @@ const EventDetail = ({
                                         onClick={handleAttendClick}
                                         className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
                                     >
-                                        attend
+                                        Attend
                                     </button>
                                 </div>
                             )}
@@ -242,10 +258,18 @@ const EventDetail = ({
                                         onClick={handleNotAttendClick}
                                         className="bg-red-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-red-600"
                                     >
-                                        not attend
+                                        Cancel
                                     </button>
                                 </div>
                             )}
+                            <div className="pl-2">
+                                <button
+                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded "
+                                    onClick={handleEditClick}
+                                >
+                                    Edit
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
