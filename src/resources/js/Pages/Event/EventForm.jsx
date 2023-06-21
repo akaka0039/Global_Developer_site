@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import TimeForm from "./EventFormComponents/TimeForm";
 import { router } from "@inertiajs/react";
-import GeneralLayout from "@/Layouts/GeneralLayout";
 import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
-const EventForm = ({ errors, auth, tags, event }) => {
-    const [limit, setLimit] = useState("");
-    const [image, setImage] = useState(null);
+const EventForm = ({ errors, auth, tags, event, related_tags }) => {
+    const [limit, setLimit] = useState(event?.participant_limit_number || 0);
+    const [image, setImage] = useState(event?.image || null );
+    const [name, setName] = useState(event?.name || "");
+    const [description, setDescription] = useState(event?.description || "");
+    const [address, setAddress] = useState(event?.address || "");
+    const [startTime, setStartTime] = useState(event?.start_date ? getDefaultDate(event?.start_date) : "" );
+    const [endTime, setEndTime] = useState(event?.end_date ? getDefaultDate(event?.end_date) : "" );
+    const [submitTags, setSubmitTags] = useState(getDefaultActiveTagNames());
     const [isDragging, setIsDragging] = useState(false);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [address, setAddress] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
-    const errorMessageStyle = "text-red-500 italic text-lg";
     const [isOnline, setIsOnline] = useState(false);
-    const [activeTagButtons, setActiveTagButtons] = useState([]);
-    const [submitTags, setSubmitTags] = useState([]);
+    const [activeTagButtons, setActiveTagButtons] = useState(getDefaultActiveTags());
+    const [imageUrl, setImageUrl] = useState(`storage/images/${auth.user.image}`);
+    const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleTagButton = (index, tagName) => {
         // Copy current tag status
@@ -35,6 +35,8 @@ const EventForm = ({ errors, auth, tags, event }) => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImage(file);
+        setImageUrl(URL.createObjectURL(file));
+
     };
 
     const handleDrop = (e) => {
@@ -43,6 +45,7 @@ const EventForm = ({ errors, auth, tags, event }) => {
 
         const file = e.dataTransfer.files[0];
         setImage(file);
+        setImageUrl(URL.createObjectURL(file));
     };
 
     const handleDragOver = (e) => {
@@ -74,14 +77,49 @@ const EventForm = ({ errors, auth, tags, event }) => {
             start_date: startTime,
             end_date: endTime,
             is_online: isOnline,
-            user_id: auth.user.user_id,
+            user_id: auth?.user?.user_id,
             tags: submitTags.filter((v) => v),
         };
+        if (event) {
+            router.post(`/events/${event.event_id}`, {_method: 'put', ...data});
+            return;
+        }
         router.post(`/events`, data);
     };
 
     const addressHandleSwitchChange = (isActive) => {
         setIsOnline(isActive);
+    };
+
+    function getDefaultActiveTags(){
+        if(!related_tags) return [];
+        const defaultTags = [];
+        related_tags.map((tag) => {
+            defaultTags[tag.id] = true;
+        });
+
+        return defaultTags;
+    };
+
+    function getDefaultActiveTagNames(){
+        if(!related_tags) return [];
+        const defaultNameTags = [];
+        related_tags.map((tag) => {
+            defaultNameTags[tag.id] = tag.name.en;
+        });
+
+        return defaultNameTags;
+    };
+
+    function getDefaultDate(date){
+        date = new Date(date);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hour = String(date.getHours()).padStart(2, "0");
+        const second = String(date.getHours()).padStart(2, "0");
+
+        return `${year}-${month}-${day} ${hour}:${second}`;
     };
     return (
         <div className="flex justify-center items-center">
@@ -117,10 +155,10 @@ const EventForm = ({ errors, auth, tags, event }) => {
                         Image
                     </label>
                     <div className="mb-4">
-                        {image ? (
+                        {image && imageUrl ? (
                             <img
                                 className="w-full sm:w-48 h-auto object-cover rounded"
-                                src={URL.createObjectURL(image)}
+                                src={imageUrl}
                                 alt="Event"
                             />
                         ) : (
@@ -152,6 +190,8 @@ const EventForm = ({ errors, auth, tags, event }) => {
                 <TimeForm
                     handleStartTimeChange={handleStartTimeChange}
                     handleEndTimeChange={handleEndTimeChange}
+                    start_date={event?.start_date}
+                    end_date={event?.end_date}
                     errors={errors}
                 />
 
@@ -175,7 +215,7 @@ const EventForm = ({ errors, auth, tags, event }) => {
                 </div>
 
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
-                    
+
                     <Switch onChange={addressHandleSwitchChange}>
                         {!isOnline && (
                             <div>
@@ -211,7 +251,7 @@ const EventForm = ({ errors, auth, tags, event }) => {
                                     htmlFor="onlineUrl"
                                     className="block text-sm font-bold text-gray-700"
                                 >
-                                    Online
+                                    Online URL
                                 </label>
                                 <input
                                     type="url"

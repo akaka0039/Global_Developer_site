@@ -27,7 +27,7 @@ class EventController extends Controller
      * Show the form for creating a new event.
      * @return Response|RedirectResponse
      */
-    public function create(): Response|RedirectResponse
+    public function create()
     {
         if (Auth::check()) {
             $tags = Tag::orderBy('created_at', 'desc')->get();
@@ -93,7 +93,7 @@ class EventController extends Controller
      */
     public function edit(Event $event): Response
     {
-        return Inertia::render('Event/EventEdit', [
+        return Inertia::render('Event/EventForm', [
             'event' => [
                 'name' => $event->name,
                 'address' => $event->address,
@@ -105,7 +105,9 @@ class EventController extends Controller
                 'is_online' => $event->is_online,
                 'user_id' => $event->user_id,
                 'event_id' => $event->event_id
-            ]
+            ],
+            'tags' => Tag::orderBy('created_at', 'desc')->get(),
+            'related_tags' => $event->tags()->get()
         ]);
     }
 
@@ -117,7 +119,16 @@ class EventController extends Controller
      */
     public function update(StoreEventRequest $request, Event $event): RedirectResponse
     {
-        $event->update($request->validated());
+        DB::transaction(function () use ($request, $event) {
+            $validated = $request->validated();
+            $validated['image'] = $request->get('image') ?? $request->all()['image'];
+
+            // attach tags
+            if ($validated['tags']) {
+                $event->syncTags($validated["tags"]);
+            }
+            $event->update($validated);
+        });
 
         return to_route('events.index');
     }

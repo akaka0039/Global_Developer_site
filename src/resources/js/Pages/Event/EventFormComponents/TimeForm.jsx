@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const TimeForm = (props) => {
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
-    const [eventStartDate, setEventStartDate] = useState(getToday());
-    const [eventEndDate, setEventEndDate] = useState(getToday());
+    const [startTime, setStartTime] = useState(getDefaultTime(props.start_date));
+    const [endTime, setEndTime] = useState(getDefaultTime(props.end_date));
+    const [eventStartDate, setEventStartDate] = useState(getDefaultDate(props.start_date));
+    const [eventEndDate, setEventEndDate] = useState(getDefaultDate(props.end_date));
     const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleEventStartChange = (event) => {
@@ -21,6 +21,8 @@ const TimeForm = (props) => {
 
     const handleStartTimeChange = (event) => {
         const newValue = event.target.value;
+        const time = new Date(props.start_date);
+        console.log(newValue, time.getHours(), time.getMinutes());
         setStartTime(newValue);
         props.handleStartTimeChange(`${eventStartDate} ${newValue}`);
     };
@@ -31,12 +33,22 @@ const TimeForm = (props) => {
         props.handleEndTimeChange(`${eventEndDate} ${newValue}`);
     };
 
-    function getToday() {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, "0");
-        const day = String(today.getDate()).padStart(2, "0");
+    function getDefaultDate(date) {
+        date = date ? new Date(date) : new Date();
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
+    }
+
+    function getDefaultTime(time) {
+        if (!time) return "";
+
+        const dateTime = new Date(time);
+        const hour = String(dateTime.getHours()).padStart(2, "0");
+        const second = String(dateTime.getHours()).padStart(2, "0");
+        return `${hour}:${second}`;
     }
 
     return (
