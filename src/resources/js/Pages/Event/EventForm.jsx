@@ -67,7 +67,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
     };
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         const data = {
             name: name,
             address: address,
