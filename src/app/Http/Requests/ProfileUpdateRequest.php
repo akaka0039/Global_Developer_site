@@ -20,6 +20,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$this->user()->user_id.',user_id'],
+            'position' => ['nullable', 'string'],
             'introduction' => ['nullable', 'string'],
             'habitation' => ['nullable', 'string'],
             'nationality' => ['nullable', 'string'],
