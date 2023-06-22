@@ -16,7 +16,7 @@ const TimeForm = (props) => {
     const handleEventEndChange = (event) => {
         const newValue = event.target.value;
         setEventEndDate(newValue);
-        props.handleStartTimeChange(`${newValue} ${endTime}`);
+        props.handleEndTimeChange(`${newValue} ${endTime}`);
     };
 
     const handleStartTimeChange = (event) => {
