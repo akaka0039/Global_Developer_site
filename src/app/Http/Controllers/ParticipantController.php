@@ -13,7 +13,7 @@ class ParticipantController extends Controller
     /**
      * Add participant to event.
      * @param int $eventId
-     * @return Response|RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function addParticipant(int $eventId)
     {

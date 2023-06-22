@@ -22,7 +22,6 @@ const TimeForm = (props) => {
     const handleStartTimeChange = (event) => {
         const newValue = event.target.value;
         const time = new Date(props.start_date);
-        console.log(newValue, time.getHours(), time.getMinutes());
         setStartTime(newValue);
         props.handleStartTimeChange(`${eventStartDate} ${newValue}`);
     };

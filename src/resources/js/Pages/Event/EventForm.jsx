@@ -36,7 +36,6 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
         const file = e.target.files[0];
         setImage(file);
         setImageUrl(URL.createObjectURL(file));
-
     };
 
     const handleDrop = (e) => {
@@ -81,7 +80,10 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
             tags: submitTags.filter((v) => v),
         };
         if (event) {
-            router.post(`/events/${event.event_id}`, {_method: 'put', ...data});
+            router.post(
+                `/events/${event.event_id}`,
+                {_method: 'put', ...data}
+            );
             return;
         }
         router.post(`/events`, data);
@@ -93,6 +95,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
 
     function getDefaultActiveTags(){
         if(!related_tags) return [];
+
         const defaultTags = [];
         related_tags.map((tag) => {
             defaultTags[tag.id] = true;
@@ -103,6 +106,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
 
     function getDefaultActiveTagNames(){
         if(!related_tags) return [];
+
         const defaultNameTags = [];
         related_tags.map((tag) => {
             defaultNameTags[tag.id] = tag.name.en;
