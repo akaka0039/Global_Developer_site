@@ -15,7 +15,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [isOnline, setIsOnline] = useState(false);
     const [activeTagButtons, setActiveTagButtons] = useState(getDefaultActiveTags());
-    const [imageUrl, setImageUrl] = useState(`storage/images/${auth.user.image}`);
+    const [imageUrl, setImageUrl] = useState(event?.image ? `storage/images/${event?.image}` : "");
     const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleTagButton = (index, tagName) => {

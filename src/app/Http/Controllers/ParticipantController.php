@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class ParticipantController extends Controller
@@ -12,9 +13,9 @@ class ParticipantController extends Controller
     /**
      * Add participant to event.
      * @param int $eventId
-     * @return JsonResponse
+     * @return Response|RedirectResponse
      */
-    public function addParticipant(int $eventId) : JsonResponse
+    public function addParticipant(int $eventId)
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -37,7 +38,7 @@ class ParticipantController extends Controller
     /**
      * Remove participant from event.
      * @param int $eventId
-     * @return JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function removeParticipant(int $eventId) : JsonResponse
     {

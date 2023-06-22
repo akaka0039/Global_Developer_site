@@ -130,7 +130,7 @@ class EventController extends Controller
             $event->update($validated);
         });
 
-        return to_route('events.index');
+        return redirect('/events')->with('message', 'Your event has been successfully updated!');
     }
 
     /**

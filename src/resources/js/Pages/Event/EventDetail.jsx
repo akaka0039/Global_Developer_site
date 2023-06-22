@@ -39,6 +39,7 @@ const EventDetail = ({
             `/events/${event.event_id}/participants`,
             { user_id: auth?.user?.user_id }
         );
+
         if (response?.data?.is_attended) {
             SetIsAttended(true);
         }
@@ -63,6 +64,7 @@ const EventDetail = ({
             `/events/${event.event_id}/participants`,
             { user_id: auth?.user?.user_id }
         );
+
         if (!response?.data?.is_attended) {
             SetIsAttended(false);
         }
@@ -251,7 +253,7 @@ const EventDetail = ({
                             </a>
                         </div>
 
-                        {isFullyOccupied && !isAttended && (
+                        {isFullyOccupied && !isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleAttendClick}
@@ -261,7 +263,7 @@ const EventDetail = ({
                                 </button>
                             </div>
                         )}
-                        {!isFullyOccupied && !isAttended && (
+                        {!isFullyOccupied && !isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleAttendClick}
@@ -271,7 +273,7 @@ const EventDetail = ({
                                 </button>
                             </div>
                         )}
-                        {isAttended && (
+                        {isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleNotAttendClick}
@@ -280,6 +282,28 @@ const EventDetail = ({
                                     Cancel
                                 </button>
                             </div>
+                        )}
+                        {!isFullyOccupied && !auth.user && (
+                            <a href="/login">
+                                <div className="pl-2">
+                                    <button
+                                        className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
+                                    >
+                                        Attend
+                                    </button>
+                                </div>
+                            </a>
+                        )}
+                        {isFullyOccupied && !auth.user && (
+                            <a href="/login">
+                                <div className="pl-2">
+                                    <button
+                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
+                                    >
+                                        Waitlist
+                                    </button>
+                                </div>
+                            </a>
                         )}
                         <div className="pl-2">
                             <button
