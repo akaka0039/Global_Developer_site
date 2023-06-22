@@ -13,7 +13,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -45,14 +45,12 @@ class StoreEventRequest extends FormRequest
             $original = $this->file('image')->getClientOriginalName();
             $name = date('Ymd_His') . '_' . $original;
             $this->file('image')->move('storage/images', $name);
-            $this->merge([
-                'image' => $name,
-            ]);
+        } elseif ($this->input('image_name')) {
+            $name = $this->input('image_name');
         } else {
-            // default
-            $this->merge([
-                'image' => 'top_background.jpg',
-            ]);
+            $name = 'top_background.jpg';
         }
+
+        $this->merge(['image' => $name]);
     }
 }

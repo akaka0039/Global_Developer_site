@@ -72,12 +72,16 @@ export default function ProfileEdit({
             email: email,
             image: image,
             position: position,
+            image_name: auth?.user?.image,
             introduction: introduction,
             habitation: habitation,
             nationality: nationality,
             url: url,
         };
-        router.post("profile", data);
+        router.post("profile", {
+            _method: 'put',
+            ...data
+        })
     };
 
     return (
