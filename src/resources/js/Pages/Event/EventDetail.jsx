@@ -28,6 +28,10 @@ const EventDetail = ({
         router.get(`/events/${event.event_id}/edit`);
     };
 
+    const handleTagButton = (tagName) => {
+        router.get(`/events?tag_name=${tagName}`);
+    };
+
     const handleAttendClick = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -235,6 +239,7 @@ const EventDetail = ({
                                             <button
                                                 key={tag.id}
                                                 className="bg-gray-300 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded mt-2 ml-4"
+                                                onClick={() => { handleTagButton(tag.name.en) }}
                                             >
                                                 {tag.name.en}
                                             </button>
