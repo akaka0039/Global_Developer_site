@@ -5,7 +5,7 @@ import GeneralLayout from "@/Layouts/GeneralLayout";
 
 export default function Edit({ auth, mustVerifyEmail, status, errors, flash }) {
     return (
-        <GeneralLayout auth={auth}>
+        <>
             <div className="pb-10">
                 <ProfileEdit
                     auth={auth}
@@ -24,6 +24,6 @@ export default function Edit({ auth, mustVerifyEmail, status, errors, flash }) {
             <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <DeleteUserForm className="max-w-xl" />
             </div>
-        </GeneralLayout>
+        </>
     );
 }

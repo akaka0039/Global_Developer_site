@@ -53,7 +53,8 @@ class ProfileController extends Controller
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
-        $user->image = $request->get('image');
+
+        $user->image = $request->get('image') ? $request->get('image') : $request->all()['image'];
         $user->save();
         return Redirect::route('profile.edit')->with('message', 'Your account has been successfully edit!'); ;
     }
