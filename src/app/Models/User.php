@@ -9,15 +9,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
 // for creating in the future
 // class User extends Authenticatable implements MustVerifyEmail
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
 
     protected $primaryKey = 'user_id';
+    protected $table = 'users';
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.

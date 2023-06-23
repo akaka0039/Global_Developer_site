@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Tags\HasTags;
 
@@ -12,6 +13,7 @@ class Event extends Model
 {
     use HasFactory;
     use HasTags;
+    use SoftDeletes;
 
     protected $primaryKey = 'event_id';
 
@@ -30,6 +32,7 @@ class Event extends Model
         'end_date',
         'is_online',
         'user_id',
+        'deleted_at',
     ];
 
     // DB relationships
