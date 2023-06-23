@@ -8,6 +8,8 @@ const EventDetail = ({
     auth,
     event,
     is_attended,
+    is_hosted,
+    host_user,
     participants,
     tags,
     wait_list,
@@ -121,9 +123,14 @@ const EventDetail = ({
                     </div>
                     <div className="flex px-3 py-8 sm:px-10">
                         <div className="flex flex-col">
-                            <h1 className="text-4xl leading-8 font-bold text-gray-900 mb-4">
-                                {event.name}
-                            </h1>
+                            <div className="flex mb-4">
+                                <h1 className="text-4xl leading-8 font-bold text-gray-900 mb-4">
+                                    {event.name}
+                                </h1>
+                                <div className="text-md text-gray-600 ml-4 mt-3">
+                                    hosted by {host_user?.name || "Deleted user"}
+                                </div>
+                            </div>
                             <p className="text-md text-gray-600 mb-2">
                                 Start：{event.start_date}
                             </p>
@@ -258,7 +265,7 @@ const EventDetail = ({
                             </a>
                         </div>
 
-                        {isFullyOccupied && !isAttended && auth.user && (
+                        {!is_hosted && isFullyOccupied && !isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleAttendClick}
@@ -268,7 +275,7 @@ const EventDetail = ({
                                 </button>
                             </div>
                         )}
-                        {!isFullyOccupied && !isAttended && auth.user && (
+                        {!is_hosted && !isFullyOccupied && !isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleAttendClick}
@@ -278,7 +285,7 @@ const EventDetail = ({
                                 </button>
                             </div>
                         )}
-                        {isAttended && auth.user && (
+                        {!is_hosted && isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
                                     onClick={handleNotAttendClick}
@@ -288,24 +295,24 @@ const EventDetail = ({
                                 </button>
                             </div>
                         )}
-                        {!isFullyOccupied && !auth.user && (
+                        {!is_hosted && isFullyOccupied && !auth.user && (
+                            <a href="/login">
+                                <div className="pl-2">
+                                    <button
+                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
+                                        >
+                                        Waitlist
+                                    </button>
+                                </div>
+                            </a>
+                        )}
+                        {!is_hosted && !isFullyOccupied && !auth.user && (
                             <a href="/login">
                                 <div className="pl-2">
                                     <button
                                         className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
                                     >
                                         Attend
-                                    </button>
-                                </div>
-                            </a>
-                        )}
-                        {isFullyOccupied && !auth.user && (
-                            <a href="/login">
-                                <div className="pl-2">
-                                    <button
-                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
-                                    >
-                                        Waitlist
                                     </button>
                                 </div>
                             </a>
