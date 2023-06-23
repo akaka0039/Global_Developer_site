@@ -19,8 +19,15 @@ class EventController extends Controller
      */
     public function index(): Response
     {
-        $events = Event::orderBy('created_at', 'desc')->get();
-        return Inertia::render('Main/Index', compact('events'));
+        if (request('tag_name')) {
+            $tagNames[] = request('tag_name');
+            $events = Event::withAnyTags($tagNames)->get();
+        } else {
+            $events = Event::orderBy('created_at', 'desc')->get();
+        }
+
+        $tags = Tag::orderBy('created_at', 'desc')->get();
+        return Inertia::render('Main/Index', compact('events', 'tags'));
     }
 
     /**
