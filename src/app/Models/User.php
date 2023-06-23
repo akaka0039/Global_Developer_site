@@ -20,8 +20,6 @@ class User extends Authenticatable
     use SoftDeletes;
 
     protected $primaryKey = 'user_id';
-    protected $table = 'users';
-    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -38,6 +36,7 @@ class User extends Authenticatable
         'habitation',
         'nationality',
         'url',
+        'deleted_at',
     ];
 
     /**
