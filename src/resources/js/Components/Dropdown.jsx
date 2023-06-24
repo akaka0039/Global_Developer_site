@@ -27,7 +27,7 @@ const Trigger = ({ children }) => {
 
             {open && (
                 <div
-                    className="fixed inset-0 z-40"
+                    className="fixed inset-0 z-10"
                     onClick={() => setOpen(false)}
                 ></div>
             )}
@@ -70,7 +70,7 @@ const Content = ({
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`absolute z-10 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
                     <div
@@ -92,7 +92,7 @@ const DropdownLink = ({ className = "", children, ...props }) => {
         <Link
             {...props}
             className={
-                "block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:text-red-300 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out " +
+                "block w-full px-4 py-2 text-center text-sm leading-5 text-gray-700 hover:text-red-300 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out " +
                 className
             }
         >

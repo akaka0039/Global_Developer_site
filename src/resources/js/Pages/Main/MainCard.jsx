@@ -8,6 +8,7 @@ const MainCard = ({ event }) => {
         backgroundPosition: "center",
         width: "100%",
         aspectRatio: "16/9",
+        zIndex: -1,
     };
 
     function handleClick() {
@@ -60,6 +61,7 @@ const MainCard = ({ event }) => {
         <div
             className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:bg-orange-100 pb-3"
             onClick={handleClick}
+            style={{ zIndex: -1 }}
         >
             <div
                 style={cardStyle}
