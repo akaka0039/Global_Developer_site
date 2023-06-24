@@ -4,7 +4,7 @@ import { router } from "@inertiajs/react";
 import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
 const EventForm = ({ errors, auth, tags, event, related_tags }) => {
-    const [limit, setLimit] = useState(event?.participant_limit_number || 0);
+    const [limit, setLimit] = useState(event?.participant_limit_number || 2);
     const [image, setImage] = useState(event?.image || null );
     const [name, setName] = useState(event?.name || "");
     const [description, setDescription] = useState(event?.description || "");

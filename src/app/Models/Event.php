@@ -43,7 +43,7 @@ class Event extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'event_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -77,6 +77,19 @@ class Event extends Model
         }
 
         return $this->participants->contains(auth()->user());
+    }
+
+    /**
+     * Check if the event is wait listed by the current user.
+     * @return bool
+     */
+    public function isHosted(): bool
+    {
+        if (!auth()->check() && is_null(auth()->user())) {
+            return false;
+        }
+
+        return $this->user_id === auth()->id();
     }
 
     /**

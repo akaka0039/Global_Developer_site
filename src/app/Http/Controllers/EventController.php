@@ -63,6 +63,8 @@ class EventController extends Controller
             if ($validated['tags']) {
                 $event->attachTags($validated["tags"]);
             }
+            // attach myself as a participant
+            $event->participants()->attach(auth()->id());
         });
 
         return redirect('/events')->with('message', 'Your event has been successfully created!');
@@ -76,6 +78,8 @@ class EventController extends Controller
     public function show(Event $event): Response
     {
         $is_attended = $event->isAttended();
+        $is_hosted = $event->isHosted();
+        $host_user = $event->user()->first();
         $participants = $event->participants()->get();
         $wait_list = $event->waitList()->get();
         $tags = $event->tags()->get();
@@ -85,6 +89,8 @@ class EventController extends Controller
                 [
                     'event',
                     'is_attended',
+                    'is_hosted',
+                    'host_user',
                     'participants',
                     'wait_list',
                     'tags'

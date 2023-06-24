@@ -26,7 +26,7 @@ class StoreEventRequest extends FormRequest
             'user_id' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:255'],
             'address' => $this->input('is_online') ? ['required', 'url'] : ['required', 'string', 'max:255'],
-            'participant_limit_number' => [ 'required', 'integer'],
+            'participant_limit_number' => [ 'required', 'integer', 'min:2'],
             'description' => [ 'required', 'string'],
             'start_date' => ['required', 'date_format:Y-m-d H:i'],
             'end_date' => ['required', 'date_format:Y-m-d H:i', 'after:start_date'],
