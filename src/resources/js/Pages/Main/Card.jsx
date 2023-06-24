@@ -12,11 +12,11 @@ const Card = ({ event }) => {
     }
 
     return (
-        <div
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-2"
-            onClick={handleClick}
-        >
-            <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:bg-blue-100">
+        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 py-2 px-5">
+            <div
+                className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:bg-orange-100"
+                onClick={handleClick}
+            >
                 <div
                     className="w-full h-40 bg-cover bg-no-repeat bg-center"
                     style={cardStyle}

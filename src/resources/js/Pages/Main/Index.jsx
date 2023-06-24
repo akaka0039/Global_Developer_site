@@ -41,13 +41,9 @@ function Index({ auth, events, flash, tags }) {
                     </div>
                 )}
             </div>
-            <div className="flex flex-col items-center md:flex-row pt-16 px-2">
-                <MainCard
-                    imageUrl="/images/top_background.jpg"
-                    title="Example Card"
-                    description="This is an example card description."
-                />
-                <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12">
+            <div className="flex flex-col items-center md:flex-row pt-8 px-2">
+                {events[0] && <MainCard className="pb-10" event={events[0]} />}
+                <div className="max-w-full md:max-w-8/12 lg:max-w-6/12 xl:max-w-6/12 mx-auto flex items-center justify-center">
                     <div className="text-center">
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black-100 pt-10">
                             Global Developer
@@ -65,14 +61,15 @@ function Index({ auth, events, flash, tags }) {
                                 </button>
                             </a>
                         </div>
-                        {/* temporary design */}
                         <div className="px-4 py-8 text-center items-center sm:px-6">
                             {tags.map((tag) => (
                                 <button
                                     type="button"
                                     className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                     key={tag.id}
-                                    onClick={() => { handleTagButton(tag.name.en) }}
+                                    onClick={() => {
+                                        handleTagButton(tag.name.en);
+                                    }}
                                 >
                                     {tag.name.en}
                                 </button>
@@ -87,7 +84,7 @@ function Index({ auth, events, flash, tags }) {
                     <Card key={event.event_id} event={event} />
                 ))}
             </div>
-            <div className="md-2">
+            <div className="mt-auto">
                 <Footer />
             </div>
         </div>

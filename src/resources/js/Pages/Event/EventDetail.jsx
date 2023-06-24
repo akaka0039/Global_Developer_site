@@ -84,8 +84,6 @@ const EventDetail = ({
         attendClickProcessing.current = false;
     };
 
-    console.log(waitListState);
-
     const handleAttendanceClick = () => {
         setShowAttendance(true);
     };
@@ -188,9 +186,7 @@ const EventDetail = ({
                                         participantsState.length > 0 && (
                                             <button
                                                 className="text-blue-500 ml-2 hover:underline"
-                                                onClick={
-                                                    handleAttendanceClick
-                                                }
+                                                onClick={handleAttendanceClick}
                                             >
                                                 show attendance
                                             </button>
@@ -212,9 +208,7 @@ const EventDetail = ({
                                         waitListState.length > 0 && (
                                             <button
                                                 className="text-blue-500 ml-5 hover:underline"
-                                                onClick={
-                                                    handleWaitListClick
-                                                }
+                                                onClick={handleWaitListClick}
                                             >
                                                 show waitList
                                             </button>
@@ -246,7 +240,11 @@ const EventDetail = ({
                                             <button
                                                 key={tag.id}
                                                 className="bg-gray-300 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded mt-2 ml-4"
-                                                onClick={() => { handleTagButton(tag.name.en) }}
+                                                onClick={() => {
+                                                    handleTagButton(
+                                                        tag.name.en
+                                                    );
+                                                }}
                                             >
                                                 {tag.name.en}
                                             </button>
@@ -309,6 +307,7 @@ const EventDetail = ({
                         {!is_hosted && !isFullyOccupied && !auth.user && (
                             <a href="/login">
                                 <div className="pl-2">
+
                                     <button
                                         className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
                                     >
