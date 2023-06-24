@@ -1,14 +1,24 @@
-import React from "react";
-import { router } from "@inertiajs/react";
+import React, { useRef, useEffect } from "react";
+import { router, usePage } from "@inertiajs/react";
 
 const MemberPopup = ({ Members, handleModalClose, title }) => {
     const handleClick = (userId) => {
         router.get(`/profile/${userId}`);
     };
 
+    const handleInnerClick = (e) => {
+        e.stopPropagation();
+    };
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-900">
-            <div className="bg-white p-4 rounded-lg max-w-xl w-full max-h-[500px] overflow-y-auto">
+        <div
+            className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-900"
+            onClick={handleModalClose}
+        >
+            <div
+                className="bg-white p-4 rounded-lg max-w-xl w-full max-h-[500px] overflow-y-auto"
+                onClick={handleInnerClick}
+            >
                 <h2 className="text-lg font-semibold mb-4">{title}</h2>
                 {Members &&
                     Members.map((Member) => (
