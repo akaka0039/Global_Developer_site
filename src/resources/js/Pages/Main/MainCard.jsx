@@ -19,8 +19,11 @@ const MainCard = ({ event }) => {
     function getTimeRemainingText() {
         const currentDate = new Date();
         const startDate = new Date(event.start_date);
+        const endDate = new Date(event.end_date);
         const timeDiff = startDate.getTime() - currentDate.getTime();
-        if (timeDiff <= 0) {
+        if (currentDate >= endDate) {
+            return "End the event";
+        } else if (timeDiff <= 0) {
             return "going on";
         } else {
             const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
@@ -61,7 +64,7 @@ const MainCard = ({ event }) => {
         <div
             className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:bg-orange-100 pb-3"
             onClick={handleClick}
-            style={{ zIndex: -1 }}
+            style={{ zIndex: 1 }}
         >
             <div
                 style={cardStyle}
