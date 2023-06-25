@@ -8,7 +8,7 @@ function Top_2() {
             <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12">
                 <div className="text-center">
                     <div className="mt-8 flex flex-col sm:flex-row justify-center items-center">
-                        <div className="rounded-full bg-gray-300 p-2 mx-4 mb-4 sm:mb-0">
+                        <div className="rounded-full bg-blue-300 p-2 mx-4 mb-4 sm:mb-0">
                             <img
                                 src={Global}
                                 alt="Global"
@@ -18,16 +18,15 @@ function Top_2() {
                                     objectPosition: "center",
                                 }}
                             />
-                            <h2 className="text-2xl font-bold mt-4">
-                                Global Image
-                            </h2>
+                            <h2 className="text-4xl font-bold mt-4">Global</h2>
                             <p className="text-gray-600 mt-2">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Sed feugiat vestibulum nunc in
-                                tincidunt. Vivamus vel lacus dolor.
+                                Connecting developers globally, fostering
+                                diversity, knowledge sharing, and endless
+                                possibilities for collective growth and
+                                progress.
                             </p>
                         </div>
-                        <div className="rounded-full bg-blue-300 p-2 mx-4">
+                        <div className="rounded-full bg-gray-300 p-2 mx-4">
                             <img
                                 src={Networking}
                                 alt="Networking"
@@ -37,13 +36,13 @@ function Top_2() {
                                     objectPosition: "center",
                                 }}
                             />
-                            <h2 className="text-2xl font-bold mt-4">
-                                Networking Image
+                            <h2 className="text-4xl font-bold mt-4">
+                                Networking
                             </h2>
                             <p className="text-gray-600 mt-2">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Sed feugiat vestibulum nunc in
-                                tincidunt. Vivamus vel lacus dolor.
+                                Developers unite, forging connections,
+                                collaboration, and growth, unlocking new
+                                opportunities for success together.
                             </p>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ function Index() {
                                         "linear-gradient(to right, black, gray)",
                                 }}
                             >
-                                ~ Find Global Connection ~?????
+                                ~ Find Global Connection ~
                             </span>
                         </p>
                     </div>

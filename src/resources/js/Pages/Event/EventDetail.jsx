@@ -126,7 +126,8 @@ const EventDetail = ({
                                     {event.name}
                                 </h1>
                                 <div className="text-md text-gray-600 ml-4 mt-3">
-                                    hosted by {host_user?.name || "Deleted user"}
+                                    hosted by{" "}
+                                    {host_user?.name || "Deleted user"}
                                 </div>
                             </div>
                             <p className="text-md text-gray-600 mb-2">
@@ -263,26 +264,32 @@ const EventDetail = ({
                             </a>
                         </div>
 
-                        {!is_hosted && isFullyOccupied && !isAttended && auth.user && (
-                            <div className="pl-2">
-                                <button
-                                    onClick={handleAttendClick}
-                                    className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
-                                >
-                                    Waitlist
-                                </button>
-                            </div>
-                        )}
-                        {!is_hosted && !isFullyOccupied && !isAttended && auth.user && (
-                            <div className="pl-2">
-                                <button
-                                    onClick={handleAttendClick}
-                                    className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
-                                >
-                                    Attend
-                                </button>
-                            </div>
-                        )}
+                        {!is_hosted &&
+                            isFullyOccupied &&
+                            !isAttended &&
+                            auth.user && (
+                                <div className="pl-2">
+                                    <button
+                                        onClick={handleAttendClick}
+                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
+                                    >
+                                        Waitlist
+                                    </button>
+                                </div>
+                            )}
+                        {!is_hosted &&
+                            !isFullyOccupied &&
+                            !isAttended &&
+                            auth.user && (
+                                <div className="pl-2">
+                                    <button
+                                        onClick={handleAttendClick}
+                                        className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
+                                    >
+                                        Attend
+                                    </button>
+                                </div>
+                            )}
                         {!is_hosted && isAttended && auth.user && (
                             <div className="pl-2">
                                 <button
@@ -296,9 +303,7 @@ const EventDetail = ({
                         {!is_hosted && isFullyOccupied && !auth.user && (
                             <a href="/login">
                                 <div className="pl-2">
-                                    <button
-                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
-                                        >
+                                    <button className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600">
                                         Waitlist
                                     </button>
                                 </div>
@@ -307,23 +312,22 @@ const EventDetail = ({
                         {!is_hosted && !isFullyOccupied && !auth.user && (
                             <a href="/login">
                                 <div className="pl-2">
-
-                                    <button
-                                        className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
-                                    >
+                                    <button className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
                                         Attend
                                     </button>
                                 </div>
                             </a>
                         )}
-                        <div className="pl-2">
-                            <button
-                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded "
-                                onClick={handleEditClick}
-                            >
-                                Edit
-                            </button>
-                        </div>
+                        {is_hosted && (
+                            <div className="pl-2">
+                                <button
+                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded "
+                                    onClick={handleEditClick}
+                                >
+                                    Edit
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

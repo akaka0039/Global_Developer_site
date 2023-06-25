@@ -8,7 +8,6 @@ const MainCard = ({ event }) => {
         backgroundPosition: "center",
         width: "100%",
         aspectRatio: "16/9",
-        zIndex: -1,
     };
 
     function handleClick() {
@@ -62,13 +61,12 @@ const MainCard = ({ event }) => {
 
     return (
         <div
-            className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:bg-orange-100 pb-3"
+            className="max-w-3xl mx-auto cursor-pointer bg-white shadow-lg rounded-lg overflow-hidden hover:bg-orange-100 pb-3"
             onClick={handleClick}
-            style={{ zIndex: 1 }}
         >
             <div
                 style={cardStyle}
-                className="w-full h-auto pb-[56.25%] lg:pb-[75%] relative"
+                className="w-full h-auto pb-[56.25%] lg:pb-[75%]"
             ></div>
             <div className="p-3">
                 <div className="flex flex-col sm:flex-row justify-between items-center">
