@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { router } from "@inertiajs/react";
-import GeneralLayout from "@/Layouts/GeneralLayout";
 import MemberPopup from "./EventFormComponents/MemberPopup";
 import axios from "axios";
 
@@ -111,7 +110,7 @@ const EventDetail = ({
                 <div className="bg-white overflow-hidden shadow sm:rounded-lg">
                     <div className="h-screen max-h-96 sm:max-h-72 flex items-center">
                         <div
-                            className={`flex bg-center bg-cover bg-no-repeat border object-contain rounded-md border-gray-200`}
+                            className="flex bg-center bg-cover bg-no-repeat border object-contain rounded-md border-gray-200"
                             style={{
                                 backgroundImage: `url(/storage/images/${event.image})`,
                                 width: "100%",

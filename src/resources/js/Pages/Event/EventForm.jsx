@@ -5,17 +5,25 @@ import Switch from "@/Pages/Event/EventFormComponents/AddressForm";
 
 const EventForm = ({ errors, auth, tags, event, related_tags }) => {
     const [limit, setLimit] = useState(event?.participant_limit_number || 2);
-    const [image, setImage] = useState(event?.image || null );
+    const [image, setImage] = useState(event?.image || null);
     const [name, setName] = useState(event?.name || "");
     const [description, setDescription] = useState(event?.description || "");
     const [address, setAddress] = useState(event?.address || "");
-    const [startTime, setStartTime] = useState(event?.start_date ? getDefaultDate(event?.start_date) : "" );
-    const [endTime, setEndTime] = useState(event?.end_date ? getDefaultDate(event?.end_date) : "" );
+    const [startTime, setStartTime] = useState(
+        event?.start_date ? getDefaultDate(event?.start_date) : ""
+    );
+    const [endTime, setEndTime] = useState(
+        event?.end_date ? getDefaultDate(event?.end_date) : ""
+    );
     const [submitTags, setSubmitTags] = useState(getDefaultActiveTagNames());
     const [isDragging, setIsDragging] = useState(false);
     const [isOnline, setIsOnline] = useState(false);
-    const [activeTagButtons, setActiveTagButtons] = useState(getDefaultActiveTags());
-    const [imageUrl, setImageUrl] = useState(event?.image ? `storage/images/${event?.image}` : "");
+    const [activeTagButtons, setActiveTagButtons] = useState(
+        getDefaultActiveTags()
+    );
+    const [imageUrl, setImageUrl] = useState(
+        event?.image ? `/storage/images/${event?.image}` : ""
+    );
     const errorMessageStyle = "text-red-500 italic text-lg";
 
     const handleTagButton = (index, tagName) => {
@@ -80,10 +88,10 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
             tags: submitTags.filter((v) => v),
         };
         if (event) {
-            router.post(
-                `/events/${event.event_id}`,
-                {_method: 'put', ...data}
-            );
+            router.post(`/events/${event.event_id}`, {
+                _method: "put",
+                ...data,
+            });
             return;
         }
         router.post(`/events`, data);
@@ -93,8 +101,8 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
         setIsOnline(isActive);
     };
 
-    function getDefaultActiveTags(){
-        if(!related_tags) return [];
+    function getDefaultActiveTags() {
+        if (!related_tags) return [];
 
         const defaultTags = [];
         related_tags.map((tag) => {
@@ -102,10 +110,10 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
         });
 
         return defaultTags;
-    };
+    }
 
-    function getDefaultActiveTagNames(){
-        if(!related_tags) return [];
+    function getDefaultActiveTagNames() {
+        if (!related_tags) return [];
 
         const defaultNameTags = [];
         related_tags.map((tag) => {
@@ -113,9 +121,9 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
         });
 
         return defaultNameTags;
-    };
+    }
 
-    function getDefaultDate(date){
+    function getDefaultDate(date) {
         date = new Date(date);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -124,7 +132,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
         const second = String(date.getHours()).padStart(2, "0");
 
         return `${year}-${month}-${day} ${hour}:${second}`;
-    };
+    }
     return (
         <div className="flex justify-center items-center">
             <div className="w-9/12 pt-46">
@@ -142,9 +150,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     {errors.name && (
-                        <div className={errorMessageStyle}>
-                            {errors.name}
-                        </div>
+                        <div className={errorMessageStyle}>{errors.name}</div>
                     )}
                 </div>
                 <div
@@ -161,7 +167,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                     <div className="mb-4">
                         {image && imageUrl ? (
                             <img
-                                className="w-full sm:w-48 h-auto object-cover rounded"
+                                className="w-full sm:w-48 h-72 object-cover rounded"
                                 src={imageUrl}
                                 alt="Event"
                             />
@@ -219,7 +225,6 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                 </div>
 
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
-
                     <Switch onChange={addressHandleSwitchChange}>
                         {!isOnline && (
                             <div>
@@ -264,9 +269,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                                     className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter the online URL"
                                     value={address}
-                                    onChange={(e) =>
-                                        setAddress(e.target.value)
-                                    }
+                                    onChange={(e) => setAddress(e.target.value)}
                                 />
                                 {errors.address && (
                                     <div className={errorMessageStyle}>
@@ -290,10 +293,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                         value={limit}
                         onChange={(e) => {
                             const inputValue = e.target.value;
-                            const numericValue = inputValue.replace(
-                                /\D/g,
-                                ""
-                            ); // Remove non-numeric characters
+                            const numericValue = inputValue.replace(/\D/g, ""); // Remove non-numeric characters
                             setLimit(numericValue);
                         }}
                     />
