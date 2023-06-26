@@ -44,6 +44,11 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// contact page
+Route::get('/contact', function () {
+    return Inertia::render('Contact/Index');
+});
+
 /*
     Reference
 */
