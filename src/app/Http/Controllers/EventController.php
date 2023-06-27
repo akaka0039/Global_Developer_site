@@ -68,7 +68,7 @@ class EventController extends Controller
             $validated['image'] = $request->get('image') ?? $request->all()['image'];
             $event = Event::create($validated);
             // attach tags
-            if ($validated['tags']) {
+            if (!empty($validated['tags'])) {
                 $event->attachTags($validated["tags"]);
             }
             // attach myself as a participant
