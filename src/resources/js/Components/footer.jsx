@@ -21,25 +21,18 @@ function Footer() {
                                     Home
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a
                                     href="#"
                                     className="text-gray-300 hover:text-white"
                                 >
                                     About
                                 </a>
-                            </li>
+                            </li> */}
+
                             <li>
                                 <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-white"
-                                >
-                                    Services
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
+                                    href="/contact"
                                     className="text-gray-300 hover:text-white"
                                 >
                                     Contact

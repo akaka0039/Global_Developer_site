@@ -11,7 +11,6 @@ export default function ProfileEdit({
     errors,
     flash,
 }) {
-    const [isFlashVisible, setFlashVisible] = useState(true);
     const [name, setName] = useState(auth.user.name);
     const [email, setEmail] = useState(auth.user.email);
     const [position, setPosition] = useState(auth.user.position || "");
@@ -25,11 +24,8 @@ export default function ProfileEdit({
         auth.user.image ? `${auth.user.image}` : ""
     );
     const [imageUrl, setImageUrl] = useState(
-        auth.user.image ? `storage/images/${auth.user.image}` : ""
+        auth.user.image ? `/storage/images/${auth.user.image}` : ""
     );
-    const handleCloseFlash = () => {
-        setFlashVisible(false);
-    };
 
     const handleDrop = (event) => {
         event.preventDefault();

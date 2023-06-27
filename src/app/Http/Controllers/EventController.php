@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
@@ -19,13 +20,20 @@ class EventController extends Controller
      */
     public function index(): Response
     {
+        $currentDateTime = Carbon::now();
+        
         if (request('tag_name')) {
             $tagNames[] = request('tag_name');
-            $events = Event::withAnyTags($tagNames)->get();
+            $events = Event::where('end_date', '>=', $currentDateTime)
+                ->withAnyTags($tagNames)
+                ->orderBy('start_date')
+                ->get();
         } else {
-            $events = Event::orderBy('created_at', 'desc')->get();
+            $events = Event::where('end_date', '>=', $currentDateTime)
+                ->orderBy('start_date')
+                ->get();
         }
-
+    
         $tags = Tag::orderBy('created_at', 'desc')->get();
         return Inertia::render('Main/Index', compact('events', 'tags'));
     }

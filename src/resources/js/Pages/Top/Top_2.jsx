@@ -42,7 +42,8 @@ function Top_2() {
                             <p className="text-gray-600 mt-2">
                                 Developers unite, forging connections,
                                 collaboration, and growth, unlocking new
-                                opportunities for success together.
+                                opportunities, paving the path to shared success
+                                together.
                             </p>
                         </div>
                     </div>
