@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return (
-        <footer className=" bg-slate-800 ">
+        <footer className="bg-primary text-white p-2">
             <div className="container mx-auto lg:px-8">
                 <div className="flex flex-col lg:flex-row justify-between items-center text-white">
                     <div>
@@ -16,7 +16,7 @@ function Footer() {
                             <li>
                                 <a
                                     href="/events"
-                                    className="text-gray-300 hover:text-white"
+                                    className="text-white hover:text-gray"
                                 >
                                     Home
                                 </a>
@@ -33,7 +33,7 @@ function Footer() {
                             <li>
                                 <a
                                     href="/contact"
-                                    className="text-gray-300 hover:text-white"
+                                    className="text-white hover:text-gray"
                                 >
                                     Contact
                                 </a>
