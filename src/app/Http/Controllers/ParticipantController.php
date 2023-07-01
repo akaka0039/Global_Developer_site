@@ -6,7 +6,8 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WaitingListAdvanceMail;
 
 class ParticipantController extends Controller
 {
@@ -56,6 +57,9 @@ class ParticipantController extends Controller
             $first_wait_list = $wait_list->first();
             $event->participants()->attach($first_wait_list->user_id);
             $event->waitList()->detach($first_wait_list->user_id);
+
+            // Send an email to users who have moved up from the waiting list
+            Mail::send(new WaitingListAdvanceMail($event, $first_wait_list));
         } else {
             $event->waitList()->detach(auth()->id());
         }
