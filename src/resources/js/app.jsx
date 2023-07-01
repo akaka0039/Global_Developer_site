@@ -4,20 +4,33 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import GeneralLayout from "./Layouts/GeneralLayout";
+import "../css/app.css";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: name => {
-        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-        let page = pages[`./Pages/${name}.jsx`]
-        // TODO: The design is corrupted when connecting the top page and the event list page.
-        page.default.layout = name.startsWith('Main/Index') || name.startsWith('Top/Index') ? undefined : (page => <GeneralLayout children={page} />)
-        return page
+    resolve: (name) => {
+        return resolvePageComponent(
+            `./Pages/${name}.jsx`,
+            import.meta.glob("./Pages/**/*.jsx")
+        ).then((module) => {
+            const page = module.default;
+            if (page) {
+                if (
+                    name.startsWith("Main/Index") ||
+                    name.startsWith("Top/Index")
+                ) {
+                    page.layout = null;
+                } else {
+                    page.layout = (page) => <GeneralLayout children={page} />;
+                }
+            }
+            return page;
+        });
     },
-    setup({ el, App, props }) {
+    setup: ({ el, App, props }) => {
         const root = createRoot(el);
 
         root.render(<App {...props} />);
