@@ -6,6 +6,14 @@ This repository is for the Global Meetup for Developers platform, an online hub 
 
 The Global Meetup for Developers platform provides a space for developers to connect, access valuable resources, and engage in discussions. It offers a wide range of content on various development-related topics, including programming languages, frameworks, databases, and cloud platforms.
 
+## Website (2023/06/30)
+
+https://test-site-akaka.online/
+
+※ Demo user:
+email: user1@example.com
+pass: password1
+
 ### Design Resources
 
 - [Google Slides Presentation - Concept](https://docs.google.com/presentation/d/1SNJKIt_EOww7z5Tp2Az6Ix4-KuuCIh4N9v_dFMHD8cs/edit?usp=sharing)
@@ -14,7 +22,7 @@ The Global Meetup for Developers platform provides a space for developers to con
 
 ## Tech Stack
 
-[![Tech Stack](https://skillicons.dev/icons?i=laravel,react,tailwind,vite,aws,figma,&perline=7)](https://skills.thijs.gg)
+[![Tech Stack](https://skillicons.dev/icons?i=laravel,react,tailwind,docker,mysql,nginx,vite,aws,figma,vscode,&perline=7)](https://skills.thijs.gg)
 
 The Global Meetup for Developers platform utilizes a tech stack that includes AWS, React, Tailwind CSS, Vite, Figma, and Laravel.
 

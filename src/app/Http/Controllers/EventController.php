@@ -85,7 +85,7 @@ class EventController extends Controller
      */
     public function show(Event $event): Response
     {
-        $is_attended = $event->isAttended();
+        $is_attended = $event->isAttended() || $event->isWaitListed();
         $is_hosted = $event->isHosted();
         $host_user = $event->user()->first();
         $participants = $event->participants()->get();
