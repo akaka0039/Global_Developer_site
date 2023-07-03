@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { router, usePage } from "@inertiajs/react";
+import Button from "@/Components/Button";
 
 const MemberPopup = ({ Members, handleModalClose, title }) => {
     const handleClick = (userId) => {
@@ -38,12 +39,12 @@ const MemberPopup = ({ Members, handleModalClose, title }) => {
                             <div className="truncated">{Member.name}</div>
                         </div>
                     ))}
-                <button
-                    className="bg-blue-500 text-white font-bold py-2 px-4 mt-4 rounded float-right"
-                    onClick={handleModalClose}
+                <Button
+                  onClick={handleModalClose}
+                  className="float-right mt-4"
                 >
                     Close
-                </button>
+                </Button>
             </div>
         </div>
     );

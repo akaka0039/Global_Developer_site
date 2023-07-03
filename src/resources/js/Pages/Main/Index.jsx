@@ -5,6 +5,7 @@ import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 import { router } from "@inertiajs/react";
 import FlashMessage from "@/Components/FlashMessage";
+import Button from "@/Components/Button";
 
 function Index({ auth, events, flash, tags }) {
     const handleCloseFlash = () => {
@@ -31,12 +32,9 @@ function Index({ auth, events, flash, tags }) {
                         </p>
                         <div className="px-4 py-8 text-center items-center sm:px-6">
                             <a href="/events/create">
-                                <button
-                                    type="submit"
-                                    className="inline-flex justify-center py-4 px-11 text-gray-500 text-xl bg-primary hover:bg-primary-hover rounded-full border border-transparent shadow-sm font-medium"
-                                >
+                                <Button className="px-12 py-4 text-xl">
                                     Create
-                                </button>
+                                </Button>
                             </a>
                         </div>
                         <div>

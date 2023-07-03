@@ -312,7 +312,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                         tags.map((tag) => (
                             <Button
                                 key={tag.id}
-                                bgColorSet={
+                                colorSet={
                                     activeTagButtons[tag.id]
                                         ? {
                                             bg_color: "bg-secondary",
@@ -321,6 +321,8 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                                         : {
                                             bg_color: "bg-transparent",
                                             bg_hover: "hover:bg-transparent",
+                                            text_color: "bg-gray-500",
+                                            text_hover: "bg-gray-500",
                                         }
                                 }
                                 className = "ml-2 mb-2"
@@ -336,13 +338,13 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
 
                 <div className="flex justify-end mb-4">
                     <Button
-                        bgColorSet={
+                        colorSet={
                             {
                                 bg_color: "bg-gray-500",
-                                bg_hover: "hover:bg-gray-700",
+                                bg_hover: "hover:bg-gray-600",
                             }
                         }
-                        className="text-white mr-2 px-6"
+                        className="mr-2 px-6"
                         onClick={() => {
                             router.visit("/events");
                         }}

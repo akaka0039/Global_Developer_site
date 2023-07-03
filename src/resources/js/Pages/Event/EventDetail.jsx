@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { router } from "@inertiajs/react";
 import MemberPopup from "./EventFormComponents/MemberPopup";
 import axios from "axios";
+import Button from "@/Components/Button";
 
 const EventDetail = ({
     auth,
@@ -104,6 +105,17 @@ const EventDetail = ({
         }
     };
 
+    const adjustDate = (value) => {
+        const date = new Date(value);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hour = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+
+        return `${year}-${month}-${day} ${hour}:${minutes}`;
+    };
+
     return (
         <div className="flex flex-col justify-center items-center h-full pt-8 pb-6">
             <div className="max-w-6xl w-full px-4 sm:px-6 lg:px-8">
@@ -121,19 +133,19 @@ const EventDetail = ({
                     <div className="flex px-3 py-8 sm:px-10">
                         <div className="flex flex-col">
                             <div className="flex mb-4">
-                                <h1 className="text-4xl leading-8 font-bold text-gray-900 mb-4">
+                                <h1 className="text-5xl leading-8 font-bold text-gray-600 mb-4">
                                     {event.name}
                                 </h1>
-                                <div className="text-md text-gray-600 ml-4 mt-3">
+                                <div className="text-lg text-gray-600 ml-4 mt-3">
                                     hosted by{" "}
                                     {host_user?.name || "Deleted user"}
                                 </div>
                             </div>
-                            <p className="text-md text-gray-600 mb-2">
-                                Start：{event.start_date}
+                            <p className="text-lg text-gray-600 mb-2">
+                                Start：{adjustDate(event.start_date)}
                             </p>
-                            <p className="text-md text-gray-600 mb-2">
-                                End ： {event.end_date}
+                            <p className="text-lg text-gray-600 mb-2">
+                                End ： {adjustDate(event.end_date)}
                             </p>
                         </div>
                     </div>
@@ -141,12 +153,12 @@ const EventDetail = ({
                     <div className="border-t border-gray-200 px-4 py-5 sm:p-6">
                         <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                                <dt className="text-sm font-medium text-gray-500">
+                                <dt className="text-lg font-bold text-gray-600">
                                     {event.is_online === 0
                                         ? "Location"
                                         : "Online Event"}
                                 </dt>
-                                <dd className="mt-1 text-sm text-gray-900">
+                                <dd className="mt-1 text-lg text-gray-600">
                                     <div className="flex items-center">
                                         <span>{event.address}</span>
                                         <button
@@ -176,10 +188,10 @@ const EventDetail = ({
                                 </dd>
                             </div>
                             <div className="sm:col-span-1">
-                                <dt className="text-sm font-medium text-gray-500">
+                                <dt className="text-lg font-bold text-gray-600">
                                     Limit of Attendance
                                 </dt>
-                                <dd className="mt-1 text-sm text-gray-900">
+                                <dd className="mt-1 text-md text-gray-600">
                                     {participantsState.length}/
                                     {event.participant_limit_number}
                                     {participantsState &&
@@ -199,10 +211,10 @@ const EventDetail = ({
                                         title="Attendance List"
                                     />
                                 )}
-                                <dt className="text-sm font-medium text-gray-500 pt-3">
+                                <dt className="text-lg font-bold text-gray-600 pt-3">
                                     Number of people waiting
                                 </dt>
-                                <dd className="mt-1 text-sm text-gray-900">
+                                <dd className="mt-1 text-md text-gray-600">
                                     {waitListState.length}
                                     {waitListState &&
                                         waitListState.length > 0 && (
@@ -223,32 +235,43 @@ const EventDetail = ({
                                 )}
                             </div>
                             <div className="sm:col-span-2">
-                                <dt className="text-sm font-medium text-gray-500">
+                                <dt className="text-lg font-bold text-gray-600">
                                     Description
                                 </dt>
-                                <dd className="mt-1 text-sm text-gray-900">
+                                <dd className="mt-1 text-lg text-gray-600">
                                     {event.description}
                                 </dd>
                             </div>
                             <div className="sm:col-span-2">
-                                <dt className="text-sm font-medium text-gray-500">
+                                <dt className="text-lg font-bold text-gray-600">
                                     Tag
                                 </dt>
-                                <dd className="mt-1 text-sm text-gray-900">
+                                <dd className="mt-1 text-md text-gray-600">
                                     {tags &&
                                         tags.map((tag) => (
-                                            <button
-                                                key={tag.id}
-                                                className="bg-gray-300 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded mt-2 ml-4"
-                                                onClick={() => {
-                                                    handleTagButton(
-                                                        tag.name.en
-                                                    );
-                                                }}
-                                            >
-                                                {tag.name.en}
-                                            </button>
-                                        ))}
+                                            <span className="mr-2">
+                                                <Button
+                                                    key={tag.id}
+                                                    colorSet={{
+                                                        bg_color: "bg-transparent",
+                                                        bg_hover: "hover:bg-transparent",
+                                                        text_color: "bg-gray-500",
+                                                        text_hover: "hover:bg-neutral-100",
+                                                    }}
+                                                    onClick={() => {
+                                                        handleTagButton(
+                                                            tag.name.en
+                                                        );
+                                                    }}
+                                                >
+                                                    {tag.name.en}
+                                                </Button>
+                                            </span>
+                                        ))
+                                    }
+                                    {tags.length === 0 && (
+                                        "No tags attached to this event."
+                                    )}
                                 </dd>
                             </div>
                         </dl>
@@ -257,9 +280,17 @@ const EventDetail = ({
                     <div className="bg-gray-100 px-4 py-4 sm:px-6 flex justify-end">
                         <div className="pl-2">
                             <a href="/events">
-                                <button className="bg-gray-400 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
+                                <Button
+                                    colorSet={
+                                        {
+                                            bg_color: "bg-gray-500",
+                                            bg_hover: "hover:bg-gray-600",
+                                        }
+                                    }
+                                    className="px-6"
+                                >
                                     Back
-                                </button>
+                                </Button>
                             </a>
                         </div>
 
@@ -267,64 +298,78 @@ const EventDetail = ({
                             isFullyOccupied &&
                             !isAttended &&
                             auth.user && (
-                                <div className="pl-2">
-                                    <button
+                                <div className="ml-2">
+                                    <Button
+                                        colorSet={{
+                                            bg_color: "bg-warm",
+                                            bg_hover: "hover:bg-warm-hover",
+                                        }}
                                         onClick={handleAttendClick}
-                                        className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600"
                                     >
                                         Waitlist
-                                    </button>
+                                    </Button>
                                 </div>
                             )}
                         {!is_hosted &&
                             !isFullyOccupied &&
                             !isAttended &&
                             auth.user && (
-                                <div className="pl-2">
-                                    <button
-                                        onClick={handleAttendClick}
-                                        className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
-                                    >
+                                <div className="ml-2">
+                                    <Button onClick={handleAttendClick}>
                                         Attend
-                                    </button>
+                                    </Button>
                                 </div>
                             )}
                         {!is_hosted && isAttended && auth.user && (
-                            <div className="pl-2">
-                                <button
+                            <div className="ml-2">
+                                <Button
+                                    colorSet={{
+                                        bg_color: "bg-danger",
+                                        bg_hover: "hover:bg-danger-hover",
+                                    }}
                                     onClick={handleNotAttendClick}
-                                    className="bg-red-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-red-600"
                                 >
                                     Cancel
-                                </button>
+                                </Button>
                             </div>
                         )}
                         {!is_hosted && isFullyOccupied && !auth.user && (
                             <a href="/login">
-                                <div className="pl-2">
-                                    <button className="bg-orange-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-orange-600">
+                                <div className="ml-2">
+                                    <Button
+                                        colorSet={{
+                                            bg_color: "bg-warm",
+                                            bg_hover: "hover:bg-warm-hover",
+                                        }}
+                                    >
                                         Waitlist
-                                    </button>
+                                    </Button>
                                 </div>
                             </a>
                         )}
                         {!is_hosted && !isFullyOccupied && !auth.user && (
                             <a href="/login">
-                                <div className="pl-2">
-                                    <button className="bg-blue-500 text-white rounded-md px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600">
+                                <div className="ml-2">
+                                    <Button>
                                         Attend
-                                    </button>
+                                    </Button>
                                 </div>
                             </a>
                         )}
                         {is_hosted && (
-                            <div className="pl-2">
-                                <button
-                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded "
+                            <div className="ml-2">
+                                <Button
+                                    colorSet={
+                                        {
+                                            bg_color: "bg-secondary",
+                                            bg_hover: "hover:bg-secondary-hover",
+                                        }
+                                    }
+                                    className = "px-6"
                                     onClick={handleEditClick}
                                 >
                                     Edit
-                                </button>
+                                </Button>
                             </div>
                         )}
                     </div>
