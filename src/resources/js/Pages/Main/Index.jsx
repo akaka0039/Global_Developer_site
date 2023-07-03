@@ -39,19 +39,37 @@ function Index({ auth, events, flash, tags }) {
                                 </button>
                             </a>
                         </div>
-                        <div className="px-4 py-8 text-center items-center sm:px-6">
-                            {tags.map((tag) => (
-                                <button
-                                    type="button"
-                                    className="inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-neutral-50 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100 mr-2 mb-2"
-                                    key={tag.id}
-                                    onClick={() => {
-                                        handleTagButton(tag.name.en);
-                                    }}
-                                >
-                                    {tag.name.en}
-                                </button>
-                            ))}
+                        <div>
+                            <button type="button" className="hs-collapse-toggle inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-neutral-50 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100" id="hs-basic-collapse" data-hs-collapse="#hs-basic-collapse-heading">
+                                <div className="pr-3">
+                                    Filter by Tag
+                                </div>
+                                <svg className="hs-collapse-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                </svg>
+                            </button>
+                            <div id="hs-basic-collapse-heading" className="hs-collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse">
+                                <div className="mt-5">
+                                    <div className="text-gray-500 dark:text-gray-400">
+                                        <div className="container mx-auto">
+                                            <div className="px-4 py-8 text-center items-center sm:px-6">
+                                                {tags.map((tag) => (
+                                                    <button
+                                                        type="button"
+                                                        className="inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-neutral-50 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100 mr-2 mb-2"
+                                                        key={tag.id}
+                                                        onClick={() => {
+                                                            handleTagButton(tag.name.en);
+                                                        }}
+                                                    >
+                                                        {tag.name.en}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
