@@ -29,7 +29,7 @@ const Switch = ({ label, onChange, children }) => {
                     />
                 </div>
                 <div className="flex flex-grow">
-                    <span className="pl-2 items-center block text-gray-700 text-sm font-bold mb-2">
+                    <span className="pl-2 items-center block text-gray-600 text-lg font-bold mb-2">
                         {switchLabel}
                     </span>
                 </div>

@@ -54,22 +54,22 @@ const TimeForm = (props) => {
         <div>
             <div className="flex-wrap pd-4 flex">
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                    <label className="block text-gray-600 text-lg font-bold mb-2">
                         Event Start
                     </label>
                     <input
-                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                         type="date"
                         value={eventStartDate}
                         onChange={handleEventStartChange}
                     />
                 </div>
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                    <label className="block text-gray-600 text-lg font-bold mb-2">
                         Start Time
                     </label>
                     <input
-                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                         type="time"
                         value={startTime}
                         onChange={handleStartTimeChange}
@@ -79,22 +79,22 @@ const TimeForm = (props) => {
 
             <div className="flex-wrap pd-4 flex">
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                    <label className="block text-gray-600 text-lg font-bold mb-2">
                         Event End
                     </label>
                     <input
-                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                         type="date"
                         value={eventEndDate}
                         onChange={handleEventEndChange}
                     />
                 </div>
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                    <label className="block text-gray-600 text-lg font-bold mb-2">
                         End Time
                     </label>
                     <input
-                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                         type="time"
                         value={endTime}
                         onChange={handleEndTimeChange}

@@ -19,6 +19,7 @@ export default {
                 "primary":"#9BD5FA",
                 "primary-hover":"#82CCFA",
                 "secondary":"#9AEDAF",
+                "secondary-hover":"#82ED9D",
                 "tertiary":"#FEFC94"
             },
         },
