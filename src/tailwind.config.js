@@ -21,7 +21,12 @@ export default {
                 "primary-hover":"#82CCFA",
                 "secondary":"#9AEDAF",
                 "secondary-hover":"#82ED9D",
-                "tertiary":"#FEFC94"
+                "tertiary":"#FEFC94",
+                "tertiary":"#FEFC94",
+                "warm":'#F9A763',
+                "warm-hover":'#FA9A4B',
+                "danger":"#EB556A",
+                "danger-hover":"#EB3D54",
             },
         },
     },

@@ -172,7 +172,7 @@ export default function ProfileEdit({
                                             </div>
                                         )}
                                         <div className="flex justify-center pt-1">
-                                            <div className="border-2 border-gray-300 border-dashed rounded-m py-28 w-full">
+                                            <div className="border-2 border-gray-300 border-dashed rounded-m py-8 w-full">
                                                 <div className="space-y-1 text-center">
                                                     <div className="text-lg text-gray-600 flex flex-row justify-center">
                                                         <label
@@ -356,20 +356,43 @@ export default function ProfileEdit({
                                     )}
 
                                 <div className="mt-2 flex flex-row-reverse items-end">
-                                    <div className="ml-4">
+                                    <div className="ml-2">
                                         <Button
                                             onClick={submit}
-                                            className="py-3 px-7 mr-2"
+                                            className="py-2 px-5"
                                         >
                                             Save
                                         </Button>
                                     </div>
+                                    <Button
+                                        colorSet={
+                                            {
+                                                bg_color: "bg-gray-500",
+                                                bg_hover: "hover:bg-gray-700",
+                                            }
+                                        }
+                                        className="text-white ml-6 px-5"
+                                        onClick={() => {
+                                            router.visit("/events");
+                                        }}
+                                    >
+                                        Back
+                                    </Button>
+
                                     <div>
                                         <Link
                                             href={route('password.edit')}
-                                            className="underline text-md text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            className="underline text-md ml-4 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         >
                                             Update Password?
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <Link
+                                            href={route('profile.delete')}
+                                            className="underline text-md text-red-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Delete Account?
                                         </Link>
                                     </div>
                                 </div>

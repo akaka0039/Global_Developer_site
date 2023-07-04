@@ -312,7 +312,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                         tags.map((tag) => (
                             <Button
                                 key={tag.id}
-                                bgColorSet={
+                                colorSet={
                                     activeTagButtons[tag.id]
                                         ? {
                                             bg_color: "bg-secondary",
@@ -336,7 +336,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
 
                 <div className="flex justify-end mb-4">
                     <Button
-                        bgColorSet={
+                        colorSet={
                             {
                                 bg_color: "bg-gray-500",
                                 bg_hover: "hover:bg-gray-700",
