@@ -14,9 +14,6 @@ const EventDetail = ({
     tags,
     wait_list,
 }) => {
-    // for debug
-    console.log(event, is_attended, participants, tags, wait_list);
-
     const [isAttended, SetIsAttended] = useState(is_attended);
     const [participantsState, SetParticipantsState] = useState(participants);
     const [waitListState, SetWaitListState] = useState(wait_list);
