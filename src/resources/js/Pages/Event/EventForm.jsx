@@ -321,6 +321,8 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                                         : {
                                             bg_color: "bg-transparent",
                                             bg_hover: "hover:bg-transparent",
+                                            text_color: "text-gray-600",
+                                            text_hover: "hover: text-gray-600",
                                         }
                                 }
                                 className = "ml-2 mb-2"
