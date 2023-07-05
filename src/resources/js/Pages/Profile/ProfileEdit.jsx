@@ -88,7 +88,7 @@ export default function ProfileEdit({
                 <FlashMessage flash={flash} />
             </div>
             <div className="flex justify-center items-center pt-3">
-                <div className="w-full lg:w-2/3 xl:w-2/ 3 pt-4">
+                <div className="w-full lg:w-2/3 xl:w-2/3 pt-4">
                     <h1 className="text-4xl text-gray-600">
                         Edit Profile
                     </h1>
@@ -355,7 +355,7 @@ export default function ProfileEdit({
                                         </div>
                                     )}
 
-                                <div className="mt-2 flex flex-row-reverse items-end">
+                                <div className="mt-2 mb-2 flex flex-row-reverse items-end">
                                     <div className="ml-2">
                                         <Button
                                             onClick={submit}
@@ -382,7 +382,7 @@ export default function ProfileEdit({
                                     <div>
                                         <Link
                                             href={route('password.edit')}
-                                            className="underline text-md ml-4 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            className="underline text-sm lg:text-md ml-4 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         >
                                             Update Password?
                                         </Link>
@@ -390,7 +390,7 @@ export default function ProfileEdit({
                                     <div>
                                         <Link
                                             href={route('profile.delete')}
-                                            className="underline text-md text-red-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            className="underline text-sm lg:text-md text-red-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         >
                                             Delete Account?
                                         </Link>

@@ -134,8 +134,7 @@ export default function UpdatePasswordForm({ auth, className = "" }) {
                         >
                             Save
                         </Button>
-                        {/* TODO: Commented out because the back button is not routed properly */}
-                        {/* <Button
+                        <Button
                             colorSet={
                                 {
                                     bg_color: "bg-gray-500",
@@ -146,9 +145,10 @@ export default function UpdatePasswordForm({ auth, className = "" }) {
                             onClick={() => {
                                 router.visit("/profile");
                             }}
+                            submit={false}
                         >
                             Back
-                        </Button> */}
+                        </Button>
 
                         <Transition
                             show={recentlySuccessful}

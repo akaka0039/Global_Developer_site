@@ -1,4 +1,4 @@
-export default function Button({ className = '', colorSet, disabled, children, ...props }) {
+export default function Button({ submit = true, className = '', colorSet, disabled, children, ...props }) {
     const options = [];
     options.push(colorSet?.bg_color || 'bg-primary');
     options.push(colorSet?.bg_hover || 'hover:bg-primary-hover');
@@ -14,6 +14,7 @@ export default function Button({ className = '', colorSet, disabled, children, .
                 } ` + className + ' ' + options.join(' ')
             }
             disabled={disabled}
+            type= {submit ? 'submit' : 'button'}
         >
             {children}
         </button>
