@@ -129,8 +129,8 @@ const EventDetail = ({
                     </div>
                     <div className="flex px-3 py-8 sm:px-10">
                         <div className="flex flex-col">
-                            <div className="flex mb-4">
-                                <h1 className="text-5xl leading-8 font-bold text-gray-600 mb-4">
+                        <div className="flex mb-4">
+                                <h1 className="text-4xl leading-8 font-bold text-gray-600 mb-4">
                                     {event.name}
                                 </h1>
                                 <div className="text-lg text-gray-600 ml-4 mt-3">
@@ -139,10 +139,10 @@ const EventDetail = ({
                                 </div>
                             </div>
                             <p className="text-lg text-gray-600 mb-2">
-                                Start：{adjustDate(event.start_date)}
+                                Start: {adjustDate(event.start_date)}
                             </p>
                             <p className="text-lg text-gray-600 mb-2">
-                                End ： {adjustDate(event.end_date)}
+                                End: {adjustDate(event.end_date)}
                             </p>
                         </div>
                     </div>
