@@ -246,9 +246,8 @@ const EventDetail = ({
                                 <dd className="mt-1 text-md text-gray-600">
                                     {tags &&
                                         tags.map((tag) => (
-                                            <span className="mr-2">
+                                            <span key={tag.id} className="mr-2">
                                                 <Button
-                                                    key={tag.id}
                                                     colorSet={{
                                                         bg_color: "bg-transparent",
                                                         bg_hover: "hover:bg-transparent",
