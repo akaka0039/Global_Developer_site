@@ -1,8 +1,9 @@
-export default function Button({ className = '', bgColorSet, disabled, children, ...props }) {
-    console.log(bgColorSet, 'props');
+export default function Button({ className = '', colorSet, disabled, children, ...props }) {
     const options = [];
-    options.push(bgColorSet?.bg_color || 'bg-primary');
-    options.push(bgColorSet?.bg_hover || 'bg-primary-hover');
+    options.push(colorSet?.bg_color || 'bg-primary');
+    options.push(colorSet?.bg_hover || 'hover:bg-primary-hover');
+    options.push(colorSet?.text_color || 'text-white');
+    options.push(colorSet?.text_hover || 'hover:text-white');
 
     return (
         <button
