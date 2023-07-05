@@ -37,7 +37,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
+        return Inertia::render('Profile/ProfileEdit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
@@ -56,7 +56,18 @@ class ProfileController extends Controller
 
         $user->image = $request->get('image') ? $request->get('image') : $request->all()['image'];
         $user->save();
-        return Redirect::route('profile.edit')->with('message', 'Your account has been successfully edit!'); ;
+        return Redirect::route('profile.edit')->with('message', 'Your account has been successfully edit!');
+    }
+
+    /**
+     * Display the delete user form.
+     */
+    public function delete(Request $request): Response
+    {
+        return Inertia::render('Profile/DeleteUser', [
+            'status' => session('status'),
+        ]);
+
     }
 
     /**

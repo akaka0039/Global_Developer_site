@@ -142,7 +142,7 @@ const EventDetail = ({
                                 Start: {adjustDate(event.start_date)}
                             </p>
                             <p className="text-lg text-gray-600 mb-2">
-                                End: {adjustDate(event.end_date)}
+                                End&nbsp; : {adjustDate(event.end_date)}
                             </p>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ const EventDetail = ({
                                 </dt>
                                 <dd className="mt-1 text-lg text-gray-600">
                                     <div className="flex items-center">
-                                        <span>{event.address}</span>
+                                        <span className="truncate">{event.address}</span>
                                         <button
                                             className="ml-2 p-1 rounded-md bg-gray-200 hover:bg-gray-300 focus:bg-gray-300"
                                             onClick={() => {
@@ -246,9 +246,8 @@ const EventDetail = ({
                                 <dd className="mt-1 text-md text-gray-600">
                                     {tags &&
                                         tags.map((tag) => (
-                                            <span className="mr-2">
+                                            <span key={tag.id} className="mr-2">
                                                 <Button
-                                                    key={tag.id}
                                                     colorSet={{
                                                         bg_color: "bg-transparent",
                                                         bg_hover: "hover:bg-transparent",

@@ -21,7 +21,7 @@ class EventController extends Controller
     public function index(): Response
     {
         $currentDateTime = Carbon::now();
-        
+
         if (request('tag_name')) {
             $tagNames[] = request('tag_name');
             $events = Event::where('end_date', '>=', $currentDateTime)
@@ -33,7 +33,7 @@ class EventController extends Controller
                 ->orderBy('start_date')
                 ->get();
         }
-    
+
         $tags = Tag::orderBy('created_at', 'desc')->get();
         return Inertia::render('Main/Index', compact('events', 'tags'));
     }
