@@ -9,7 +9,7 @@ export default function Button({ submit = true, className = '', colorSet, disabl
         <button
             {...props}
             className={
-                    `inline-flex justify-center py-2 px-4 text-gray-500 rounded-full border shadow-sm font-medium ${
+                    `inline-flex justify-center py-2 px-4 rounded-full border shadow-sm font-medium ${
                     disabled && 'opacity-25'
                 } ` + className + ' ' + options.join(' ')
             }

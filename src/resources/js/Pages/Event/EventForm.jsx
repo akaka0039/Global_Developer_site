@@ -341,10 +341,10 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                         colorSet={
                             {
                                 bg_color: "bg-gray-500",
-                                bg_hover: "hover:bg-gray-700",
+                                bg_hover: "hover:bg-gray-600",
                             }
                         }
-                        className="text-white mr-2 px-6"
+                        className="mr-2 px-6"
                         onClick={() => {
                             router.visit("/events");
                         }}

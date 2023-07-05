@@ -17,7 +17,7 @@ function Index({ auth }) {
                         <div className="w-full md:w-1/2 md:px-3">
                             <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                                    <span className="block text-center">
+                                    <span className="block text-center text-gray-600">
                                         Global Developer
                                     </span>
                                 </h1>
@@ -30,7 +30,7 @@ function Index({ auth }) {
                                     〜Find Global Connection〜
                                 </p>
                                 <div className="flex sm:flex-row sm:space-x-4 justify-center">
-                                    <a href="/events" className="flex px-6 py-3 mb-3 text-lg text-gray-600 bg-primary rounded-full sm:mb-0 hover:bg-primary-hover sm:max-w-xs text-center max-w-0.625" data-primary="indigo-600" data-rounded="rounded-md">
+                                    <a href="/events" className="flex px-6 py-3 mb-3 text-lg text-gray-500 bg-primary rounded-full sm:mb-0 hover:bg-primary-hover sm:max-w-xs text-center max-w-0.625" data-primary="indigo-600" data-rounded="rounded-md">
                                         Check events
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-7 ml-1 feather feather-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </a>

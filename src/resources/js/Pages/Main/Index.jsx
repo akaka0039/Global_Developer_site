@@ -5,6 +5,7 @@ import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 import { router } from "@inertiajs/react";
 import FlashMessage from "@/Components/FlashMessage";
+import Button from "@/Components/Button";
 
 function Index({ auth, events, flash, tags }) {
     const handleCloseFlash = () => {
@@ -31,16 +32,13 @@ function Index({ auth, events, flash, tags }) {
                         </p>
                         <div className="px-4 py-8 text-center items-center sm:px-6">
                             <a href="/events/create">
-                                <button
-                                    type="submit"
-                                    className="inline-flex justify-center py-4 px-11 text-gray-500 text-xl bg-primary hover:bg-primary-hover rounded-full border border-transparent shadow-sm font-medium"
-                                >
+                                <Button className="py-4 pr-12 pl-12 text-xl">
                                     Create
-                                </button>
+                                </Button>
                             </a>
                         </div>
                         <div>
-                            <button type="button" className="hs-collapse-toggle inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-neutral-50 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100" id="hs-basic-collapse" data-hs-collapse="#hs-basic-collapse-heading">
+                            <button type="button" className="hs-collapse-toggle inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 md:text-lg text-md font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-transparent focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100" id="hs-basic-collapse" data-hs-collapse="#hs-basic-collapse-heading">
                                 <div className="pr-3">
                                     Filter by Tag
                                 </div>
@@ -56,7 +54,7 @@ function Index({ auth, events, flash, tags }) {
                                                 {tags.map((tag) => (
                                                     <button
                                                         type="button"
-                                                        className="inline-flex items-center justify-center border-gray-600 border px-5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-neutral-50 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100 mr-2 mb-2"
+                                                        className="inline-flex items-center justify-center border-gray-600 border px-5 py-2 md:text-lg text-md font-medium tracking-wide transition-colors duration-100 rounded-full text-gray-500 bg-transparent focus:ring-2 focus:ring-offset-2 focus:ring-neutral-100 hover:text-neutral-600 hover:bg-neutral-100 mr-2 mb-2"
                                                         key={tag.id}
                                                         onClick={() => {
                                                             handleTagButton(tag.name.en);
