@@ -8,6 +8,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+        'node_modules/preline/dist/*.js',
     ],
 
     theme: {
@@ -15,8 +16,22 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors:{
+                "primary":"#9BD5FA",
+                "primary-hover":"#82CCFA",
+                "secondary":"#9AEDAF",
+                "secondary-hover":"#82ED9D",
+                "tertiary":"#FEFC94",
+                "warm":'#F9A763',
+                "warm-hover":'#FA9A4B',
+                "danger":"#EB556A",
+                "danger-hover":"#EB3D54",
+            },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('preline/plugin'),
+    ],
 };

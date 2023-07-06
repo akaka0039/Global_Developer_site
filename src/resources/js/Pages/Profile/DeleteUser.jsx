@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
-import DangerButton from "@/Components/DangerButton";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import Modal from "@/Components/Modal";
-import SecondaryButton from "@/Components/SecondaryButton";
 import TextInput from "@/Components/TextInput";
-import { useForm } from "@inertiajs/react";
-import GeneralLayout from "@/Layouts/GeneralLayout";
+import { useForm, router } from "@inertiajs/react";
+import Button from "@/Components/Button";
 
 export default function DeleteUserForm({ auth, className = "" }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -45,7 +43,7 @@ export default function DeleteUserForm({ auth, className = "" }) {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="flex items-center justify-center min-h-screen bg-gray-400">
             <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-xl w-full">
                 <header>
                     <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-900">
@@ -60,9 +58,33 @@ export default function DeleteUserForm({ auth, className = "" }) {
                     </p>
                 </header>
 
-                <DangerButton onClick={confirmUserDeletion} className="mt-4">
+                <Button
+                    onClick={confirmUserDeletion}
+                    colorSet={{
+                        bg_color: "bg-danger",
+                        bg_hover: "hover: bg-danger-hover",
+                        text_color: "text-white",
+                        text_hover: "hover: text-white"
+                    }}
+                    className="mt-4"
+                >
                     Delete Account
-                </DangerButton>
+                </Button>
+
+                <Button
+                    colorSet={
+                        {
+                            bg_color: "bg-gray-500",
+                            bg_hover: "hover:bg-gray-700",
+                        }
+                    }
+                    className="text-white ml-2 px-5"
+                    onClick={() => {
+                        router.visit("/profile");
+                    }}
+                >
+                    Back
+                </Button>
 
                 <Modal show={confirmingUserDeletion} onClose={closeModal}>
                     <form onSubmit={deleteUser} className="p-6">
@@ -105,16 +127,31 @@ export default function DeleteUserForm({ auth, className = "" }) {
                         </div>
 
                         <div className="mt-6 flex justify-end">
-                            <SecondaryButton onClick={closeModal}>
-                                Cancel
-                            </SecondaryButton>
+                            <Button
+                                onClick={closeModal}
+                                colorSet={{
+                                    bg_color: "bg-transparent",
+                                    bg_hover: "hover: bg-transdparent",
+                                    text_color: "text-gray-500",
+                                    text_hover: "hover: gray-500"
+                                }}
 
-                            <DangerButton
-                                className="ml-3"
+                            >
+                                Cancel
+                            </Button>
+
+                            <Button
+                                colorSet={{
+                                    bg_color: "bg-danger",
+                                    bg_hover: "hover: bg-danger-hover",
+                                    text_color: "text-white",
+                                    text_hover: "hover: text-white"
+                                }}
+                                className="ml-2"
                                 disabled={processing}
                             >
                                 Delete Account
-                            </DangerButton>
+                            </Button>
                         </div>
                     </form>
                 </Modal>

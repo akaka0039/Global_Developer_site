@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -52,6 +53,6 @@ class RegisteredUserController extends Controller
         // send an email to the user who registered
         Mail::send(new RegisteredConfirmationMail($request));
 
-        return redirect(RouteServiceProvider::HOME);
+        return Redirect::route('profile.edit')->with('message', 'Your account has been successfully Created!');
     }
 }

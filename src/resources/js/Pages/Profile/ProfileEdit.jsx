@@ -3,6 +3,7 @@ import InputLabel from "@/Components/InputLabel";
 import { Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 import FlashMessage from "@/Components/FlashMessage";
+import Button from "@/Components/Button";
 
 export default function ProfileEdit({
     auth,
@@ -88,20 +89,20 @@ export default function ProfileEdit({
             </div>
             <div className="flex justify-center items-center pt-3">
                 <div className="w-full lg:w-2/3 xl:w-2/3 pt-4">
-                    <h1 className="text-xl text-gray-900">
-                        Profile Information
+                    <h1 className="text-4xl text-gray-600">
+                        Edit Profile
                     </h1>
-                    <p className="mt-1 text-sm text-gray-600">
-                        Update your account's profile information
+                    <p className="mt-2 text-md text-gray-600">
+                        This information will appear on your public profile
                     </p>
 
-                    <div className="mt-6 space-y-6">
+                    <div className="mt-4 space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <div>
                                     <label
                                         htmlFor="name"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Name
                                         <span className="text-red-500"> *</span>
@@ -126,7 +127,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="email"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Email
                                         <span className="text-red-500"> *</span>
@@ -149,9 +150,13 @@ export default function ProfileEdit({
                                 </div>
 
                                 <div>
-                                    <InputLabel htmlFor="image">
-                                        Image
-                                    </InputLabel>
+                                    <label
+                                            htmlFor="image"
+                                            className="block text-lg font-medium text-gray-600"
+                                        >
+                                            Image
+                                    </label>
+
                                     <div
                                         onDrop={handleDrop}
                                         onDragOver={handleDragOver}
@@ -167,12 +172,12 @@ export default function ProfileEdit({
                                             </div>
                                         )}
                                         <div className="flex justify-center pt-1">
-                                            <div className="border-2 border-gray-300 border-dashed rounded-m px-8 pt-5 pb-6 w-full">
+                                            <div className="border-2 border-gray-300 border-dashed rounded-m py-8 w-full">
                                                 <div className="space-y-1 text-center">
-                                                    <div className="text-sm text-gray-600 flex flex-row justify-center">
+                                                    <div className="text-lg text-gray-600 flex flex-row justify-center">
                                                         <label
                                                             htmlFor="image"
-                                                            className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                                                            className="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                                                         >
                                                             <span>
                                                                 Select Image
@@ -212,7 +217,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="position"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Position
                                     </label>
@@ -234,7 +239,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="introduction"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Introduction
                                     </label>
@@ -256,7 +261,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="habitation"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Habitation
                                     </label>
@@ -279,7 +284,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="nationality"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-600"
                                     >
                                         Nationality
                                     </label>
@@ -302,7 +307,7 @@ export default function ProfileEdit({
                                 <div>
                                     <label
                                         htmlFor="url"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-lg font-medium text-gray-700"
                                     >
                                         URL
                                     </label>
@@ -350,14 +355,45 @@ export default function ProfileEdit({
                                         </div>
                                     )}
 
-                                <div className="mt-2 flex flex-col items-end">
-                                    <div className="flex">
-                                        <button
+                                <div className="mt-2 mb-2 flex flex-row-reverse items-end">
+                                    <div className="ml-2">
+                                        <Button
                                             onClick={submit}
-                                            className="py-3 px-7 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                            className="py-2 px-5"
                                         >
                                             Save
-                                        </button>
+                                        </Button>
+                                    </div>
+                                    <Button
+                                        colorSet={
+                                            {
+                                                bg_color: "bg-gray-500",
+                                                bg_hover: "hover:bg-gray-700",
+                                            }
+                                        }
+                                        className="text-white ml-6 px-5"
+                                        onClick={() => {
+                                            router.visit("/events");
+                                        }}
+                                    >
+                                        Back
+                                    </Button>
+
+                                    <div>
+                                        <Link
+                                            href={route('password.edit')}
+                                            className="underline text-sm lg:text-md ml-4 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Update Password?
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <Link
+                                            href={route('profile.delete')}
+                                            className="underline text-sm lg:text-md text-red-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Delete Account?
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

@@ -22,10 +22,10 @@ const Card = ({ event }) => {
                     style={cardStyle}
                 ></div>
                 <div className="p-4">
-                    <h2 className="text-xl font-bold mb-2" key={event.event_id}>
+                    <h2 className="text-xl text-gray-700 font-bold mb-2" key={event.event_id}>
                         {event.name}
                     </h2>
-                    <p className="text-gray-700 truncate">
+                    <p className="text-gray-600 truncate">
                         {event.description}
                     </p>
                 </div>

@@ -3,6 +3,7 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import Button from '@/Components/Button';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -40,9 +41,7 @@ export default function ForgotPassword({ status }) {
                 <InputError message={errors.email} className="mt-2" />
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Email Password Reset Link
-                    </PrimaryButton>
+                    <Button className='ml-4 text-md py-2.5' disabled={processing}>Email Password Reset Link</Button>
                 </div>
             </form>
         </GuestLayout>
