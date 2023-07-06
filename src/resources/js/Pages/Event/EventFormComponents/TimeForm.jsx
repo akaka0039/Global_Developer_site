@@ -56,6 +56,7 @@ const TimeForm = (props) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         Event Start
+                        <span className="text-red-500"> *</span>
                     </label>
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
@@ -67,6 +68,7 @@ const TimeForm = (props) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         Start Time
+                        <span className="text-red-500"> *</span>
                     </label>
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
@@ -81,6 +83,7 @@ const TimeForm = (props) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         Event End
+                        <span className="text-red-500"> *</span>
                     </label>
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
@@ -92,6 +95,7 @@ const TimeForm = (props) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4 flex-grow">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         End Time
+                        <span className="text-red-500"> *</span>
                     </label>
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"

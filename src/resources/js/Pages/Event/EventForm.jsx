@@ -141,6 +141,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         Event Name
+                        <span className="text-red-500"> *</span>
                     </label>
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
@@ -208,6 +209,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                 <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
                     <label className="block text-gray-600 text-lg font-bold mb-2">
                         Description
+                        <span className="text-red-500"> *</span>
                     </label>
                     <textarea
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
@@ -234,6 +236,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                                         className="block text-lg font-bold text-gray-600"
                                     >
                                         Address
+                                        <span className="text-red-500"> *</span>
                                     </label>
                                     <input
                                         type="text"
@@ -261,6 +264,7 @@ const EventForm = ({ errors, auth, tags, event, related_tags }) => {
                                     className="block text-lg font-bold text-gray-600"
                                 >
                                     Online URL
+                                    <span className="text-red-500"> *</span>
                                 </label>
                                 <input
                                     type="url"
