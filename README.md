@@ -8,17 +8,19 @@ The Global Meetup for Developers platform provides a space for developers to con
 
 ## Website (2023/06/30)
 
-https://test-site-akaka.online/
+### https://test-site-akaka.online/
 
-※ Demo user:
-email: user1@example.com
-pass: password1
+#### Demo user:
+
+- Email: user1@example.com
+- Pass: password1
 
 ### Design Resources
 
 - [Google Slides Presentation - Concept](https://docs.google.com/presentation/d/1SNJKIt_EOww7z5Tp2Az6Ix4-KuuCIh4N9v_dFMHD8cs/edit?usp=sharing)
 - [Figma - Design](https://www.figma.com/file/o3kgSi8gQJW6TFfcDzL5kD/Global-Developer-Site-Design?type=design&node-id=1%3A297&t=CZkLvLwjqSZUKTOJ-1)
 - [Figma - Screen Transitions](https://www.figma.com/file/2Mih5THnthmXD6sOujOKG2/Global-Developer-Site?type=whiteboard&node-id=0%3A1&t=KrVEtjive2yYwN9z-1)
+- [ER - Diagram DB](https://drive.google.com/file/d/10FsXhL0Wl-uaOOt4tiLXr8zFmO1TAxCx/view)
 
 ## Tech Stack
 
@@ -47,31 +49,13 @@ The Global Meetup for Developers platform utilizes a tech stack that includes AW
    cd Global_Developer_site
    ```
 
-3. Build Docker images.
+3. Set up the Laravel development environment.
 
-   ```
-   docker-compose build
-   ```
+   - Change directory to src
 
-4. Start Docker containers.
-
-   ```
-   docker-compose up -d
-   ```
-
-5. Enter the `app` container.
-
-   ```
-   docker-compose exec -it app bash
-   ```
-
-6. Install dependencies with Composer.
-
-   ```
-   composer install
-   ```
-
-7. Set up the Laravel development environment.
+     ```
+     cd src
+     ```
 
    - Copy the example `.env` file.
 
@@ -96,6 +80,36 @@ The Global Meetup for Developers platform utilizes a tech stack that includes AW
      php artisan key:generate
      ```
 
+4. Build Docker images.
+
+- Back to Global_Developer_site directory from src
+
+  ```
+  cd ../
+  ```
+
+  ```
+  docker-compose build
+  ```
+
+5. Start Docker containers.
+
+   ```
+   docker-compose up -d
+   ```
+
+6. Enter the `app` container.
+
+   ```
+   docker-compose exec -it app bash
+   ```
+
+7. Install dependencies with Composer.
+
+   ```
+   composer install
+   ```
+
 8. Run database migrations.
 
    ```shell
@@ -116,7 +130,11 @@ The Global Meetup for Developers platform utilizes a tech stack that includes AW
 
 11. Access the website.
 
-    Open your browser and visit [http://localhost:8080/top](http://localhost:8080/top).
+    Open your browser and visit [http://localhost:8080/](http://localhost:8080/).
+
+12. Access phpMyAdmin.
+
+    Open your browser and visit [http://localhost:8081/](http://localhost:8081/).
 
 **Note**: Make sure that all the steps are executed in the project directory.
 
