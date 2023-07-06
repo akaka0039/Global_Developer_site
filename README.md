@@ -89,7 +89,7 @@ The Global Meetup for Developers platform utilizes a tech stack that includes AW
   ```
   
 - Build Docker images.
-- 
+
   ```
   docker-compose build
   ```
