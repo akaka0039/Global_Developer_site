@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash; 
 
 class TagsTableSeeder extends Seeder
 {
@@ -13,10 +12,24 @@ class TagsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        $tags = [
+            'Java',
+            'JavaScript',
+            'TypeScript',
+            'PHP',
+            'Ruby',
+            'Python',
+            'Go',
+            'C++',
+            'C#',
+            'Swift',
+            'Kotlin',
+            'SQL',
+        ];
+        foreach ($tags as $i => $tag) {
             DB::table('tags')->insert([
-                'name' => json_encode(['en' => 'tag-' . $i]),
-                'slug' => json_encode(['en' => 'tag-' . $i]),
+                'name' => json_encode(['en' => $tag]),
+                'slug' => json_encode(['en' => $tag]),
             ]);
         }
     }
