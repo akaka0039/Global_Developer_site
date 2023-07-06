@@ -71,17 +71,14 @@ const MainCard = ({ event }) => {
                 <div className="text-center text-lg font-medium text-gray-800">
                     Upcoming Event
                 </div>
-                <div className="flex flex-col sm:flex-row justify-between items-center">
-                    <h2 className="text-3xl text-gray-700 font-bold w-8/12 truncate">
+                <div className="p-3">
+                    <h2 className="text-3xl text-center text-gray-700 font-bold truncate">
                         {event.name}
                     </h2>
-                    <p className="text-sm mb-2 sm:mb-4 w-4/12 md:text-md lg:mb-3 xl:text-xl xl:mb-4 md:pl-7 md:p-2 pt-3">
-                        {timeRemaining}
-                    </p>
                 </div>
-                <p className="text-lg text-gray-700 truncate">
-                    {event.description}
-                </p>
+                <div className="text-center text-lg xl:text-xl pt-3">
+                    This event will start in {timeRemaining}
+                </div>
             </div>
         </div>
     );
