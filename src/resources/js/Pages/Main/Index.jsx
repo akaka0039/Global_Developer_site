@@ -69,6 +69,13 @@ function Index({ auth, events, flash, tags }) {
                                 </div>
                             </div>
                         </div>
+                        <div className="pt-3">
+                            <a
+                                className="underline text-gray-500 hover:text-gray-600 font-medium"
+                                href="/events">
+                                Clear Filter
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
