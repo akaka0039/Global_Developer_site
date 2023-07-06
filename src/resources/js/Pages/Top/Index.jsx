@@ -30,7 +30,7 @@ function Index({ auth }) {
                                     〜Find Global Connection〜
                                 </p>
                                 <div className="flex sm:flex-row sm:space-x-4 justify-center">
-                                    <a href="/events" className="flex px-6 py-3 mb-3 text-lg text-gray-500 bg-primary rounded-full sm:mb-0 hover:bg-primary-hover sm:max-w-xs text-center max-w-0.625" data-primary="indigo-600" data-rounded="rounded-md">
+                                    <a href="/events" className="flex px-6 py-3 mb-3 text-lg text-gray-700 font-medium bg-primary rounded-full sm:mb-0 hover:bg-primary-hover sm:max-w-xs text-center max-w-0.625" data-primary="indigo-600" data-rounded="rounded-md">
                                         Check events
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-7 ml-1 feather feather-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </a>
