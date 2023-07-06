@@ -1,5 +1,5 @@
 import React from "react";
-import JubHunting from "/public/images/JubHunting.png";
+import JobHunting from "/public/images/JobHunting.png";
 import Self from "/public/images/Self.png";
 import Project from "/public/images/Project.png";
 
@@ -28,8 +28,8 @@ function Top_3() {
                         </div>
                         <div className="rounded-full bg-gray-300 p-2 mx-4 ">
                             <img
-                                src={JubHunting}
-                                alt="JubHunting"
+                                src={JobHunting}
+                                alt="JobHunting"
                                 className="max-w-[45%] h-auto mx-auto rounded-full"
                                 style={{
                                     objectFit: "cover",
@@ -37,7 +37,7 @@ function Top_3() {
                                 }}
                             />
                             <h2 className="text-4xl font-bold mt-4">
-                                JubHunting
+                                JobHunting
                             </h2>
                             <p className="text-gray-600 mt-2">
                                 Leverage our vibrant community for job hunting,
