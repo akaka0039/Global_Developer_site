@@ -81,19 +81,15 @@ const ProfileDetails = ({ user, organizing_events, participating_events }) => {
                             <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
                                 Participating Events
                             </h3>
-                            <div className="flex flex-wrap">
-                                <ParticipatingEvents
-                                    events={participating_events}
-                                />
-                            </div>
+                            <ParticipatingEvents
+                                events={participating_events}
+                            />
                         </div>
                         <div className="mb-4 flex-grow">
                             <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-tight">
                                 Organizing Events
                             </h3>
-                            <div className="flex flex-wrap">
-                                <OrganizingEvents events={organizing_events} />
-                            </div>
+                            <OrganizingEvents events={organizing_events} />
                         </div>
                     </div>
                 </div>
