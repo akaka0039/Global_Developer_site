@@ -96,7 +96,22 @@ const EventDetail = ({
     const handleCopyAddress = async (address) => {
         try {
             await navigator.clipboard.writeText(address);
-            alert("Copied to clipboard");
+            const alertMessage = document.createElement("div");
+            alertMessage.textContent = "Copied to clipboard";
+            alertMessage.style.position = "fixed";
+            alertMessage.style.top = "10px";
+            alertMessage.style.left = "50%";
+            alertMessage.style.transform = "translateX(-50%)";
+            alertMessage.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+            alertMessage.style.color = "white";
+            alertMessage.style.padding = "10px";
+            alertMessage.style.borderRadius = "4px";
+            alertMessage.style.zIndex = "9999";
+            document.body.appendChild(alertMessage);
+
+            setTimeout(() => {
+                document.body.removeChild(alertMessage);
+            }, 3000);
         } catch (error) {
             console.error("Error copying address to clipboard:", error);
         }
@@ -129,7 +144,7 @@ const EventDetail = ({
                     </div>
                     <div className="flex px-3 py-8 sm:px-10">
                         <div className="flex flex-col">
-                        <div className="flex mb-4">
+                            <div className="flex mb-4">
                                 <h1 className="text-4xl leading-8 font-bold text-gray-600 mb-4">
                                     {event.name}
                                 </h1>
@@ -157,7 +172,9 @@ const EventDetail = ({
                                 </dt>
                                 <dd className="mt-1 text-lg text-gray-600">
                                     <div className="flex items-center">
-                                        <span className="truncate">{event.address}</span>
+                                        <span className="truncate">
+                                            {event.address}
+                                        </span>
                                         <button
                                             className="ml-2 p-1 rounded-md bg-gray-200 hover:bg-gray-300 focus:bg-gray-300"
                                             onClick={() => {
@@ -166,20 +183,7 @@ const EventDetail = ({
                                                 );
                                             }}
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.0"
-                                                stroke="currentColor"
-                                                className="w-4 h-4"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                                                />
-                                            </svg>
+                                            <i className="fa-solid fa-copy"></i>
                                         </button>
                                     </div>
                                 </dd>
@@ -249,10 +253,14 @@ const EventDetail = ({
                                             <span key={tag.id} className="mr-2">
                                                 <Button
                                                     colorSet={{
-                                                        bg_color: "bg-transparent",
-                                                        bg_hover: "hover:bg-transparent",
-                                                        text_color: "bg-gray-500",
-                                                        text_hover: "hover:bg-neutral-100",
+                                                        bg_color:
+                                                            "bg-transparent",
+                                                        bg_hover:
+                                                            "hover:bg-transparent",
+                                                        text_color:
+                                                            "bg-gray-500",
+                                                        text_hover:
+                                                            "hover:bg-neutral-100",
                                                     }}
                                                     onClick={() => {
                                                         handleTagButton(
@@ -263,11 +271,9 @@ const EventDetail = ({
                                                     {tag.name.en}
                                                 </Button>
                                             </span>
-                                        ))
-                                    }
-                                    {tags.length === 0 && (
-                                        "No tags attached to this event."
-                                    )}
+                                        ))}
+                                    {tags.length === 0 &&
+                                        "No tags attached to this event."}
                                 </dd>
                             </div>
                         </dl>
@@ -277,12 +283,10 @@ const EventDetail = ({
                         <div className="pl-2">
                             <a href="/events">
                                 <Button
-                                    colorSet={
-                                        {
-                                            bg_color: "bg-gray-500",
-                                            bg_hover: "hover:bg-gray-600",
-                                        }
-                                    }
+                                    colorSet={{
+                                        bg_color: "bg-gray-500",
+                                        bg_hover: "hover:bg-gray-600",
+                                    }}
                                     className="px-6"
                                 >
                                     Back
@@ -346,22 +350,18 @@ const EventDetail = ({
                         {!is_hosted && !isFullyOccupied && !auth.user && (
                             <a href="/login">
                                 <div className="ml-2">
-                                    <Button>
-                                        Attend
-                                    </Button>
+                                    <Button>Attend</Button>
                                 </div>
                             </a>
                         )}
                         {is_hosted && (
                             <div className="ml-2">
                                 <Button
-                                    colorSet={
-                                        {
-                                            bg_color: "bg-secondary",
-                                            bg_hover: "hover:bg-secondary-hover",
-                                        }
-                                    }
-                                    className = "px-6"
+                                    colorSet={{
+                                        bg_color: "bg-secondary",
+                                        bg_hover: "hover:bg-secondary-hover",
+                                    }}
+                                    className="px-6"
                                     onClick={handleEditClick}
                                 >
                                     Edit
